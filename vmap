@@ -1,6 +1,6 @@
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/luto/linux.git
 
- git checkout test_20160622_vmap_stack_sg_init_stackbuf
+git checkout test_20160622_vmap_stack_sg_init_stackbuf
 
 make
 
@@ -53,11 +53,11 @@ make: *** [arch/x86] Error 2
 
 
 
- root@ubuntu:~/vmap/luto/linux#git describe 
-20160610_uvc_compat_for_linus-905-g96e9e09
-
-root@ubuntu:~/vmap/luto/linux# git branch
+ubuntu:~/vmap/luto/linux# git branch
+* (detached from test_20160622_vmap_stack_sg_init_stackbuf)
   master
-* test_20160622_vmap_stack_sg_init_stackbuf
-  x86/vmap_stack
-root@cohda-ubuntu:~/vmap/luto/linux# 
+root@ubuntu:~/vmap/luto/linux# git describe
+
+20160610_uvc_compat_for_linus-374-g16aaa6a
+root@ubuntu:~/vmap/luto/linux# 
+root@ubuntu:~/vmap/luto/linux# 
