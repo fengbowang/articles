@@ -1,3 +1,11 @@
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/luto/linux.git
+
+git checkout -b test_20160622_vmap_stack_sg_init_stackbuf
+
+make
+
+
+
 In file included from include/asm-generic/percpu.h:6:0,
                  from ./arch/x86/include/asm/percpu.h:551,
                  from ./arch/x86/include/asm/preempt.h:5,
