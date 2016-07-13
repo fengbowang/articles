@@ -45,5 +45,11 @@ make: *** [arch/x86] Error 2
 
 
 
- git describe 
+ root@ubuntu:~/vmap/luto/linux#git describe 
 20160610_uvc_compat_for_linus-905-g96e9e09
+
+root@ubuntu:~/vmap/luto/linux# git branch
+  master
+* test_20160622_vmap_stack_sg_init_stackbuf
+  x86/vmap_stack
+root@cohda-ubuntu:~/vmap/luto/linux# 
