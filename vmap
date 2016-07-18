@@ -1,5 +1,13 @@
 
 //nothing happened
+
+obj-m += hello.o
+all:
+        make -C /lib/modules/`uname -r`/build SUBDIRS=$(PWD) modules
+clean:
+        make -C /lib/modules/`uname -r`/build SUBDIRS=$(PWD) clean
+        
+        
 #include <linux/kernel.h>   
 #include <linux/init.h>   
 #include <linux/module.h>   
