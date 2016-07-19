@@ -1,0 +1,49 @@
+
+
+[root@localhost hl]#
+[root@localhost hl]# insmod hello.ko
+
+Message from syslogd@localhost at Jul 19 00:19:57 ...
+ kernel:BUG: stack guard page was hit at ffffc900041f4000 (stack is ffffc900041f0000..ffffc900041f3fff)
+
+
+
+
+
+
+static int __init hello_init(void)   
+{  
+    
+    int  a[20];
+    int i = 0; 
+
+ 
+    printk(KERN_ALERT "hello_init, world! from kernel space, a[190000] = %d....\n", a[0]);
+	dump_stack();
+    
+   // return 0; 
+	
+    for (i = 0; i < 500000; i++)
+    {
+           //printk(KERN_ALERT "hello_init write %u int \r\n", i);
+           a[i] = 999999999;
+           //printk(KERN_ALERT "hello_init write %u int ok %u\r\n", i, a[i]);
+    }
+
+	printk(KERN_ALERT "hello_init, world! from kernel space, a[190000] = %d, i = %u....\n", a[0], i);
+    return 0; 
+
+	
+	/*
+    a[190000] = 100;  
+    printk(KERN_ALERT "Hello, world! from kernel space, a[190000] = %d after ....\n", a[190000]);
+    a[4096/4] = 100;
+    a[4096/4 + 2] = 100;
+    a[4096/2] = 100;
+    a[4096/2 + 1] = 100; 
+    a[4096 + 2] = 100;
+
+    printk(KERN_ALERT "Hello, world! from kernel space, a[190000] = %d after ....\n", a[190000]);
+    return 0;  
+	*/
+}   
