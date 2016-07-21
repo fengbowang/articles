@@ -7,6 +7,21 @@ Message from syslogd@localhost at Jul 19 00:19:57 ...
  kernel:BUG: stack guard page was hit at ffffc900041f4000 (stack is ffffc900041f0000..ffffc900041f3fff)
 
 
+#ifdef CONFIG_VMAP_STACK
+__visible void __noreturn handle_stack_overflow(const char *message,
+						struct pt_regs *regs,
+						unsigned long fault_address)
+{
+	printk(KERN_EMERG "BUG: stack guard page was hit at %p (stack is %p..%p)\n",
+		 (void *)fault_address, current->stack,
+		 (char *)current->stack + THREAD_SIZE - 1);
+	die(message, regs, 0);
+
+	/* Be absolutely certain we don't return. */
+	panic(message);
+}
+#endif
+
 
 
 
