@@ -1,0 +1,597 @@
+
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cd /mnt/ubt/root/hl
+[root@localhost hl]# 
+[root@localhost hl]# make
+make -C /lib/modules/`uname -r`/build SUBDIRS=/mnt/ubt/root/hl modules
+make[1]: Entering directory `/mnt/ubt/mnt/sdb1/vmap/linux'
+  CC [M]  /mnt/ubt/root/hl/hello.o
+/mnt/ubt/root/hl/hello.c: In function ‘hello_init’:
+/mnt/ubt/root/hl/hello.c:54:11: warning: ‘a[0]’ is used uninitialized in this function [-Wuninitialized]
+     printk(KERN_ALERT "hello_init, world! from kernel space, a[190000] = %d....\n", a[0]);
+           ^
+/mnt/ubt/root/hl/hello.c:65:17: warning: iteration 20u invokes undefined behavior [-Waggressive-loop-optimizations]
+            a[i] = 999999999;
+                 ^
+/mnt/ubt/root/hl/hello.c:62:5: note: containing loop
+     for (i = 0; i < 500000; i++)
+     ^
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /mnt/ubt/root/hl/hello.mod.o
+  LD [M]  /mnt/ubt/root/hl/hello.ko
+make[1]: Leaving directory `/mnt/ubt/mnt/sdb1/vmap/linux'
+[root@localhost hl]# insmod hello.ko 
+
+Message from syslogd@localhost at Jul 27 07:25:39 ...
+ kernel:my stack is ffffc90003690000..ffffc90003693fff
+Segmentation fault
+[root@localhost hl]# 
+Message from syslogd@localhost at Jul 27 07:25:39 ...
+ kernel:BUG: stack guard page was hit at ffffc90003694000 (stack is ffffc90003690000..ffffc90003693fff)
+
+[root@localhost hl]# 
+[root@localhost hl]# dmesg 
+[  114.898250] hello: module license 'unspecified' taints kernel.
+[  114.898262] Disabling lock debugging due to kernel taint
+[  114.898394] hello: module verification failed: signature and/or required key missing - tainting kernel
+[  114.902167] hello_init, world! from kernel space, a[190000] = 0....
+[  114.902181] my stack is ffffc90003690000..ffffc90003693fff
+[  114.902191] CPU: 3 PID: 3246 Comm: insmod Tainted: P           OE   4.7.0-rc3+ #3
+[  114.902196] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/20/2014
+[  114.902203]  0000000000000286 0000000028bc2030 ffffc90003693bf8 ffffffff813e2cff
+[  114.902214]  0000000000000000 ffffffffc0049000 ffffc90003693c68 ffffffffc0049050
+[  114.902223]  0000000000000000 ffffc90003693c88 ffffffff81784ab8 0000000000000000
+[  114.902232] Call Trace:
+[  114.902296]  [<ffffffff813e2cff>] dump_stack+0x63/0x84
+[  114.902310]  [<ffffffffc0049000>] ? 0xffffffffc0049000
+[  114.902320]  [<ffffffffc0049050>] hello_init+0x50/0x1000 [hello]
+[  114.902334]  [<ffffffff81784ab8>] ? netlink_broadcast_filtered+0x138/0x3e0
+[  114.902346]  [<ffffffff811d56fc>] ? vunmap_page_range+0x1dc/0x310
+[  114.902357]  [<ffffffff81002190>] do_one_initcall+0x50/0x190
+[  114.902371]  [<ffffffff811f4c1d>] ? kmem_cache_alloc_trace+0x19d/0x210
+[  114.902381]  [<ffffffff81190c58>] ? do_init_module+0x27/0x1e2
+[  114.902392]  [<ffffffff81190c91>] do_init_module+0x60/0x1e2
+[  114.902405]  [<ffffffff8110b28d>] load_module+0x1edd/0x2910
+[  114.902414]  [<ffffffff811081b0>] ? __symbol_put+0x60/0x60
+[  114.902428]  [<ffffffff8110befc>] SYSC_finit_module+0xcc/0x100
+[  114.902440]  [<ffffffff8110bf4e>] SyS_finit_module+0xe/0x10
+[  114.902449]  [<ffffffff810039d5>] do_syscall_64+0x55/0xc0
+[  114.902458]  [<ffffffff8185d1a5>] entry_SYSCALL64_slow_path+0x25/0x25
+[  114.902466] hello_init write 0 int 
+[  114.902472] hello_init write 0 int ok 999999999
+[  114.902476] hello_init write 1 int 
+[  114.902480] hello_init write 1 int ok 999999999
+[  114.902484] hello_init write 2 int 
+[  114.902488] hello_init write 2 int ok 999999999
+[  114.902492] hello_init write 3 int 
+[  114.902496] hello_init write 3 int ok 999999999
+[  114.902500] hello_init write 4 int 
+[  114.902504] hello_init write 4 int ok 999999999
+[  114.902508] hello_init write 5 int 
+[  114.902512] hello_init write 5 int ok 999999999
+[  114.902516] hello_init write 6 int 
+[  114.902520] hello_init write 6 int ok 999999999
+[  114.902524] hello_init write 7 int 
+[  114.902528] hello_init write 7 int ok 999999999
+[  114.902532] hello_init write 8 int 
+[  114.902536] hello_init write 8 int ok 999999999
+[  114.902540] hello_init write 9 int 
+[  114.902544] hello_init write 9 int ok 999999999
+[  114.902548] hello_init write 10 int 
+[  114.902552] hello_init write 10 int ok 999999999
+[  114.902556] hello_init write 11 int 
+[  114.902561] hello_init write 11 int ok 999999999
+[  114.902564] hello_init write 12 int 
+[  114.902568] hello_init write 12 int ok 999999999
+[  114.902572] hello_init write 13 int 
+[  114.902576] hello_init write 13 int ok 999999999
+[  114.902580] hello_init write 14 int 
+[  114.902584] hello_init write 14 int ok 999999999
+[  114.902588] hello_init write 15 int 
+[  114.902592] hello_init write 15 int ok 999999999
+[  114.902596] hello_init write 16 int 
+[  114.902600] hello_init write 16 int ok 999999999
+[  114.902604] hello_init write 17 int 
+[  114.902607] hello_init write 17 int ok 999999999
+[  114.902610] hello_init write 18 int 
+[  114.902613] hello_init write 18 int ok 999999999
+[  114.902616] hello_init write 19 int 
+[  114.902620] hello_init write 19 int ok 999999999
+[  114.902622] hello_init write 20 int 
+[  114.902626] hello_init write 20 int ok 999999999
+[  114.902629] hello_init write 21 int 
+[  114.902633] hello_init write 21 int ok 999999999
+[  114.902636] hello_init write 22 int 
+[  114.902640] hello_init write 22 int ok 999999999
+[  114.902643] hello_init write 23 int 
+[  114.902646] hello_init write 23 int ok 999999999
+[  114.902649] hello_init write 24 int 
+[  114.902653] hello_init write 24 int ok 999999999
+[  114.902657] hello_init write 25 int 
+[  114.902660] hello_init write 25 int ok 999999999
+[  114.902664] hello_init write 26 int 
+[  114.902668] hello_init write 26 int ok 999999999
+[  114.902671] hello_init write 27 int 
+[  114.902675] hello_init write 27 int ok 999999999
+[  114.902678] hello_init write 28 int 
+[  114.902682] hello_init write 28 int ok 999999999
+[  114.902686] hello_init write 29 int 
+[  114.902689] hello_init write 29 int ok 999999999
+[  114.902692] hello_init write 30 int 
+[  114.902695] hello_init write 30 int ok 999999999
+[  114.902698] hello_init write 31 int 
+[  114.902701] hello_init write 31 int ok 999999999
+[  114.902705] hello_init write 32 int 
+[  114.902708] hello_init write 32 int ok 999999999
+[  114.902711] hello_init write 33 int 
+[  114.902715] hello_init write 33 int ok 999999999
+[  114.902718] hello_init write 34 int 
+[  114.902721] hello_init write 34 int ok 999999999
+[  114.902724] hello_init write 35 int 
+[  114.902727] hello_init write 35 int ok 999999999
+[  114.902735] hello_init write 36 int 
+[  114.902739] hello_init write 36 int ok 999999999
+[  114.902742] hello_init write 37 int 
+[  114.902745] hello_init write 37 int ok 999999999
+[  114.902748] hello_init write 38 int 
+[  114.902752] hello_init write 38 int ok 999999999
+[  114.902755] hello_init write 39 int 
+[  114.902758] hello_init write 39 int ok 999999999
+[  114.902762] hello_init write 40 int 
+[  114.902765] hello_init write 40 int ok 999999999
+[  114.902768] hello_init write 41 int 
+[  114.902771] hello_init write 41 int ok 999999999
+[  114.902775] hello_init write 42 int 
+[  114.902778] hello_init write 42 int ok 999999999
+[  114.902781] hello_init write 43 int 
+[  114.902785] hello_init write 43 int ok 999999999
+[  114.902788] hello_init write 44 int 
+[  114.902792] hello_init write 44 int ok 999999999
+[  114.902795] hello_init write 45 int 
+[  114.902799] hello_init write 45 int ok 999999999
+[  114.902802] hello_init write 46 int 
+[  114.902806] hello_init write 46 int ok 999999999
+[  114.902810] hello_init write 47 int 
+[  114.902813] hello_init write 47 int ok 999999999
+[  114.902817] hello_init write 48 int 
+[  114.902821] hello_init write 48 int ok 999999999
+[  114.902824] hello_init write 49 int 
+[  114.902827] hello_init write 49 int ok 999999999
+[  114.902830] hello_init write 50 int 
+[  114.902833] hello_init write 50 int ok 999999999
+[  114.902836] hello_init write 51 int 
+[  114.902840] hello_init write 51 int ok 999999999
+[  114.902843] hello_init write 52 int 
+[  114.902846] hello_init write 52 int ok 999999999
+[  114.902849] hello_init write 53 int 
+[  114.902853] hello_init write 53 int ok 999999999
+[  114.902856] hello_init write 54 int 
+[  114.902859] hello_init write 54 int ok 999999999
+[  114.902862] hello_init write 55 int 
+[  114.902908] hello_init write 55 int ok 999999999
+[  114.902931] hello_init write 56 int 
+[  114.902934] hello_init write 56 int ok 999999999
+[  114.902937] hello_init write 57 int 
+[  114.902940] hello_init write 57 int ok 999999999
+[  114.902943] hello_init write 58 int 
+[  114.902985] hello_init write 58 int ok 999999999
+[  114.902989] hello_init write 59 int 
+[  114.902992] hello_init write 59 int ok 999999999
+[  114.902995] hello_init write 60 int 
+[  114.902998] hello_init write 60 int ok 999999999
+[  114.903001] hello_init write 61 int 
+[  114.903004] hello_init write 61 int ok 999999999
+[  114.903008] hello_init write 62 int 
+[  114.903011] hello_init write 62 int ok 999999999
+[  114.903014] hello_init write 63 int 
+[  114.903017] hello_init write 63 int ok 999999999
+[  114.903021] hello_init write 64 int 
+[  114.903024] hello_init write 64 int ok 999999999
+[  114.903027] hello_init write 65 int 
+[  114.903030] hello_init write 65 int ok 999999999
+[  114.903034] hello_init write 66 int 
+[  114.903038] hello_init write 66 int ok 999999999
+[  114.903041] hello_init write 67 int 
+[  114.903045] hello_init write 67 int ok 999999999
+[  114.903048] hello_init write 68 int 
+[  114.903052] hello_init write 68 int ok 999999999
+[  114.903056] hello_init write 69 int 
+[  114.903059] hello_init write 69 int ok 999999999
+[  114.903062] hello_init write 70 int 
+[  114.903065] hello_init write 70 int ok 999999999
+[  114.903068] hello_init write 71 int 
+[  114.903072] hello_init write 71 int ok 999999999
+[  114.903075] hello_init write 72 int 
+[  114.903078] hello_init write 72 int ok 999999999
+[  114.903084] hello_init write 73 int 
+[  114.903088] hello_init write 73 int ok 999999999
+[  114.903092] hello_init write 74 int 
+[  114.903095] hello_init write 74 int ok 999999999
+[  114.903099] hello_init write 75 int 
+[  114.903102] hello_init write 75 int ok 999999999
+[  114.903105] hello_init write 76 int 
+[  114.903108] hello_init write 76 int ok 999999999
+[  114.903111] hello_init write 77 int 
+[  114.903114] hello_init write 77 int ok 999999999
+[  114.903117] hello_init write 78 int 
+[  114.903121] hello_init write 78 int ok 999999999
+[  114.903124] hello_init write 79 int 
+[  114.903127] hello_init write 79 int ok 999999999
+[  114.903130] hello_init write 80 int 
+[  114.903133] hello_init write 80 int ok 999999999
+[  114.903136] hello_init write 81 int 
+[  114.903140] hello_init write 81 int ok 999999999
+[  114.903143] hello_init write 82 int 
+[  114.903146] hello_init write 82 int ok 999999999
+[  114.903149] hello_init write 83 int 
+[  114.903153] hello_init write 83 int ok 999999999
+[  114.903156] hello_init write 84 int 
+[  114.903159] hello_init write 84 int ok 999999999
+[  114.903163] hello_init write 85 int 
+[  114.903166] hello_init write 85 int ok 999999999
+[  114.903169] hello_init write 86 int 
+[  114.903173] hello_init write 86 int ok 999999999
+[  114.903176] hello_init write 87 int 
+[  114.903179] hello_init write 87 int ok 999999999
+[  114.903182] hello_init write 88 int 
+[  114.903186] hello_init write 88 int ok 999999999
+[  114.903188] hello_init write 89 int 
+[  114.903192] hello_init write 89 int ok 999999999
+[  114.903195] hello_init write 90 int 
+[  114.903198] hello_init write 90 int ok 999999999
+[  114.903201] hello_init write 91 int 
+[  114.903204] hello_init write 91 int ok 999999999
+[  114.903207] hello_init write 92 int 
+[  114.903211] hello_init write 92 int ok 999999999
+[  114.903214] hello_init write 93 int 
+[  114.903218] hello_init write 93 int ok 999999999
+[  114.903222] hello_init write 94 int 
+[  114.903226] hello_init write 94 int ok 999999999
+[  114.903230] hello_init write 95 int 
+[  114.903234] hello_init write 95 int ok 999999999
+[  114.903237] hello_init write 96 int 
+[  114.903241] hello_init write 96 int ok 999999999
+[  114.903244] hello_init write 97 int 
+[  114.903247] hello_init write 97 int ok 999999999
+[  114.903250] hello_init write 98 int 
+[  114.903254] hello_init write 98 int ok 999999999
+[  114.903257] hello_init write 99 int 
+[  114.903263] hello_init write 99 int ok 999999999
+[  114.903266] hello_init write 100 int 
+[  114.903270] hello_init write 100 int ok 999999999
+[  114.903274] hello_init write 101 int 
+[  114.903277] hello_init write 101 int ok 999999999
+[  114.903281] hello_init write 102 int 
+[  114.903285] hello_init write 102 int ok 999999999
+[  114.903289] hello_init write 103 int 
+[  114.903293] hello_init write 103 int ok 999999999
+[  114.903296] hello_init write 104 int 
+[  114.903300] hello_init write 104 int ok 999999999
+[  114.903304] hello_init write 105 int 
+[  114.903308] hello_init write 105 int ok 999999999
+[  114.903312] hello_init write 106 int 
+[  114.903315] hello_init write 106 int ok 999999999
+[  114.903318] hello_init write 107 int 
+[  114.903322] hello_init write 107 int ok 999999999
+[  114.903327] hello_init write 108 int 
+[  114.903331] hello_init write 108 int ok 999999999
+[  114.903335] hello_init write 109 int 
+[  114.903339] hello_init write 109 int ok 999999999
+[  114.903343] hello_init write 110 int 
+[  114.903347] hello_init write 110 int ok 999999999
+[  114.903351] hello_init write 111 int 
+[  114.903355] hello_init write 111 int ok 999999999
+[  114.903359] hello_init write 112 int 
+[  114.903363] hello_init write 112 int ok 999999999
+[  114.903367] hello_init write 113 int 
+[  114.903371] hello_init write 113 int ok 999999999
+[  114.903374] hello_init write 114 int 
+[  114.903380] hello_init write 114 int ok 999999999
+[  114.903384] hello_init write 115 int 
+[  114.903388] hello_init write 115 int ok 999999999
+[  114.903392] hello_init write 116 int 
+[  114.903395] hello_init write 116 int ok 999999999
+[  114.903399] hello_init write 117 int 
+[  114.903403] hello_init write 117 int ok 999999999
+[  114.903407] hello_init write 118 int 
+[  114.903412] hello_init write 118 int ok 999999999
+[  114.903415] hello_init write 119 int 
+[  114.903419] hello_init write 119 int ok 999999999
+[  114.903423] hello_init write 120 int 
+[  114.903426] hello_init write 120 int ok 999999999
+[  114.903430] hello_init write 121 int 
+[  114.903436] hello_init write 121 int ok 999999999
+[  114.903439] hello_init write 122 int 
+[  114.903443] hello_init write 122 int ok 999999999
+[  114.903447] hello_init write 123 int 
+[  114.903451] hello_init write 123 int ok 999999999
+[  114.903455] hello_init write 124 int 
+[  114.903459] hello_init write 124 int ok 999999999
+[  114.903463] hello_init write 125 int 
+[  114.903467] hello_init write 125 int ok 999999999
+[  114.903470] hello_init write 126 int 
+[  114.903475] hello_init write 126 int ok 999999999
+[  114.903478] hello_init write 127 int 
+[  114.903484] hello_init write 127 int ok 999999999
+[  114.903487] hello_init write 128 int 
+[  114.903491] hello_init write 128 int ok 999999999
+[  114.903495] hello_init write 129 int 
+[  114.903499] hello_init write 129 int ok 999999999
+[  114.903503] hello_init write 130 int 
+[  114.903507] hello_init write 130 int ok 999999999
+[  114.903511] hello_init write 131 int 
+[  114.903515] hello_init write 131 int ok 999999999
+[  114.903519] hello_init write 132 int 
+[  114.903523] hello_init write 132 int ok 999999999
+[  114.903526] hello_init write 133 int 
+[  114.903532] hello_init write 133 int ok 999999999
+[  114.903535] hello_init write 134 int 
+[  114.903539] hello_init write 134 int ok 999999999
+[  114.903543] hello_init write 135 int 
+[  114.903547] hello_init write 135 int ok 999999999
+[  114.903551] hello_init write 136 int 
+[  114.903555] hello_init write 136 int ok 999999999
+[  114.903559] hello_init write 137 int 
+[  114.903563] hello_init write 137 int ok 999999999
+[  114.903567] hello_init write 138 int 
+[  114.903571] hello_init write 138 int ok 999999999
+[  114.903574] hello_init write 139 int 
+[  114.903580] hello_init write 139 int ok 999999999
+[  114.903584] hello_init write 140 int 
+[  114.903588] hello_init write 140 int ok 999999999
+[  114.903592] hello_init write 141 int 
+[  114.903596] hello_init write 141 int ok 999999999
+[  114.903600] hello_init write 142 int 
+[  114.903604] hello_init write 142 int ok 999999999
+[  114.903608] hello_init write 143 int 
+[  114.903612] hello_init write 143 int ok 999999999
+[  114.903616] hello_init write 144 int 
+[  114.903620] hello_init write 144 int ok 999999999
+[  114.903623] hello_init write 145 int 
+[  114.903629] hello_init write 145 int ok 999999999
+[  114.903632] hello_init write 146 int 
+[  114.903636] hello_init write 146 int ok 999999999
+[  114.903640] hello_init write 147 int 
+[  114.903644] hello_init write 147 int ok 999999999
+[  114.903648] hello_init write 148 int 
+[  114.903652] hello_init write 148 int ok 999999999
+[  114.903656] hello_init write 149 int 
+[  114.903660] hello_init write 149 int ok 999999999
+[  114.903664] hello_init write 150 int 
+[  114.903668] hello_init write 150 int ok 999999999
+[  114.903671] hello_init write 151 int 
+[  114.903677] hello_init write 151 int ok 999999999
+[  114.903680] hello_init write 152 int 
+[  114.903684] hello_init write 152 int ok 999999999
+[  114.903687] hello_init write 153 int 
+[  114.903691] hello_init write 153 int ok 999999999
+[  114.903694] hello_init write 154 int 
+[  114.903698] hello_init write 154 int ok 999999999
+[  114.903700] hello_init write 155 int 
+[  114.903704] hello_init write 155 int ok 999999999
+[  114.903707] hello_init write 156 int 
+[  114.903710] hello_init write 156 int ok 999999999
+[  114.903714] hello_init write 157 int 
+[  114.903717] hello_init write 157 int ok 999999999
+[  114.903720] hello_init write 158 int 
+[  114.903724] hello_init write 158 int ok 999999999
+[  114.903727] hello_init write 159 int 
+[  114.903731] hello_init write 159 int ok 999999999
+[  114.903734] hello_init write 160 int 
+[  114.903737] hello_init write 160 int ok 999999999
+[  114.903740] hello_init write 161 int 
+[  114.903743] hello_init write 161 int ok 999999999
+[  114.903747] hello_init write 162 int 
+[  114.903749] hello_init write 162 int ok 999999999
+[  114.903752] hello_init write 163 int 
+[  114.903755] hello_init write 163 int ok 999999999
+[  114.903759] hello_init write 164 int 
+[  114.903762] hello_init write 164 int ok 999999999
+[  114.903766] hello_init write 165 int 
+[  114.903770] hello_init write 165 int ok 999999999
+[  114.903773] hello_init write 166 int 
+[  114.903777] hello_init write 166 int ok 999999999
+[  114.903781] hello_init write 167 int 
+[  114.903785] hello_init write 167 int ok 999999999
+[  114.903789] hello_init write 168 int 
+[  114.903792] hello_init write 168 int ok 999999999
+[  114.903796] hello_init write 169 int 
+[  114.903799] hello_init write 169 int ok 999999999
+[  114.903802] hello_init write 170 int 
+[  114.903806] hello_init write 170 int ok 999999999
+[  114.903811] hello_init write 171 int 
+[  114.903815] hello_init write 171 int ok 999999999
+[  114.903818] hello_init write 172 int 
+[  114.903822] hello_init write 172 int ok 999999999
+[  114.903826] hello_init write 173 int 
+[  114.903830] hello_init write 173 int ok 999999999
+[  114.903834] hello_init write 174 int 
+[  114.903838] hello_init write 174 int ok 999999999
+[  114.903842] hello_init write 175 int 
+[  114.903846] hello_init write 175 int ok 999999999
+[  114.903849] hello_init write 176 int 
+[  114.903854] hello_init write 176 int ok 999999999
+[  114.903857] hello_init write 177 int 
+[  114.903861] hello_init write 177 int ok 999999999
+[  114.903866] hello_init write 178 int 
+[  114.903870] hello_init write 178 int ok 999999999
+[  114.903873] hello_init write 179 int 
+[  114.903878] hello_init write 179 int ok 999999999
+[  114.903881] hello_init write 180 int 
+[  114.903885] hello_init write 180 int ok 999999999
+[  114.903889] hello_init write 181 int 
+[  114.903894] hello_init write 181 int ok 999999999
+[  114.903897] hello_init write 182 int 
+[  114.903901] hello_init write 182 int ok 999999999
+[  114.903905] hello_init write 183 int 
+[  114.903909] hello_init write 183 int ok 999999999
+[  114.903914] hello_init write 184 int 
+[  114.903918] hello_init write 184 int ok 999999999
+[  114.903922] hello_init write 185 int 
+[  114.903926] hello_init write 185 int ok 999999999
+[  114.903930] hello_init write 186 int 
+[  114.903933] hello_init write 186 int ok 999999999
+[  114.903936] hello_init write 187 int 
+[  114.903940] hello_init write 187 int ok 999999999
+[  114.903943] hello_init write 188 int 
+[  114.903984] hello_init write 188 int ok 999999999
+[  114.903989] hello_init write 189 int 
+[  114.903992] hello_init write 189 int ok 999999999
+[  114.903995] hello_init write 190 int 
+[  114.903999] hello_init write 190 int ok 999999999
+[  114.904005] hello_init write 191 int 
+[  114.904008] hello_init write 191 int ok 999999999
+[  114.904011] hello_init write 192 int 
+[  114.904015] hello_init write 192 int ok 999999999
+[  114.904019] hello_init write 193 int 
+[  114.904023] hello_init write 193 int ok 999999999
+[  114.904026] hello_init write 194 int 
+[  114.904030] hello_init write 194 int ok 999999999
+[  114.904034] hello_init write 195 int 
+[  114.904038] hello_init write 195 int ok 999999999
+[  114.904042] hello_init write 196 int 
+[  114.904046] hello_init write 196 int ok 999999999
+[  114.904049] hello_init write 197 int 
+[  114.904053] hello_init write 197 int ok 999999999
+[  114.904058] hello_init write 198 int 
+[  114.904062] hello_init write 198 int ok 999999999
+[  114.904066] hello_init write 199 int 
+[  114.904070] hello_init write 199 int ok 999999999
+[  114.904074] hello_init write 200 int 
+[  114.904078] hello_init write 200 int ok 999999999
+[  114.904082] hello_init write 201 int 
+[  114.904086] hello_init write 201 int ok 999999999
+[  114.904090] hello_init write 202 int 
+[  114.904093] hello_init write 202 int ok 999999999
+[  114.904097] hello_init write 203 int 
+[  114.904101] hello_init write 203 int ok 999999999
+[  114.904106] hello_init write 204 int 
+[  114.904110] hello_init write 204 int ok 999999999
+[  114.904114] hello_init write 205 int 
+[  114.904118] hello_init write 205 int ok 999999999
+[  114.904122] hello_init write 206 int 
+[  114.904126] hello_init write 206 int ok 999999999
+[  114.904130] hello_init write 207 int 
+[  114.904134] hello_init write 207 int ok 999999999
+[  114.904138] hello_init write 208 int 
+[  114.904142] hello_init write 208 int ok 999999999
+[  114.904145] hello_init write 209 int 
+[  114.904149] hello_init write 209 int ok 999999999
+[  114.904154] hello_init write 210 int 
+[  114.904158] hello_init write 210 int ok 999999999
+[  114.904162] hello_init write 211 int 
+[  114.904166] hello_init write 211 int ok 999999999
+[  114.904170] hello_init write 212 int 
+[  114.904174] hello_init write 212 int ok 999999999
+[  114.904178] hello_init write 213 int 
+[  114.904182] hello_init write 213 int ok 999999999
+[  114.904186] hello_init write 214 int 
+[  114.904190] hello_init write 214 int ok 999999999
+[  114.904193] hello_init write 215 int 
+[  114.904197] hello_init write 215 int ok 999999999
+[  114.904202] hello_init write 216 int 
+[  114.904206] hello_init write 216 int ok 999999999
+[  114.904210] hello_init write 217 int 
+[  114.904214] hello_init write 217 int ok 999999999
+[  114.904218] hello_init write 218 int 
+[  114.904222] hello_init write 218 int ok 999999999
+[  114.904225] hello_init write 219 int 
+[  114.904229] hello_init write 219 int ok 999999999
+[  114.904233] hello_init write 220 int 
+[  114.904237] hello_init write 220 int ok 999999999
+[  114.904241] hello_init write 221 int 
+[  114.904247] hello_init write 221 int ok 999999999
+[  114.904250] hello_init write 222 int 
+[  114.904255] hello_init write 222 int ok 999999999
+[  114.904258] hello_init write 223 int 
+[  114.904262] hello_init write 223 int ok 999999999
+[  114.904266] hello_init write 224 int 
+[  114.904269] hello_init write 224 int ok 999999999
+[  114.904272] hello_init write 225 int 
+[  114.904276] hello_init write 225 int ok 999999999
+[  114.904279] hello_init write 226 int 
+[  114.904282] hello_init write 226 int ok 999999999
+[  114.904285] hello_init write 227 int 
+[  114.904288] hello_init write 227 int ok 999999999
+[  114.904291] hello_init write 228 int 
+[  114.904295] hello_init write 228 int ok 999999999
+[  114.904298] hello_init write 229 int 
+[  114.904302] hello_init write 229 int ok 999999999
+[  114.904305] hello_init write 230 int 
+[  114.904308] hello_init write 230 int ok 999999999
+[  114.904312] hello_init write 231 int 
+[  114.904315] hello_init write 231 int ok 999999999
+[  114.904318] hello_init write 232 int 
+[  114.904322] hello_init write 232 int ok 999999999
+[  114.904325] hello_init write 233 int 
+[  114.904328] hello_init write 233 int ok 999999999
+[  114.904332] hello_init write 234 int 
+[  114.904335] hello_init write 234 int ok 999999999
+[  114.904338] hello_init write 235 int 
+[  114.904341] hello_init write 235 int ok 999999999
+[  114.904344] hello_init write 236 int 
+[  114.904347] hello_init write 236 int ok 999999999
+[  114.904351] hello_init write 237 int 
+[  114.904354] hello_init write 237 int ok 999999999
+[  114.904357] hello_init write 238 int 
+[  114.904361] hello_init write 238 int ok 999999999
+[  114.904365] hello_init write 239 int 
+[  114.904368] hello_init write 239 int ok 999999999
+[  114.904371] hello_init write 240 int 
+[  114.904374] hello_init write 240 int ok 999999999
+[  114.904377] hello_init write 241 int 
+[  114.904381] hello_init write 241 int ok 999999999
+[  114.904385] hello_init write 242 int 
+[  114.904389] hello_init write 242 int ok 999999999
+[  114.904393] hello_init write 243 int 
+[  114.904396] hello_init write 243 int ok 999999999
+[  114.904399] hello_init write 244 int 
+[  114.904402] hello_init write 244 int ok 999999999
+[  114.904406] hello_init write 245 int 
+[  114.904409] hello_init write 245 int ok 999999999
+[  114.904412] hello_init write 246 int 
+[  114.904418] hello_init write 246 int ok 999999999
+[  114.904421] hello_init write 247 int 
+[  114.904425] hello_init write 247 int ok 999999999
+[  114.904428] hello_init write 248 int 
+[  114.904432] hello_init write 248 int ok 999999999
+[  114.904436] hello_init write 249 int 
+[  114.904439] hello_init write 249 int ok 999999999
+[  114.904443] hello_init write 250 int 
+[  114.904447] hello_init write 250 int ok 999999999
+[  114.904450] hello_init write 251 int 
+[  114.904455] hello_init write 251 int ok 999999999
+[  114.904458] hello_init write 252 int 
+[  114.904462] hello_init write 252 int ok 999999999
+[  114.904466] hello_init write 253 int 
+[  114.904470] hello_init write 253 int ok 999999999
+[  114.904473] hello_init write 254 int 
+[  114.904528] BUG: stack guard page was hit at ffffc90003694000 (stack is ffffc90003690000..ffffc90003693fff)
+[  114.904540] kernel stack overflow (page fault): 0000 [#1] SMP
+[  114.904546] Modules linked in: hello(POE+) arc4 md4 nls_utf8 cifs fscache lp xt_tcpudp ip6t_rpfilter ip6t_REJECT nf_reject_ipv6 ipt_REJECT nf_reject_ipv4 xt_conntrack cfg80211 ebtable_nat ebtable_broute bridge stp llc ebtable_filter ebtables ip6table_nat nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv6 ip6table_mangle ip6table_security ip6table_raw ip6table_filter ip6_tables iptable_nat nf_conntrack_ipv4 nf_defrag_ipv4 nf_nat_ipv4 nf_nat nf_conntrack iptable_mangle iptable_security iptable_raw iptable_filter ip_tables x_tables snd_seq_midi snd_seq_midi_event snd_ens1371 snd_ac97_codec intel_powerclamp gameport snd_rawmidi coretemp ac97_bus snd_seq crct10dif_pclmul crc32_pclmul joydev ghash_clmulni_intel dm_mirror ppdev aesni_intel snd_seq_device dm_region_hash psmouse dm_log hid_generic aes_x86_64 snd_pcm
+[  114.904665]  lrw usbmouse gf128mul glue_helper vmw_balloon ablk_helper cryptd input_leds snd_timer serio_raw pcspkr usbhid snd hid soundcore shpchp i2c_piix4 vmw_vmci parport_pc parport nfsd evbug mac_hid auth_rpcgss nfs_acl lockd grace sunrpc autofs4 xfs libcrc32c vmwgfx drm_kms_helper syscopyarea sysfillrect sysimgblt fb_sys_fops ttm drm e1000 pata_acpi floppy
+[  114.904745] CPU: 3 PID: 3246 Comm: insmod Tainted: P           OE   4.7.0-rc3+ #3
+[  114.904750] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/20/2014
+[  114.904757] task: ffff8800b3ea5580 ti: ffffc90003690000 task.ti: ffffc90003690000
+[  114.904762] RIP: 0010:[<ffffffffc0049060>]  [<ffffffffc0049060>] hello_init+0x60/0x1000 [hello]
+[  114.904778] RSP: 0018:ffffc90003693c08  EFLAGS: 00010246
+[  114.904786] RAX: 000000000000001a RBX: 00000000000000fe RCX: 0000000000000006
+[  114.904791] RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffff8800baccdd20
+[  114.904796] RBP: ffffc90003693c68 R08: 6e695f6f6c6c6568 R09: 6574697277207469
+[  114.904801] R10: 3220657469727720 R11: 00000000000008a4 R12: ffffffffc0049000
+[  114.904806] R13: ffffffffc0761000 R14: ffffffffc0761050 R15: ffff8800b4819ae0
+[  114.904814] FS:  00007fa437c31740(0000) GS:ffff8800bacc0000(0000) knlGS:0000000000000000
+[  114.904820] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  114.904825] CR2: ffffc90003694000 CR3: 00000000b32ae000 CR4: 00000000001406e0
+[  114.905000] Stack:
+[  114.905008]  3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff
+[  114.905018]  3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff
+[  114.905026]  3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff 3b9ac9ff3b9ac9ff
+[  114.905034] Call Trace:
+[  114.905046] Code: 08 48 c7 c7 07 01 76 c0 31 c0 48 8d 96 ff 3f 00 00 e8 c3 77 14 c1 e8 4c 9c 39 c1 89 de 48 c7 c7 1d 01 76 c0 31 c0 e8 ae 77 14 c1 <c7> 44 9d a0 ff c9 9a 3b 89 de 31 c0 ba ff c9 9a 3b 48 c7 c7 68 
+[  114.905137] RIP  [<ffffffffc0049060>] hello_init+0x60/0x1000 [hello]
+[  114.905152]  RSP <ffffc90003693c08>
+[  114.905160] ---[ end trace cb0f5b84a92e233d ]---
+[r
