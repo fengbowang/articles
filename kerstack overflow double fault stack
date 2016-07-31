@@ -93,3 +93,51 @@ static void delay_tsc(unsigned long __loops)
 	preempt_enable();
 }
 
+Tasks: 296 total,   1 running, 295 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us, 73.4 sy,  0.0 ni, 26.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  1.0 us, 24.9 sy,  0.0 ni, 70.0 id,  3.7 wa,  0.0 hi,  0.3 si,  0.0 st
+%Cpu2  :  0.0 us, 41.9 sy,  0.0 ni, 57.0 id,  1.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu3  :  0.3 us,  9.3 sy,  0.0 ni, 53.6 id, 36.4 wa,  0.0 hi,  0.3 si,  0.0 st
+KiB Mem:  12173908 total, 12080408 used,    93500 free,  2871584 buffers
+KiB Swap:        0 total,        0 used,        0 free.  7630540 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                 
+30647 root      20   0 2819472 991.8m 992072 S 100.2  8.3   7:49.14 vmware-vmx                                                                              
+ 3533 root      20   0 3383964 2.526g 2.491g S  51.9 21.8 636:16.42 vmware-vmx                                                                              
+   18 root      20   0       0      0      0 S   0.3  0.0   0:08.83 rcuos/1                                                                                 
+  658 root      20   0   19440   2196   1964 S   0.3  0.0   0:02.08 irqbalance                                                                              
+ 4335 root      20   0       0      0      0 S   0.3  0.0   0:00.03 kworker/u8:2                                                                            
+    1 root      20   0  119580   5632   3860 S   0.0  0.0   0:01.37 systemd                                                                                 
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                                
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.14 ksoftirqd/0                                                                             
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H                                                                            
+    7 root      20   0       0      0      0 S   0.0  0.0   0:25.30 rcu_sched                                                                               
+    8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh                                                                                  
+    9 root      20   0       0      0      0 S   0.0  0.0   0:14.50 rcuos/0                                                                                 
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/0                                                                                 
+   11 root      rt   0       0      0      0 S   0.0  0.0   0:00.06 migration/0                                                                             
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.16 watchdog/0                                                                              
+   13 root      rt   0       0      0      0 S   0.0  0.0   0:00.16 watchdog/1                                                                              
+   14 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 migration/1                                                                             
+   15 root      20   0       0      0      0 S   0.0  0.0   0:00.10 ksoftirqd/1                                                                             
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.04 kworker/1:0                                                                             
+   17 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/1:0H                                                                            
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/1                                                                                 
+   20 root      rt   0       0      0      0 S   0.0  0.0   0:00.17 watchdog/2                                                                              
+   21 root      rt   0       0      0      0 S   0.0  0.0   0:00.02 migration/2                                                                             
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.01 ksoftirqd/2                                                                             
+   24 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/2:0H                                                                            
+   25 root      20   0       0      0      0 S   0.0  0.0   0:10.38 rcuos/2                                                                                 
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/2                                                                                 
+   27 root      rt   0       0      0      0 S   0.0  0.0   0:00.14 watchdog/3                                                                              
+   28 root      rt   0       0      0      0 S   0.0  0.0   0:00.02 migration/3                                                                             
+   29 root      20   0       0      0      0 S   0.0  0.0   0:00.14 ksoftirqd/3                                                                             
+   31 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/3:0H                                                                            
+   32 root      20   0       0      0      0 S   0.0  0.0   0:05.46 rcuos/3                                                                                 
+   33 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/3                                                                                 
+   34 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 khelper                                                                                 
+   35 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                               
+   36 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 netns                                                                                   
+   37 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 perf                                                                                    
+   38 root      20   0       0      0      0 S   0.0  0.0   0:00.03 khungtaskd                                                                              
+   39 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 writeback
