@@ -1,0 +1,55 @@
+To enable execution of this file add
+        add-auto-load-safe-path /mnt/vd/vmap/linux/scripts/gdb/vmlinux-gdb.py
+line to your configuration file "/root/.gdbinit".
+To completely disable this security protection add
+        set auto-load safe-path /
+line to your configuration file "/root/.gdbinit".
+For more information about this security protection see the
+"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+        info "(gdb)Auto-loading safe path"
+(gdb)  target remote localhost:8864
+Remote debugging using localhost:8864
+native_safe_halt () at ./arch/x86/include/asm/irqflags.h:50
+50      }
+(gdb) bt
+#0  native_safe_halt () at ./arch/x86/include/asm/irqflags.h:50
+#1  0xffffffff81037d5e in arch_safe_halt () at ./arch/x86/include/asm/paravirt.h:107
+#2  default_idle () at arch/x86/kernel/process.c:306
+#3  0xffffffff8103850f in arch_cpu_idle () at arch/x86/kernel/process.c:297
+#4  0xffffffff810c3ce3 in default_idle_call () at kernel/sched/idle.c:93
+#5  0xffffffff810c3ff9 in cpuidle_idle_call () at kernel/sched/idle.c:151
+#6  cpu_idle_loop () at kernel/sched/idle.c:242
+#7  cpu_startup_entry (state=<optimized out>) at kernel/sched/idle.c:291
+#8  0xffffffff81850657 in rest_init () at init/main.c:408
+#9  0xffffffff81f5f192 in start_kernel () at init/main.c:662
+#10 0xffffffff81f5e5db in x86_64_start_reservations (real_mode_data=<optimized out>) at arch/x86/kernel/head64.c:196
+#11 0xffffffff81f5e729 in x86_64_start_kernel (real_mode_data=0x945c0 <error: Cannot access memory at address 0x945c0>) at arch/x86/kernel/head64.c:176
+#12 0x0000000000000000 in ?? ()
+(gdb) c
+Continuing.
+
+
+
+
+
+
+
+^C
+Program received signal SIGINT, Interrupt.
+delay_tsc (__loops=3365033) at arch/x86/lib/delay.c:78
+78                      if (unlikely(cpu != smp_processor_id())) {
+(gdb) bt
+#0  delay_tsc (__loops=3365033) at arch/x86/lib/delay.c:78
+#1  0xffffffff813f078b in __delay (loops=<optimized out>) at arch/x86/lib/delay.c:153
+#2  __const_udelay (xloops=<optimized out>) at arch/x86/lib/delay.c:167
+#3  0xffffffff811901ef in panic (fmt=<optimized out>) at kernel/panic.c:261
+#4  0xffffffff8105fc51 in df_debug (regs=0xffff88003c604f58, error_code=<optimized out>) at arch/x86/kernel/doublefault.c:81
+#5  0xffffffff8102eb1a in do_double_fault (regs=0x3358a9, error_code=0) at arch/x86/kernel/traps.c:368
+#6  0xffffffff8185eaf8 in double_fault () at arch/x86/entry/entry_64.S:763
+#7  0xffff880038bdad80 in ?? ()
+#8  0xffffffffc0743050 in ?? ()
+#9  0xffffffffc0743000 in ?? ()
+#10 0xffffffffc001f000 in ?? ()
+#11 0xffffc900032a3c68 in ?? ()
+#12 0x0000000000000000 in ?? ()
+(gdb) ^C
