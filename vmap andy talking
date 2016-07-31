@@ -1,0 +1,33 @@
+If you want x86_32 support, you could send patches.  Off the top of my
+head, there are three issues:
+
+1. 32-bit double-fault handling is quite different from 64-bit.
+Recovering via rewind_stack_and_do_exit() may not be sufficient for
+32-bit systems -- I think you'll have to either IRET back out of the
+double-fault handler (and re-write the target, perhaps) or modify
+rewind_stack_and_do_exit() to switch back to the normal kernel task.
+The former solution could look something like:
+
+regs->sp = current_pt_regs(); (possibly with some small negative offset)
+regs->ip = do_exit;
+return;
+
+but it would need careful testing to make sure it works more than
+once.  32-bit task switching is weird and I'm not nearly as familiar
+with it as I am with 64-bit IST.
+
+2. Because there's no IST, the page_fault -> alternate stack switching
+mechanism would need to be reworked.  (That's the compiler error
+you're hitting.)  If you do this, then you need to make sure that the
+do_exit invocation still works.
+
+3. vmalloc space is limited.  This may prevent large systems from
+using this feature entirely.
+
+--Andy
+
+On Thu, Jul 14, 2016 at 5:43 AM, fbwww fbwww <fbwww@yahoo.com> wrote:
+> HI,
+>
+> for the kernel  VMAP configuration , I only modify   arch/Kconfig
+>
