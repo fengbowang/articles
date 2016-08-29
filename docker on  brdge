@@ -1,0 +1,8 @@
+docker run --cap-add=ALL  --privileged -i -t chug/wyf_ubuntu12.10x64  /bin/bash
+
+brctl addbr br0
+
+
+docker -b=br0 -d
+
+
