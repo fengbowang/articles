@@ -1,4 +1,6 @@
 
+http://blog.csdn.net/wuyangchun/article/details/52261488
+
 mkdir chroot && cd chroot
 wget https://busybox.net/downloads/binaries/1.21.1/busybox-x86_64
 mkdir -p new_root/bin
@@ -17,4 +19,118 @@ exit
  sudo chown wyf:wyf /data
  touch /data/001
  
+ unshare --fork --pid --mount --uts --ipc --net  bash  //must be root
+ 
+ 
+ mkdir -p ./new_root/old_root/ ./new_root/data/
+ 
+ mount --bind ./new_root/ ./new_root/
+ 
+ mount --bind /data ./new_root/data
+ cd new_root/
+ 
+ pivot_root ./ ./old_root/
+ 
+ exec /bin/sh
+ 
+ export PS1='root@$(/bin/hostname):$(pwd)# '
+##root@container01:/#
+ 
+ 
+  /bin/mkdir /proc
+  
+   /bin/mount -t proc none /proc
+ 
+ 
+ /bin/mount
+ 
+ bin/umount -l /old_root
+ 
+ /bin/mkdir /dev
+ 
+ 
+ /bin/mount -t devtmpfs  none /dev
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  /bin/mount
+  
+ rootfs on / type rootfs (rw)
+/dev/sda3 on /old_root type xfs (rw,relatime,attr2,inode64,noquota)
+devtmpfs on /old_root/dev type devtmpfs (rw,nosuid,size=1419164k,nr_inodes=354791,mode=755)
+tmpfs on /old_root/dev/shm type tmpfs (rw,nosuid,nodev)
+devpts on /old_root/dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+hugetlbfs on /old_root/dev/hugepages type hugetlbfs (rw,relatime)
+mqueue on /old_root/dev/mqueue type mqueue (rw,relatime)
+proc on /old_root/proc type proc (rw,nosuid,nodev,noexec,relatime)
+systemd-1 on /old_root/proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=34,pgrp=1,timeout=300,minproto=5,maxproto=5,direct)
+nfsd on /old_root/proc/fs/nfsd type nfsd (rw,relatime)
+sysfs on /old_root/sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+securityfs on /old_root/sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /old_root/sys/fs/cgroup type tmpfs (ro,nosuid,nodev,noexec,mode=755)
+cgroup on /old_root/sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+cgroup on /old_root/sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,blkio)
+cgroup on /old_root/sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,cpuacct,cpu)
+cgroup on /old_root/sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
+cgroup on /old_root/sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,devices)
+cgroup on /old_root/sys/fs/cgroup/perf_event type cgroup (rw,nosuid,nodev,noexec,relatime,perf_event)
+cgroup on /old_root/sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+cgroup on /old_root/sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,freezer)
+cgroup on /old_root/sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,hugetlb)
+cgroup on /old_root/sys/fs/cgroup/net_cls type cgroup (rw,nosuid,nodev,noexec,relatime,net_cls)
+pstore on /old_root/sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+configfs on /old_root/sys/kernel/config type configfs (rw,relatime)
+debugfs on /old_root/sys/kernel/debug type debugfs (rw,relatime)
+tmpfs on /old_root/run type tmpfs (rw,nosuid,nodev,mode=755)
+tmpfs on /old_root/run/user/0 type tmpfs (rw,nosuid,nodev,relatime,size=286768k,mode=700)
+gvfsd-fuse on /old_root/run/user/0/gvfs type fuse.gvfsd-fuse (rw,nosuid,nodev,relatime,user_id=0,group_id=0)
+sunrpc on /old_root/var/lib/nfs/rpc_pipefs type rpc_pipefs (rw,relatime)
+/dev/sda1 on /old_root/boot type xfs (rw,relatime,attr2,inode64,noquota)
+/dev/sda3 on / type xfs (rw,relatime,attr2,inode64,noquota)
+/dev/sda3 on /data type xfs (rw,relatime,attr2,inode64,noquota)
+none on /proc type proc (rw,relatime)
+root@container01:/# ls -l /dev/fb
+/bin/sh: ls: not found
+root@container01:/# ls -l /dev/fb0
+/bin/sh: ls: not found
+root@container01:/# /bin/ls -l /dev/fb0
+ls: /dev/fb0: No such file or directory
+ 
+ root@container01:/# bin/umount -l /old_root
+root@container01:/# /bin/ls -l /dev/fb0
+ls: /dev/fb0: No such file or directory
+root@container01:/# /bin/mount
+rootfs on / type rootfs (rw)
+/dev/sda3 on / type xfs (rw,relatime,attr2,inode64,noquota)
+/dev/sda3 on /data type xfs (rw,relatime,attr2,inode64,noquota)
+none on /proc type proc (rw,relatime)
+root@container01:/# 
+ 
+ 
+ root@container01:/# /bin/ls -l /dev/fb0
+crw-rw----    1 0        39         29,   0 Sep  2 21:37 /dev/fb0
+root@container01:/# 
+ 
+ 
+ 
+ fails:
  unshare bash --user --mount --ipc --pid --net --uts -r --fork --propagation private 
