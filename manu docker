@@ -1,0 +1,20 @@
+
+mkdir chroot && cd chroot
+wget https://busybox.net/downloads/binaries/1.21.1/busybox-x86_64
+mkdir -p new_root/bin
+chmod +x ./busybox-x86_64
+mv busybox-x86_64 new_root/bin/busybox
+./new_root/bin/busybox ls
+./new_root/bin/busybox --install ./new_root/bin/
+
+ ls -l ./new_root/bin/ls
+ ./new_root/bin/ls
+ chroot ./new_root/ /bin/sh
+ 
+/bin/ps
+exit
+ sudo mkdir /data
+ sudo chown wyf:wyf /data
+ touch /data/001
+ 
+ unshare bash --user --mount --ipc --pid --net --uts -r --fork --propagation private 
