@@ -1,0 +1,3 @@
+http://blog.csdn.net/learnerz/article/details/7200860
+
+gcc dr.c -o dr  `pkg-config --cflags --libs gtk+-2.0`
