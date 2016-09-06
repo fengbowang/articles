@@ -1,0 +1,11 @@
+
+
+ip netns add t3
+ip link add veth6 type veth peer name veth8
+ip link set veth6 netns t3
+
+unshare --fork --pid --mount --uts --ipc bash
+
+ip netns exec t3 bash
+
+
