@@ -1,0 +1,150 @@
+
+//软件太需要调试日志了， 不然坑里爬不出来 
+
+
+
+
+ mount /dev/sdd1 /mnt/sdd1/
+ 
+ ip netns add t3
+ip link add veth6 type veth peer name veth8
+ip link set veth6 netns t3
+
+brctl addbr br0
+brctl addif br0 veth8
+brctl addif br0 eno16777736
+ifconfig  eno16777736 up
+ifconfig  veth8 up
+ifconfig  br0 up
+
+
+unshare --fork --pid --mount --uts --ipc bash
+
+ip netns exec t3 bash
+
+
+ //unshare --fork --pid --mount --uts --ipc --net  bash 
+ 
+ mkdir -p /mnt/sdd1/old_root/ /mnt/sdd1/data/
+ 
+ mount --bind /mnt/sdd1/ /mnt/sdd1/
+ 
+ mount --bind /data /mnt/sdd1/data
+ 
+ cd /mnt/sdd1/
+ 
+ pivot_root ./ ./old_root/
+ 
+ exec /bin/bash 
+ 
+ export PS1='root@$(/bin/hostname):$(pwd)# '
+ 
+ PATH=$PATH:/bin:/sbin
+ 
+  umount -l /sys/fs/cgroup/systemd
+  
+   umount -l /sys/fs/pstore
+ umount -l /run/user
+
+ umount -l /run/shm
+
+ umount -l /run/lock
+ umount -l /run/
+
+ umount -l /dev/pts
+
+ umount -l /dev
+
+ umount -l /sys/kernel/security
+ umount -l /sys/kernel/debug
+ umount -l /sys/fs/fuse/connections
+ umount -l /sys/fs/cgroup
+ umount -l /sys
+
+ umount -l /proc
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    mount -t proc none  /proc
+ mount -t sysfs none /sys
+ mount -t  pstore   none /sys/fs/pstore
+mount -t  tmpfs   none /run/user
+mount -t   tmpfs  none /run/shm
+mount -t  tmpfs   none /run/lock
+mount -t  tmpfs   none /run/
+mount -t  devpts   none /dev/pts
+mount -t  devtmpfs   none /dev
+mount -t securityfs    none /sys/kernel/security
+mount -t debugfs none /sys/kernel/debug
+mount -t fusectl none /sys/fs/fuse/connections
+mount -t tmpfs none /sys/fs/cgroup
+ 
+ 
+   
+mount -t  pstore   none /sys/fs/pstore
+mount -t  tmpfs   none /run/user
+mount -t   tmpfs  none /run/shm
+mount -t  tmpfs   none /run/lock
+mount -t  tmpfs   none /run/
+mount -t  devpts   none /dev/pts
+mount -t  devtmpfs   none /dev
+mount -t securityfs    none /sys/kernel/security
+mount -t debugfs none /sys/kernel/debug
+mount -t fusectl none /sys/fs/fuse/connections
+mount -t tmpfs none /sys/fs/cgroup
+
+//network
+root@localhost.localdomain:/# ifconfig  -a
+lo        Link encap:Local Loopback  
+          LOOPBACK  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+veth6     Link encap:Ethernet  HWaddr ae:6a:af:af:b7:48  
+          BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+root@localhost.localdomain:/# dhclient veth6
+
+root@localhost.localdomain:/# ifc
+^C
+root@localhost.localdomain:/# ifconfig 
+veth6     Link encap:Ethernet  HWaddr ae:6a:af:af:b7:48  
+          inet addr:192.168.8.148  Bcast:192.168.8.255  Mask:255.255.255.0
+          inet6 addr: fe80::ac6a:afff:feaf:b748/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:19 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:19 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:2378 (2.3 KB)  TX bytes:2030 (2.0 KB)
+
+root@localhost.localdomain:/# 
+
+
+
+//start dbus (for ubuntu 15 just /etc/init.d/dbus start
+
+
+mkdir -p /run/dbus
+chown messagebus:messagebus /run/dbus
+dbus-uuidgen --ensure
+dbus-daemon --system --fork
+
+
+start local desktop (non-vnc)
+ 
+ 
+ service lightdm start
+
+
