@@ -1,3 +1,6 @@
 sriov vf发送中断到vm（vmcs的eie set为0），int remap将中断路由到该vmcs（remap对应表项set对应的物理cpuid和vmcs指针），硬件将中断信息写入
 对应vmcs（所谓post），硬件根据vmcs的post int vector的是否ev notify设置向对应cpu lapic发起notify（对于运行中的vm set为是，cpu lapic id
 保存在该表项中），运行中的vm的cpu则evaluate中断（vmcs post int先set为1）和处理中断。对于非运行中vm set为仅post。
+
+
+软件模拟设备则软件写入对应VMCS
