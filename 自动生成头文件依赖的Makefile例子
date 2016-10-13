@@ -1,0 +1,38 @@
+CC = gcc
+
+CFLAGS += -g -I../
+
+APP_SRC = ad_pkt.c ad.c
+API_SRC = src1.c src2.c
+
+APP_OBJ = ${patsubst %.c, %.o, $(APP_SRC)} 
+API_OBJ = ${patsubst %.c, %.o, $(API_SRC)} 
+
+MY_APP = wbssd
+API_LIB = lib1609.a
+
+LOG_SRC_DIR = ../my_log/
+LOG_SRC_FILE = ../my_log/my_log.c
+LOG_OBJ = ${patsubst %.c, %.o, $(LOG_SRC_FILE)} 
+
+all:$(MY_APP)  $(API_LIB)
+
+wbssd:$(API_OBJ) $(LOG_OBJ)
+	$(CC) API_OBJ LOG_OBJ -o $(MY_APP)
+	
+api_lib:$(API_OBJ) $(LOG_OBJ)
+	ar rcs $(API_LIB) $(API_OBJ) $(LOG_OBJ)
+
+%.o : %.c  #all .c so
+	$(CC) $(CFLAGS) -c $< -o $@ 	
+	
+%d: %c
+	@echo "create gen depend: " $@
+	$(CC) -MM $(CFLAGS) $< > $@; 	
+	
+include $(LOG_SRC_FILE:.c=.d)
+include $(APP_SRC:.c=.d)	
+include $(API_SRC:.c=.d)	
+
+clean:
+	rm -rf *.o $(MY_APP) $(API_LIB)
