@@ -4,3 +4,10 @@ sriov vf发送中断到vm（vmcs的eie set为0），int remap将中断路由到�
 
 
 软件模拟设备则软件写入对应VMCS
+
+
+reference:
+
+vt-directed-io-spec.pdf
+VEE15_Comprehensive_Implementation_and_Evaluation_of_Direct_Interrupt_Delivery.pdf
+64-ia-32-architectures-software-developer-system-programming-manual-325384.pdf
