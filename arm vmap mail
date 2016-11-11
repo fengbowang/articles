@@ -1,7 +1,7 @@
 HI Andy,
     I tried the VMAP patch on X86_32 and I only modified the fork.c of kernel 3.18.24, and the kernel can work(I dit not test stack overflow) on VM.
-	I thought arm is more important than X86_32, so I did the same thing on armV7(NXP solo AP, also 3.18.24), the kernel failed. 
-	I think it is because armV7's kernel pagetable is completely not shared by diffrent process while X86 is? 
+	becuase I am working on arm linux(and I thought arm is more important than X86_32), so I did the same thing on armV7(NXP solo AP, also 3.18.24), the kernel failed. 
+	I think it is because armV7's kernel pagetable is completely not shared by diffrent process(each process has a copy) while X86 is? 
 	Is my result right? Can arm support kernel stack overflow detection? Arm7 has dependent kernel stack for page fault other than interrupt and syscall.
 	
 	Following is arm test printing
