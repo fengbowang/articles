@@ -1,0 +1,187 @@
+HI Andy,
+    I tried the VMAP patch on X86_32 and I only modified the fork.c of kernel 3.18.24, and the kernel can work(I dit not test stack overflow) on VM.
+	I thought arm is more important than X86_32, so I did the same thing on armV7(NXP solo AP, also 3.18.24), the kernel failed. 
+	I think it is because armV7's kernel pagetable is completely not shared by diffrent process while X86 is? 
+	Is my result right? Can arm support kernel stack overflow detection? Arm7 has dependent kernel stack for page fault other than interrupt and syscall.
+	
+	Following is arm test printing
+	
+	
+	
+	
+	icn85xx_prog_i2c_rxdata i2c read error: -5
+icn85xx_check_progmod: 0x0
+iic2 test error! 3
+icn85xx_iic_test  failed.
+icn85xx: probe of 1-0048 failed with error -1
+snvs_rtc 20cc034.snvs-rtc-lp: setting system clock to 2016-09-18 05:15:25 UTC (1474175725)
+ALSA device list:
+  #0: wm8962-audio
+kjournald starting.  Commit interval 5 seconds
+EXT3-fs (mmcblk3p2): using internal journal
+EXT3-fs (mmcblk3p2): mounted filesystem with ordered data mode
+VFS: Mounted root (ext3 filesystem) on device 179:2.
+devtmpfs: mounted
+Freeing unused kernel memory: 332K (80d14000 - 80d67000)
+INIT: version 2.88 booting
+Starting udev
+udevd[163]: starting version 182
+Unable to handle kernel paging request at virtual address c101e000
+pgd = a8924000
+[c101e000] *pgd=38875811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 807 [#1] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 188 Comm: udevd Not tainted 3.14.28 #1
+task: a88c5b00 ti: c101c000 task.ti: c101c000
+PC is at __dabt_svc+0xc/0x60
+LR is at check_and_switch_context+0x148/0x4b8
+pc : [<800120ac>]    lr : [<8001c6a0>]    psr: 60010193
+sp : c101dff4  ip : ab7332a0  fp : 80d652a0
+r10: a8244da0  r9 : 80d70804  r8 : 80d75b48
+r7 : 00000000  r6 : a8244c40  r5 : 00000000  r4 : 00000033
+r3 : 8001ca80  r2 : 00000000  r1 : 00000133  r0 : 80dcadcc
+Flags: nZCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 387f8059  DAC: 00000015
+Process udevd (pid: 188, stack limit = 0xc101c238)
+Stack: (0xc101dff4 to 0xc101e000)
+dfe0:                                              00000133 00000000 8001ca80
+Unable to handle kernel paging request at virtual address c101e000
+pgd = a8924000
+[c101e000] *pgd=38875811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#2] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 188 Comm: udevd Not tainted 3.14.28 #1
+task: a88c5b00 ti: c101c000 task.ti: c101c000
+PC is at unwind_frame+0x338/0x4b4
+LR is at unwind_frame+0x320/0x4b4
+pc : [<8001486c>]    lr : [<80014854>]    psr: 20010193
+sp : c101dd50  ip : 80d0e5f4  fp : 00000001
+r10: 80c0cac0  r9 : a88c5b00  r8 : c101dd54
+r7 : 00000000  r6 : c101ddc8  r5 : c101e000  r4 : c101dff4
+r3 : 0000000c  r2 : 8001ca80  r1 : c101e000  r0 : 00000001
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 387f8059  DAC: 00000015
+Process udevd (pid: 188, stack limit = 0xc101c238)
+Stack: (0xc101dd50 to 0xc101e000)
+dd40:                                     0000dfe0 00000133 00000000 8001ca80
+dd60: 000008d8 c101c018 00000000 20000000 20202020 20202020 20202020 20202020
+dd80: 80d652a0 20202020 c101dff4 8001c6a0 00000000 80d0e5f4 00000001 00000003
+dda0: 33313030 800120ac c101dfa8 80c0e174 c101c028 00000807 a88c5b00 80c0cac0
+ddc0: c101dde4 80014a64 80d652a0 c101dff4 8001c6a0 800120ac a88c5b00 80d74cb0
+dde0: 80dcaf04 800118d4 c101c238 0000000b 00000000 60010193 00000000 00000000
+de00: 00000000 80dcfafc 00000001 00000000 00000000 00000000 a88c5b00 c101e000
+de20: 00000807 a8880700 c101dfa8 c101e000 a88c5b00 a8244da0 80d652a0 806d2190
+de40: 80c61e08 c101e000 00000807 a8880700 c101dfa8 c101e000 a88c5b00 a8244da0
+de60: 80d652a0 806d1ae4 00000807 80019744 c101d000 800083d4 ffffffff c101debc
+de80: 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dea0: a8244c40 00000000 00000005 00000805 800199cc 80d75628 c101d000 800083d4
+dec0: ffffffff c101df04 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80
+dee0: 00000033 00000807 80019588 80d75648 c101e000 c101dfa8 80d70804 a8244da0
+df00: 80d652a0 800083d4 ffffffff c101df4c 80d75b48 800120d8 80dcadcc 00000133
+df20: 00000000 8001ca80 00000033 00000000 a8244c40 00000000 80d75b48 80d70804
+df40: a8244da0 80d652a0 800120ac 60010193 ffffffff c101df94 80d75b48 800120d8
+df60: 80dcadcc 00000133 00000000 8001ca80 00000033 00000000 a8244c40 00000000
+df80: 80d75b48 80d70804 a8244da0 80d652a0 800120ac 60010193 ffffffff c101dfdc
+dfa0: 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dfc0: a8244c40 00000000 80d75b48 80d70804 a8244da0 80d652a0 ab7332a0 c101dff4
+dfe0: 8001c6a0 800120ac 60010193 ffffffff 60010010 00000133 00000000 8001ca80
+[<8001486c>] (unwind_frame) from [<80014a64>] (unwind_backtrace+0x7c/0xf4)
+[<80014a64>] (unwind_backtrace) from [<800118d4>] (die+0x2a4/0x3e4)
+[<800118d4>] (die) from [<806d1ae4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<806d1ae4>] (__do_kernel_fault.part.11) from [<80019744>] (do_page_fault+0x1bc/0x3b0)
+[<80019744>] (do_page_fault) from [<800083d4>] (do_DataAbort+0x38/0x98)
+[<800083d4>] (do_DataAbort) from [<800120d8>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc101dfa8 to 0xc101dff0)
+dfa0:                   80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dfc0: a8244c40 00000000 80d75b48 80d70804 a8244da0 80d652a0 ab7332a0 c101dff4
+dfe0: 8001c6a0 800120ac 60010193 ffffffff
+[<800120d8>] (__dabt_svc) from [<800120ac>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c101e000
+pgd = a8924000
+[c101e000] *pgd=38875811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#3] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 188 Comm: udevd Not tainted 3.14.28 #1
+task: a88c5b00 ti: c101c000 task.ti: c101c000
+PC is at unwind_frame+0x338/0x4b4
+LR is at unwind_frame+0x320/0x4b4
+pc : [<8001486c>]    lr : [<80014854>]    psr: 20010193
+sp : c101dab0  ip : 80d0e5f4  fp : 00000001
+r10: 80c0cac0  r9 : a88c5b00  r8 : c101dab4
+r7 : 00000000  r6 : c101db28  r5 : c101e000  r4 : c101dff4
+r3 : 0000000c  r2 : 8001ca80  r1 : c101e000  r0 : 00000001
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 387f8059  DAC: 00000015
+Process udevd (pid: 188, stack limit = 0xc101c238)
+Stack: (0xc101dab0 to 0xc101e000)
+daa0:                                     31303038 00000133 00000000 8001ca80
+dac0: 8001ca80 800120d8 c101dff0 80c0e174 c101c008 00000007 a88c5b00 80c0cac0
+dae0: 80d652a0 806d2190 c101dff4 8001c6a0 00000000 80d0e5f4 00000001 00000003
+db00: 80c0ca74 800120ac c101dd08 80c0e174 c101c008 00000007 a88c5b00 80c0cac0
+db20: c101db44 80014a64 80d652a0 c101dff4 8001c6a0 800120ac a88c5b00 80d74cb0
+db40: 80dcaf04 800118d4 c101c238 0000000b 00000000 60010193 00000000 00000000
+db60: c0ad0000 80dcfafc 00000001 00000000 00000000 00000000 a88c5b00 c101e000
+db80: 00000007 a8880700 c101dd08 c101e000 a88c5b00 80c0cac0 00000001 806d2190
+dba0: 80c61e08 c101e000 00000007 a8880700 c101dd08 c101e000 a88c5b00 80c0cac0
+dbc0: 00000001 806d1ae4 00000007 80019744 00000400 00000000 80dcf208 20010193
+dbe0: 80d7b42c 00000001 00000021 00000010 00000004 00000004 00000000 00000000
+dc00: 00000000 00000000 80d704c0 806d9af0 8001ceec 80dcb0c4 80d704c0 806da16c
+dc20: 20010193 80510548 c0ad0000 a81d3010 a802b580 80dcf6dc c0ad0000 a81d3010
+dc40: 80d704c0 00000007 80019588 80d75648 c101e000 c101dd08 a88c5b00 80c0cac0
+dc60: 00000001 800083d4 c0ad0000 80d910d0 00000006 806d9af0 00000000 80d7b44c
+dc80: 00000000 8005fa78 00000006 806d9d64 000008d8 80064848 00000400 00000000
+dca0: 80dcf208 20010193 80d7b42c 00000001 60010193 80d7b42c 80dcf208 0000004d
+dcc0: 00000001 00000000 60010193 80064628 000008d8 80064c38 00000000 00000000
+dce0: 00000000 00000000 80dcfafe 0000004d 8001486c 20010193 ffffffff c101dd3c
+dd00: c101dd54 800120d8 00000001 c101e000 8001ca80 0000000c c101dff4 c101e000
+dd20: c101ddc8 00000000 c101dd54 a88c5b00 80c0cac0 00000001 80d0e5f4 c101dd50
+dd40: 80014854 8001486c 20010193 ffffffff 0000dfe0 00000133 00000000 8001ca80
+dd60: 000008d8 c101c018 00000000 20000000 20202020 20202020 20202020 20202020
+dd80: 80d652a0 20202020 c101dff4 8001c6a0 00000000 80d0e5f4 00000001 00000003
+dda0: 33313030 800120ac c101dfa8 80c0e174 c101c028 00000807 a88c5b00 80c0cac0
+ddc0: c101dde4 80014a64 80d652a0 c101dff4 8001c6a0 800120ac a88c5b00 80d74cb0
+dde0: 80dcaf04 800118d4 c101c238 0000000b 00000000 60010193 00000000 00000000
+de00: 00000000 80dcfafc 00000001 00000000 00000000 00000000 a88c5b00 c101e000
+de20: 00000807 a8880700 c101dfa8 c101e000 a88c5b00 a8244da0 80d652a0 806d2190
+de40: 80c61e08 c101e000 00000807 a8880700 c101dfa8 c101e000 a88c5b00 a8244da0
+de60: 80d652a0 806d1ae4 00000807 80019744 c101d000 800083d4 ffffffff c101debc
+de80: 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dea0: a8244c40 00000000 00000005 00000805 800199cc 80d75628 c101d000 800083d4
+dec0: ffffffff c101df04 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80
+dee0: 00000033 00000807 80019588 80d75648 c101e000 c101dfa8 80d70804 a8244da0
+df00: 80d652a0 800083d4 ffffffff c101df4c 80d75b48 800120d8 80dcadcc 00000133
+df20: 00000000 8001ca80 00000033 00000000 a8244c40 00000000 80d75b48 80d70804
+df40: a8244da0 80d652a0 800120ac 60010193 ffffffff c101df94 80d75b48 800120d8
+df60: 80dcadcc 00000133 00000000 8001ca80 00000033 00000000 a8244c40 00000000
+df80: 80d75b48 80d70804 a8244da0 80d652a0 800120ac 60010193 ffffffff c101dfdc
+dfa0: 80d75b48 800120d8 80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dfc0: a8244c40 00000000 80d75b48 80d70804 a8244da0 80d652a0 ab7332a0 c101dff4
+dfe0: 8001c6a0 800120ac 60010193 ffffffff 60010010 00000133 00000000 8001ca80
+[<8001486c>] (unwind_frame) from [<80014a64>] (unwind_backtrace+0x7c/0xf4)
+[<80014a64>] (unwind_backtrace) from [<800118d4>] (die+0x2a4/0x3e4)
+[<800118d4>] (die) from [<806d1ae4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<806d1ae4>] (__do_kernel_fault.part.11) from [<80019744>] (do_page_fault+0x1bc/0x3b0)
+[<80019744>] (do_page_fault) from [<800083d4>] (do_DataAbort+0x38/0x98)
+[<800083d4>] (do_DataAbort) from [<800120d8>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc101dd08 to 0xc101dd50)
+dd00:                   00000001 c101e000 8001ca80 0000000c c101dff4 c101e000
+dd20: c101ddc8 00000000 c101dd54 a88c5b00 80c0cac0 00000001 80d0e5f4 c101dd50
+dd40: 80014854 8001486c 20010193 ffffffff
+[<800120d8>] (__dabt_svc) from [<8001486c>] (unwind_frame+0x338/0x4b4)
+[<8001486c>] (unwind_frame) from [<80014a64>] (unwind_backtrace+0x7c/0xf4)
+[<80014a64>] (unwind_backtrace) from [<800118d4>] (die+0x2a4/0x3e4)
+[<800118d4>] (die) from [<806d1ae4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<806d1ae4>] (__do_kernel_fault.part.11) from [<80019744>] (do_page_fault+0x1bc/0x3b0)
+[<80019744>] (do_page_fault) from [<800083d4>] (do_DataAbort+0x38/0x98)
+[<800083d4>] (do_DataAbort) from [<800120d8>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc101dfa8 to 0xc101dff0)
+dfa0:                   80dcadcc 00000133 00000000 8001ca80 00000033 00000000
+dfc0: a8244c40 00000000 80d75b48 80d70804 a8244da0 80d652a0 ab7332a0 c101dff4
+dfe0: 8001c6a0 800120ac 60010193 ffffffff
+[<800120d8>] (__dabt_svc) from [<800120ac>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c101e000
+pgd = a8924000
+	
+	
+	
+	
