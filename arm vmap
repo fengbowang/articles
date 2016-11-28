@@ -33,3 +33,79 @@ r7 : 00000000  r6 : c134ddd0  r5 : c134e000  r4 : c134dffc
 r3 : 00000004  r2 : 00000309  r1 : c134e000  r0 : 00000007
 Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
 Control: 10c53c7d  Table: 38a1c059  DAC: 00000015
+
+
+thread stack allocated by vmalloc OK, addr: c1158000Unable to handle kernel paging request at virtual address c0ffe000
+pgd = 80004000
+[c0ffe000] *pgd=385f4811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 807 [#1] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 185 Comm: modprobe Not tainted 3.14.28 #1
+task: a88c4480 ti: c0ffc000 task.ti: c0ffc000
+PC is at __dabt_svc+0xc/0x60
+LR is at check_and_switch_context+0x148/0x4b8
+pc : [<800120ac>]    lr : [<8001c6a0>]    psr: 60000193
+sp : c0ffdfdc  ip : ab7332a0  fp : 80d652a0
+r10: a8245f20  r9 : 80d70804  r8 : 80d75b48
+r7 : 00000000  r6 : a8245dc0  r5 : 00000000  r4 : 00000039
+r3 : 8001ca80  r2 : 00000000  r1 : 00000139  r0 : 80dcadcc
+Flags: nZCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 38894059  DAC: 00000015
+Process modprobe (pid: 185, stack limit = 0xc0ffc238)
+Stack: (0xc0ffdfdc to 0xc0ffe000)
+dfc0:                                                                00000139
+dfe0: 00000000 8001ca80 00000039 00000000 a8245dc0 00000000 80d75b48 80d70804
+Unable to handle kernel paging request at virtual address c0ffe000
+pgd = 80004000
+[c0ffe000] *pgd=385f4811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#2] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 185 Comm: modprobe Not tainted 3.14.28 #1
+task: a88c4480 ti: c0ffc000 task.ti: c0ffc000
+PC is at unwind_frame+0x284/0x4b4
+LR is at unwind_frame+0x264/0x4b4
+pc : [<800147b8>]    lr : [<80014798>]    psr: 20000193
+sp : c0ffdd38  ip : 80d0e5f4  fp : 00000001
+r10: 00008f00  r9 : c0ffe000  r8 : c0ffdd3c
+r7 : 00000000  r6 : c0ffddb0  r5 : c0ffe000  r4 : c0ffdfdc
+r3 : 0000007f  r2 : c0ffdd54  r1 : 80d70804  r0 : 00000200
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 38894059  DAC: 00000015
+Process modprobe (pid: 185, stack limit = 0xc0ffc238)
+Stack: (0xc0ffdd38 to 0xc0ffe000)
+dd20:                                                       0000dfe0 00000139
+dd40: 00000000 8001ca80 00000039 00000000 a8245dc0 00000000 80d75b48 80d70804
+dd60: 30303820 38616331 80d652a0 30303030 c0ffdfec 8001c6a0 00000000 80d0e5f4
+dd80: 00000001 00000001 30303030 800120ac c0ffdf90 80c0e184 c0ffc010 00000807
+dda0: a88c4480 80c0cad0 c0ffddcc 80014a64 80d652a0 c0ffdfdc 8001c6a0 800120ac
+ddc0: a88c4480 80d74cb0 80dcaf04 800118d4 c0ffc238 0000000b 00000000 60000193
+dde0: 00000000 00000000 000000a8 80dcfafc 00000001 00000000 00000000 00000000
+de00: a88c4480 c0ffe000 00000807 00000000 c0ffdf90 c0ffe000 a88c4480 a8245f20
+de20: 80d652a0 806d21f0 80c61ea8 c0ffe000 00000807 00000000 c0ffdf90 c0ffe000
+de40: a88c4480 a8245f20 80d652a0 806d1b44 00000807 80019744 00000001 a88c44c8
+de60: 00000001 00000000 ab734bc0 00003400 80009888 ffffffff 00000000 8004b0a4
+de80: c1004000 00000002 80dcad50 00000000 00000000 8004b330 00000000 806dd8cc
+dea0: c100401c a88c4480 80d70804 80012518 80d66bc0 80d66bc0 80dcaa38 c0ffc018
+dec0: 00000000 80d66bc0 80d66bc0 00000807 80019588 80d75648 c0ffe000 c0ffdf90
+dee0: 80d70804 a8245f20 80d652a0 800083d4 00000008 800e6b9c c0ffc000 00000000
+df00: a88c4480 800098e0 a88c4480 c0ffc000 c0ffc030 c0ffc000 a88c4478 c0ffc008
+df20: a88c4668 00000000 a88c4478 a88c4668 a88c4478 c0ffc000 a88c4668 a8078000
+df40: a88c4480 8002e2bc c0ffdf58 00000001 fffffffe a88c46b0 c0ffdf58 c0ffdf58
+df60: 7eb2c99c a817b440 00000100 c0ffc000 000000f8 8000e564 800120ac 60000193
+df80: ffffffff c0ffdfc4 80d75b48 800120d8 80dcadcc 00000139 00000000 8001ca80
+dfa0: 00000039 00000000 a8245dc0 00000000 80d75b48 80d70804 a8245f20 80d652a0
+dfc0: ab7332a0 c0ffdfdc 8001c6a0 800120ac 60000193 ffffffff 76fe9000 00000139
+dfe0: 00000000 8001ca80 00000039 00000000 a8245dc0 00000000 80d75b48 80d70804
+[<800147b8>] (unwind_frame) from [<80014a64>] (unwind_backtrace+0x7c/0xf4)
+[<80014a64>] (unwind_backtrace) from [<800118d4>] (die+0x2a4/0x3e4)
+[<800118d4>] (die) from [<806d1b44>] (__do_kernel_fault.part.11+0x64/0x74)
+[<806d1b44>] (__do_kernel_fault.part.11) from [<80019744>] (do_page_fault+0x1bc/0x3b0)
+[<80019744>] (do_page_fault) from [<800083d4>] (do_DataAbort+0x38/0x98)
+[<800083d4>] (do_DataAbort) from [<800120d8>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0ffdf90 to 0xc0ffdfd8)
+df80:                                     80dcadcc 00000139 00000000 8001ca80
+dfa0: 00000039 00000000 a8245dc0 00000000 80d75b48 80d70804 a8245f20 80d652a0
+dfc0: ab7332a0 c0ffdfdc 8001c6a0 800120ac 60000193 ffffffff
+[<800120d8>] (__dabt_svc) from [<800120ac>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c0ffe000
+pgd = 80004000
