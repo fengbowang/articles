@@ -1,0 +1,35 @@
+Unable to handle kernel paging request at virtual address c134e000
+pgd = a9038000
+[c134e000] *pgd=38c09811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 807 [#1] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 392 Comm: mount.sh Not tainted 3.14.28 #1
+task: a8e8a880 ti: c134c000 task.ti: c134c000
+PC is at __dabt_svc+0xc/0x60
+LR is at check_and_switch_context+0x148/0x4b8
+pc : [<800120ac>]    lr : [<8001c6a0>]    psr: 60070193
+sp : c134dffc  ip : ab7332a0  fp : 80d652a0
+r10: a89c2da0  r9 : 80d70804  r8 : 80d75b48
+r7 : 00000000  r6 : a89c2c40  r5 : 00000000  r4 : 00000009
+r3 : 8001ca80  r2 : 00000000  r1 : 00000309  r0 : 80dcadcc
+Flags: nZCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 38a1c059  DAC: 00000015
+Process mount.sh (pid: 392, stack limit = 0xc134c238)
+Stack: (0xc134dffc to 0xc134e000)
+dfe0:                                                                00000309
+Unable to handle kernel paging request at virtual address c134e000
+pgd = a9038000
+[c134e000] *pgd=38c09811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#2] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 392 Comm: mount.sh Not tainted 3.14.28 #1
+task: a8e8a880 ti: c134c000 task.ti: c134c000
+PC is at unwind_frame+0x338/0x4b4
+LR is at unwind_frame+0x320/0x4b4
+pc : [<8001486c>]    lr : [<80014854>]    psr: 20070193
+sp : c134dd58  ip : 80d0e5f4  fp : 00000001
+r10: 80c0cad0  r9 : a8e8a880  r8 : c134dd5c
+r7 : 00000000  r6 : c134ddd0  r5 : c134e000  r4 : c134dffc
+r3 : 00000004  r2 : 00000309  r1 : c134e000  r0 : 00000007
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 38a1c059  DAC: 00000015
