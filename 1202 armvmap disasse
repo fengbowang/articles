@@ -1,0 +1,399 @@
+arch/arm/mm$ arm-poky-linux-gnueabi-gdb context.o
+GNU gdb (GDB) 7.6
+Copyright (C) 2013 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "--host=x86_64-pokysdk-linux --target=arm-poky-linux-gnueabi".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /home/launch/samba/www/ker/arch/arm/mm/context.o...done.
+(gdb) disassemble 
+No frame selected.
+(gdb) disassemble  /m check_and_switch_context
+Dump of assembler code for function check_and_switch_context:
+96              asm volatile(
+   0x0000002c <+44>:    mrc     15, 0, r3, cr2, cr0, {1}
+   0x00000030 <+48>:    mcr     15, 0, r3, cr2, cr0, {0}
+
+97              "       mrc     p15, 0, %0, c2, c0, 1           @ read TTBR1\n"
+98              "       mcr     p15, 0, %0, c2, c0, 0           @ set TTBR0\n"
+99              : "=r" (ttb));
+100             isb();
+   0x00000034 <+52>:    isb     sy
+
+101     }
+102     #endif
+103
+104     #ifdef CONFIG_PID_IN_CONTEXTIDR
+105     static int contextidr_notifier(struct notifier_block *unused, unsigned long cmd,
+106                                    void *t)
+107     {
+108             u32 contextidr;
+109             pid_t pid;
+110             struct thread_info *thread = t;
+111
+112             if (cmd != THREAD_NOTIFY_SWITCH)
+113                     return NOTIFY_DONE;
+114
+115             pid = task_pid_nr(thread->task) << ASID_BITS;
+116             asm volatile(
+117             "       mrc     p15, 0, %0, c13, c0, 1\n"
+118             "       and     %0, %0, %2\n"
+119             "       orr     %0, %0, %1\n"
+120             "       mcr     p15, 0, %0, c13, c0, 1\n"
+121             : "=r" (contextidr), "+r" (pid)
+122             : "I" (~ASID_MASK));
+123             isb();
+124
+125             return NOTIFY_OK;
+126     }
+127
+128     static struct notifier_block contextidr_notifier_block = {
+129             .notifier_call = contextidr_notifier,
+130     };
+131
+132     static int __init contextidr_notifier_init(void)
+133     {
+134             return thread_register_notifier(&contextidr_notifier_block);
+135     }
+136     arch_initcall(contextidr_notifier_init);
+137     #endif
+138
+139     static void flush_context(unsigned int cpu)
+140     {
+141             int i;
+142             u64 asid;
+143
+144             /* Update the list of reserved ASIDs and the ASID bitmap. */
+---Type <return> to continue, or q <return> to quit---
+145             bitmap_clear(asid_map, 0, NUM_USER_ASIDS);
+   0x00000334 <+820>:   ldr     r0, [pc, #372]  ; 0x4b0 <check_and_switch_context+1200>
+   0x00000338 <+824>:   mov     r1, #0
+   0x0000033c <+828>:   mov     r2, #256        ; 0x100
+   0x00000350 <+848>:   str     r3, [sp, #20]
+   0x00000354 <+852>:   bl      0x354 <check_and_switch_context+852>
+
+146             for_each_possible_cpu(i) {
+   0x00000370 <+880>:   mvn     r0, #0
+   0x00000420 <+1056>:  ldr     r2, [r5]
+   0x00000424 <+1060>:  cmp     r0, r2
+   0x00000428 <+1064>:  bge     0x44c <check_and_switch_context+1100>
+
+147                     if (i == cpu) {
+   0x0000042c <+1068>:  ldr     r3, [sp, #16]
+   0x00000430 <+1072>:  cmp     r3, r0
+   0x00000434 <+1076>:  bne     0x3a4 <check_and_switch_context+932>
+   0x00000438 <+1080>:  ldr     r1, [r9, r3, lsl #2]
+
+148                             asid = 0;
+   0x0000043c <+1084>:  mov     r6, #0
+   0x00000440 <+1088>:  mov     r7, #0
+   0x00000444 <+1092>:  ldr     r2, [pc, #104]  ; 0x4b4 <check_and_switch_context+1204>
+   0x00000448 <+1096>:  b       0x40c <check_and_switch_context+1036>
+
+149                     } else {
+150                             asid = atomic64_xchg(&per_cpu(active_asids, i), 0);
+   0x00000348 <+840>:   str     r11, [sp, #32]
+   0x0000034c <+844>:   movt    r3, #0
+   0x00000358 <+856>:   ldr     r12, [sp, #32]
+   0x0000035c <+860>:   ldr     r3, [sp, #20]
+   0x00000360 <+864>:   movw    r5, #0
+   0x00000364 <+868>:   str     r12, [sp, #32]
+   0x00000368 <+872>:   movt    r5, #0
+   0x000003a4 <+932>:   ldr     r2, [r9, r0, lsl #2]
+   0x000003a8 <+936>:   ldr     r6, [sp, #32]
+   0x000003ac <+940>:   add     r2, r6, r2
+   0x000003d4 <+980>:   ldrd    r6, [sp, #8]
+
+151                             /*
+152                              * If this CPU has already been through a
+153                              * rollover, but hasn't run another task in
+154                              * the meantime, we must preserve its reserved
+155                              * ASID, as this is the only trace we have of
+156                              * the process it is still running.
+157                              */
+158                             if (asid == 0)
+   0x000003dc <+988>:   orrs    r10, r6, r7
+
+159                                     asid = per_cpu(reserved_asids, i);
+   0x0000036c <+876>:   ldr     r12, [pc, #320] ; 0x4b4 <check_and_switch_context+1204>
+   0x00000374 <+884>:   str     r12, [sp, #52]  ; 0x34
+   0x00000378 <+888>:   ldr     r12, [pc, #304] ; 0x4b0 <check_and_switch_context+1200>
+   0x0000037c <+892>:   str     r8, [sp, #64]   ; 0x40
+   0x00000380 <+896>:   ldr     r4, [r3]
+---Type <return> to continue, or q <return> to quit---
+   0x00000384 <+900>:   str     r12, [sp, #24]
+   0x00000388 <+904>:   mov     r8, r12
+   0x0000038c <+908>:   str     r10, [sp, #56]  ; 0x38
+   0x00000390 <+912>:   str     r7, [sp, #16]
+   0x00000394 <+916>:   str     r6, [sp, #60]   ; 0x3c
+   0x00000398 <+920>:   str     r11, [sp, #68]  ; 0x44
+   0x0000039c <+924>:   str     r3, [sp, #4]
+   0x000003a0 <+928>:   b       0x410 <check_and_switch_context+1040>
+   0x000003d8 <+984>:   ldr     r2, [pc, #212]  ; 0x4b4 <check_and_switch_context+1204>
+   0x000003e0 <+992>:   ldr     r1, [r9, r0, lsl #2]
+   0x000003e4 <+996>:   ldreq   r11, [sp, #52]  ; 0x34
+   0x000003e8 <+1000>:  ldrdeq  r6, [r11, r1]
+   0x000003ec <+1004>:  ldr     r3, [sp, #4]
+
+160                             __set_bit(asid & ~ASID_MASK, asid_map);
+161                     }
+162                     per_cpu(reserved_asids, i) = asid;
+   0x0000040c <+1036>:  strd    r6, [r1, r2]
+
+163             }
+164
+165             /* Queue a TLB invalidate and flush the I-cache if necessary. */
+166             cpumask_setall(&tlb_flush_pending);
+167
+168             if (icache_is_vivt_asid_tagged())
+   0x0000046c <+1132>:  tst     r2, #8
+   0x00000470 <+1136>:  ldr     r10, [sp, #56]  ; 0x38
+   0x00000474 <+1140>:  ldm     r6, {r6, r8, r11}
+   0x0000047c <+1148>:  beq     0x488 <check_and_switch_context+1160>
+
+169                     __flush_icache_all();
+170     }
+171
+172     static int is_reserved_asid(u64 asid)
+173     {
+174             int cpu;
+175             for_each_possible_cpu(cpu)
+   0x000002cc <+716>:   ldr     r1, [r5]
+   0x000002d0 <+720>:   cmp     r0, r1
+   0x000002d8 <+728>:   blt     0x2a8 <check_and_switch_context+680>
+   0x000002dc <+732>:   ldr     r7, [sp, #52]   ; 0x34
+   0x000002e0 <+736>:   ldr     r6, [sp, #56]   ; 0x38
+   0x000002e4 <+740>:   ldr     r8, [sp, #60]   ; 0x3c
+   0x000002e8 <+744>:   b       0x1dc <check_and_switch_context+476>
+
+176                     if (per_cpu(reserved_asids, cpu) == asid)
+   0x0000027c <+636>:   ldr     r4, [pc, #560]  ; 0x4b4 <check_and_switch_context+1204>
+   0x00000280 <+640>:   ldr     r3, [r2]
+   0x00000284 <+644>:   movt    r5, #0
+   0x00000288 <+648>:   str     r7, [sp, #52]   ; 0x34
+   0x000002a8 <+680>:   ldr     r1, [r9, r2, lsl #2]
+   0x000002ac <+684>:   ldrd    r0, [r1, r8]
+   0x000002b0 <+688>:   cmp     r7, r1
+   0x000002b4 <+692>:   cmpeq   r6, r0
+   0x000002b8 <+696>:   beq     0x2ec <check_and_switch_context+748>
+---Type <return> to continue, or q <return> to quit---
+
+177                             return 1;
+178             return 0;
+179     }
+180
+181     static u64 new_context(struct mm_struct *mm, unsigned int cpu)
+182     {
+183             static u32 cur_idx = 1;
+184             u64 asid = atomic64_read(&mm->context.id);
+185             u64 generation = atomic64_read(&asid_generation);
+   0x000001d0 <+464>:   ldrd    r2, [sp, #32]
+   0x000001d4 <+468>:   strd    r2, [sp, #40]   ; 0x28
+
+186
+187             if (asid != 0 && is_reserved_asid(asid)) {
+   0x000001cc <+460>:   orrs    r1, r2, r3
+   0x000001d8 <+472>:   bne     0x270 <check_and_switch_context+624>
+   0x0000028c <+652>:   mvn     r2, #0
+   0x00000290 <+656>:   str     r6, [sp, #56]   ; 0x38
+   0x00000294 <+660>:   str     r8, [sp, #60]   ; 0x3c
+   0x00000298 <+664>:   mov     r8, r4
+   0x0000029c <+668>:   ldrd    r6, [sp, #24]
+   0x000002a0 <+672>:   mov     r4, r3
+   0x000002a4 <+676>:   b       0x2bc <check_and_switch_context+700>
+
+188                     /*
+189                      * Our current ASID was active during a rollover, we can
+190                      * continue to use it and this was just a false alarm.
+191                      */
+192                     asid = generation | (asid & ~ASID_MASK);
+   0x000002ec <+748>:   ldrd    r0, [sp, #32]
+   0x000002f0 <+752>:   mov     r5, #0
+   0x000002f4 <+756>:   ldrb    r4, [sp, #24]
+   0x000002f8 <+760>:   ldr     r7, [sp, #52]   ; 0x34
+   0x000002fc <+764>:   orr     r5, r5, r1
+   0x00000300 <+768>:   ldr     r6, [sp, #56]   ; 0x38
+   0x00000304 <+772>:   orr     r4, r4, r0
+   0x00000308 <+776>:   b       0x258 <check_and_switch_context+600>
+
+193             } else {
+194                     /*
+195                      * Allocate a free ASID. If we can't find one, take a
+196                      * note of the currently active ASIDs and mark the TLBs
+197                      * as requiring flushes. We always count from ASID #1,
+198                      * as we reserve ASID #0 to switch via TTBR0 and to
+199                      * avoid speculative page table walks from hitting in
+200                      * any partial walk caches, which could be populated
+201                      * from overlapping level-1 descriptors used to map both
+202                      * the module area and the userspace stack.
+203                      */
+204                     asid = find_next_zero_bit(asid_map, NUM_USER_ASIDS, cur_idx);
+   0x000001dc <+476>:   mov     r1, #256        ; 0x100
+   0x000001e0 <+480>:   ldr     r0, [pc, #712]  ; 0x4b0 <check_and_switch_context+1200>
+   0x000001e4 <+484>:   ldr     r2, [r8, #8]
+   0x000001e8 <+488>:   bl      0x1e8 <check_and_switch_context+488>
+---Type <return> to continue, or q <return> to quit---
+   0x000001ec <+492>:   asr     r1, r0, #31
+
+205                     if (asid == NUM_USER_ASIDS) {
+   0x000001f0 <+496>:   cmp     r1, #0
+   0x000001f4 <+500>:   cmpeq   r0, #256        ; 0x100
+   0x000001f8 <+504>:   beq     0x30c <check_and_switch_context+780>
+   0x000001fc <+508>:   ldr     r3, [pc, #684]  ; 0x4b0 <check_and_switch_context+1200>
+   0x00000200 <+512>:   str     r3, [sp, #24]
+
+206                             generation = atomic64_add_return(ASID_FIRST_VERSION,
+   0x00000340 <+832>:   strd    r4, [sp, #40]   ; 0x28
+   0x00000344 <+836>:   movw    r3, #0
+
+207                                                              &asid_generation);
+208                             flush_context(cpu);
+209                             asid = find_next_zero_bit(asid_map, NUM_USER_ASIDS, 1);
+   0x00000488 <+1160>:  mov     r1, #256        ; 0x100
+   0x0000048c <+1164>:  ldr     r0, [pc, #28]   ; 0x4b0 <check_and_switch_context+1200>
+   0x00000490 <+1168>:  mov     r2, #1
+   0x00000494 <+1172>:  bl      0x494 <check_and_switch_context+1172>
+   0x00000498 <+1176>:  asr     r1, r0, #31
+   0x0000049c <+1180>:  b       0x204 <check_and_switch_context+516>
+
+210                     }
+211                     __set_bit(asid, asid_map);
+212                     cur_idx = asid;
+   0x0000022c <+556>:   str     r0, [r8, #8]
+
+213                     asid |= generation;
+   0x00000208 <+520>:   ldrd    r4, [sp, #40]   ; 0x28
+   0x00000218 <+536>:   orr     r5, r5, r1
+   0x00000228 <+552>:   orr     r4, r4, r0
+
+214                     cpumask_clear(mm_cpumask(mm));
+215             }
+216
+217             return asid;
+218     }
+219
+220     void check_and_switch_context(struct mm_struct *mm, struct task_struct *tsk)
+221     {
+   0x00000000 <+0>:     push    {r4, r5, r6, r7, r8, r9, r10, r11, lr}
+   0x00000004 <+4>:     sub     sp, sp, #76     ; 0x4c
+   0x00000008 <+8>:     mov     r6, r0
+
+222             unsigned long flags;
+223             unsigned int cpu = smp_processor_id();
+   0x0000000c <+12>:    bl      0xc <check_and_switch_context+12>
+   0x00000024 <+36>:    mov     r7, r0
+
+224             u64 asid;
+225
+226             if (unlikely(mm->context.vmalloc_seq != init_mm.context.vmalloc_seq))
+   0x00000010 <+16>:    movw    r3, #0
+   0x00000014 <+20>:    movt    r3, #0
+---Type <return> to continue, or q <return> to quit---
+   0x00000018 <+24>:    ldr     r2, [r6, #360]  ; 0x168
+   0x0000001c <+28>:    ldr     r3, [r3, #360]  ; 0x168
+   0x00000020 <+32>:    cmp     r2, r3
+   0x00000028 <+40>:    bne     0x4a0 <check_and_switch_context+1184>
+
+227                     __check_vmalloc_seq(mm);
+   0x000004a0 <+1184>:  mov     r0, r6
+   0x000004a4 <+1188>:  bl      0x4a4 <check_and_switch_context+1188>
+   0x000004a8 <+1192>:  b       0x2c <check_and_switch_context+44>
+   0x000004ac <+1196>:  andeq   r0, r0, r4, lsr #32
+   0x000004b0 <+1200>:  andeq   r0, r0, r4
+   0x000004b4 <+1204>:  andeq   r0, r0, r8
+
+228
+229             /*
+230              * We cannot update the pgd and the ASID atomicly with classic
+231              * MMU, so switch exclusively to global mappings to avoid
+232              * speculative page table walking with the wrong TTBR.
+233              */
+234             cpu_set_reserved_ttbr0();
+235
+236             asid = atomic64_read(&mm->context.id);
+   0x00000038 <+56>:    add     r10, r6, #352   ; 0x160
+
+237             if (!((asid ^ atomic64_read(&asid_generation)) >> ASID_BITS)
+   0x0000004c <+76>:    eor     r4, r4, r0
+   0x00000050 <+80>:    eor     r5, r5, r1
+   0x00000054 <+84>:    lsr     r2, r4, #8
+   0x00000058 <+88>:    lsr     r3, r5, #8
+   0x0000005c <+92>:    orr     r2, r2, r5, lsl #24
+   0x00000060 <+96>:    orrs    r11, r2, r3
+   0x00000064 <+100>:   bne     0x1a8 <check_and_switch_context+424>
+
+238                 && atomic64_xchg(&per_cpu(active_asids, cpu), asid))
+   0x00000068 <+104>:   movw    r9, #0
+   0x0000006c <+108>:   movt    r9, #0
+   0x00000070 <+112>:   movw    r11, #0
+   0x00000074 <+116>:   movt    r11, #0
+   0x00000078 <+120>:   ldr     r12, [r9, r7, lsl #2]
+   0x0000007c <+124>:   mov     r3, r11
+   0x00000080 <+128>:   add     r12, r3, r12
+   0x0000009c <+156>:   orrs    r0, r2, r3
+   0x000000a0 <+160>:   bne     0x12c <check_and_switch_context+300>
+
+239                     goto switch_mm_fastpath;
+240
+241             raw_spin_lock_irqsave(&cpu_asid_lock, flags);
+   0x000000a4 <+164>:   movw    r0, #0
+   0x000000a8 <+168>:   movt    r0, #0
+   0x000000ac <+172>:   bl      0xac <check_and_switch_context+172>
+   0x000000b0 <+176>:   str     r0, [sp, #48]   ; 0x30
+
+242             /* Check that our ASID belongs to the current generation. */
+243             asid = atomic64_read(&mm->context.id);
+244             if ((asid ^ atomic64_read(&asid_generation)) >> ASID_BITS) {
+---Type <return> to continue, or q <return> to quit---
+   0x000000bc <+188>:   eor     r4, r4, r0
+   0x000000c0 <+192>:   eor     r5, r5, r1
+   0x000000c4 <+196>:   lsr     r2, r4, #8
+   0x000000c8 <+200>:   lsr     r3, r5, #8
+   0x000000cc <+204>:   orr     r2, r2, r5, lsl #24
+   0x000000d0 <+208>:   orrs    r12, r2, r3
+   0x000000d4 <+212>:   moveq   r4, r0
+   0x000000d8 <+216>:   moveq   r5, r1
+   0x000000dc <+220>:   bne     0x1bc <check_and_switch_context+444>
+
+245                     asid = new_context(mm, cpu);
+246                     atomic64_set(&mm->context.id, asid);
+247             }
+248
+249             if (cpumask_test_and_clear_cpu(cpu, &tlb_flush_pending)) {
+   0x000000ec <+236>:   cmp     r0, #0
+   0x000000f0 <+240>:   bne     0x150 <check_and_switch_context+336>
+
+250                     local_flush_bp_all();
+251                     local_flush_tlb_all();
+252             }
+253
+254             atomic64_set(&per_cpu(active_asids, cpu), asid);
+   0x000000f4 <+244>:   ldr     r3, [r9, r7, lsl #2]
+   0x000000f8 <+248>:   add     r11, r11, r3
+
+255             cpumask_set_cpu(cpu, mm_cpumask(mm));
+256             raw_spin_unlock_irqrestore(&cpu_asid_lock, flags);
+   0x0000011c <+284>:   movw    r0, #0
+   0x00000120 <+288>:   ldr     r1, [sp, #48]   ; 0x30
+   0x00000124 <+292>:   movt    r0, #0
+   0x00000128 <+296>:   bl      0x128 <check_and_switch_context+296>
+
+257
+258     switch_mm_fastpath:
+259             cpu_switch_mm(mm->pgd, mm);
+   0x0000012c <+300>:   movw    r3, #0
+   0x00000130 <+304>:   movt    r3, #0
+   0x00000138 <+312>:   mov     r1, r6
+   0x0000013c <+316>:   ldr     r3, [r3, #28]
+   0x00000144 <+324>:   blx     r3
+
+260     }
+   0x00000148 <+328>:   add     sp, sp, #76     ; 0x4c
+   0x0000014c <+332>:   pop     {r4, r5, r6, r7, r8, r9, r10, r11, pc}
+
+End of assembler dump.
+(gdb) 
+(gdb) 
