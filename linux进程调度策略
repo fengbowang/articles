@@ -1,0 +1,15 @@
+linux调度策略分两层, 参见 man sched_setscheduler
+
+第一层是根据进程的如下参数(即线程)  struct sched_param {
+           ...
+           int sched_priority;
+           ...
+       };中的sched_priority来sch的，其策略是大sched_priority的进程preempt小 sched_priority 的进程，非实时进程的sched_priority为0, 实时进程为1~99，
+       后者变runnable时立即preempt前者
+       
+第二层(下层)调度策略分如下几种SCHED_FIFO、SCHED_RR、SCHED_OTHER、SCHED_BATCH、SCHED_IDLE，仅前二者为实时进程的调度策略，对于设置为SCHED_FIFO的进程，相同sched_priority的进程之间FIFO, 
+对于设置为 SCHED_RR 的进程，相同sched_priority的进程之间RR, 对于设置为 SCHED_OTHER 的进程，进程之间轮流占有CPU运行， 每个进程有一个nice值, nice值小的进程占用CPU多，具体如何分配CPU又调度算法决定
+
+
+
+pthread_setschedparam为posix API，其效果同sched_setscheduler，参见  http://man7.org/linux/man-pages/man2/sched_setscheduler.2.html
