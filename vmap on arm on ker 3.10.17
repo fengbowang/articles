@@ -1,0 +1,366 @@
+cn85xx_iic_test  failed.
+icn85xx: probe of 1-0048 failed with error -1
+snvs_rtc 20cc034.snvs-rtc-lp: setting system clock to 2017-01-10 11:45:59 UTC (1484048759)
+thread stack allocated by vmalloc: addr c0c56000ALSA device list:
+  #0: wm8962-audio
+EXT2-fs (mmcblk0p3): warning: mounting unchecked fs, running e2fsck is recommended
+VFS: Mounted root (ext2 filesystem) on device 179:3.
+devtmpfs: mounted
+Freeing unused kernel memory: 260K (80e45000 - 80e86000)
+Mount failed for selinuxfs on /sys/fs/selinux:  No such file or directory
+
+thread stack allocated by vmalloc: addr c0c5a000thread stack allocated by vmalloc: addr c0c5e000
+thread stack allocated by vmalloc: addr c0c62000thread stack allocated by vmalloc: addr c0c66000
+thread stack allocated by vmalloc: addr c0c6a000thread stack allocated by vmalloc: addr c0c6e000
+thread stack allocated by vmalloc: addr c0c72000thread stack allocated by vmalloc: addr c0c76000
+thread stack allocated by vmalloc: addr c0c7a000thread stack allocated by vmalloc: addr c0c7e000
+thread stack allocated by vmalloc: addr c0c82000thread stack allocated by vmalloc: addr c0c86000
+thread stack allocated by vmalloc: addr c0c8a000thread stack allocated by vmalloc: addr c0c8e000
+thread stack allocated by vmalloc: addr c0c92000thread stack allocated by vmalloc: addr c0c96000
+thread stack allocated by vmalloc: addr c0c9a000thread stack allocated by vmalloc: addr c0c9e000
+thread stack allocated by vmalloc: addr c0ca2000thread stack allocated by vmalloc: addr c0ca6000
+thread stack allocated by vmalloc: addr c0caa000thread stack allocated by vmalloc: addr c0cae000
+thread stack allocated by vmalloc: addr c0cb2000thread stack allocated by vmalloc: addr c0cb6000
+thread stack allocated by vmalloc: addr c0cba000thread stack allocated by vmalloc: addr c0cbe000
+thread stack allocated by vmalloc: addr c0cc2000thread stack allocated by vmalloc: addr c0cc6000
+thread stack allocated by vmalloc: addr c0cca000thread stack allocated by vmalloc: addr c0cce000
+thread stack allocated by vmalloc: addr c0cd2000thread stack allocated by vmalloc: addr c0cd6000
+thread stack allocated by vmalloc: addr c0cda000thread stack allocated by vmalloc: addr c0cde000
+thread stack allocated by vmalloc: addr c0ce2000thread stack allocated by vmalloc: addr c0ce6000
+thread stack allocated by vmalloc: addr c0cea000thread stack allocated by vmalloc: addr c0cee000
+thread stack allocated by vmalloc: addr c0cf2000thread stack allocated by vmalloc: addr c0cf6000
+thread stack allocated by vmalloc: addr c0cfa000thread stack allocated by vmalloc: addr c0cfe000
+thread stack allocated by vmalloc: addr c0d02000thread stack allocated by vmalloc: addr c0d06000
+thread stack allocated by vmalloc: addr c0d0a000thread stack allocated by vmalloc: addr c0d0e000
+thread stack allocated by vmalloc: addr c0d12000thread stack allocated by vmalloc: addr c0d16000
+thread stack allocated by vmalloc: addr c0d1a000thread stack allocated by vmalloc: addr c0d1e000
+thread stack allocated by vmalloc: addr c0d22000thread stack allocated by vmalloc: addr c0d26000
+thread stack allocated by vmalloc: addr c0d2a000thread stack allocated by vmalloc: addr c0d2e000
+thread stack allocated by vmalloc: addr c0d32000thread stack allocated by vmalloc: addr c0d36000
+thread stack allocated by vmalloc: addr c0d3a000thread stack allocated by vmalloc: addr c0d3e000
+thread stack allocated by vmalloc: addr c0d42000thread stack allocated by vmalloc: addr c0d46000
+thread stack allocated by vmalloc: addr c0d4a000thread stack allocated by vmalloc: addr c0d4e000
+thread stack allocated by vmalloc: addr c0d52000thread stack allocated by vmalloc: addr c0d56000
+thread stack allocated by vmalloc: addr c0d5a000thread stack allocated by vmalloc: addr c0d5e000
+thread stack allocated by vmalloc: addr c0d62000thread stack allocated by vmalloc: addr c0d66000
+thread stack allocated by vmalloc: addr c0d6a000thread stack allocated by vmalloc: addr c0d6e000
+thread stack allocated by vmalloc: addr c0d72000thread stack allocated by vmalloc: addr c0d76000
+thread stack allocated by vmalloc: addr c0d7a000thread stack allocated by vmalloc: addr c0d7e000
+thread stack allocated by vmalloc: addr c0d82000thread stack allocated by vmalloc: addr c0d86000
+thread stack allocated by vmalloc: addr c0d8a000thread stack allocated by vmalloc: addr c0d8e000
+thread stack allocated by vmalloc: addr c0d92000thread stack allocated by vmalloc: addr c0d96000
+thread stack allocated by vmalloc: addr c0d9a000thread stack allocated by vmalloc: addr c0d9e000
+thread stack allocated by vmalloc: addr c0da2000thread stack allocated by vmalloc: addr c0da6000
+thread stack allocated by vmalloc: addr c0daa000thread stack allocated by vmalloc: addr c0dae000
+thread stack allocated by vmalloc: addr c0db2000thread stack allocated by vmalloc: addr c0db6000
+thread stack allocated by vmalloc: addr c0dba000thread stack allocated by vmalloc: addr c0dbe000
+thread stack allocated by vmalloc: addr c0dc2000thread stack allocated by vmalloc: addr c0dc6000
+thread stack allocated by vmalloc: addr c0dca000thread stack allocated by vmalloc: addr c0dce000
+thread stack allocated by vmalloc: addr c0dd2000thread stack allocated by vmalloc: addr c0dd6000
+thread stack allocated by vmalloc: addr c0dda000thread stack allocated by vmalloc: addr c0dde000
+thread stack allocated by vmalloc: addr c0de2000thread stack allocated by vmalloc: addr c0de6000
+thread stack allocated by vmalloc: addr c0dea000thread stack allocated by vmalloc: addr c0dee000
+thread stack allocated by vmalloc: addr c0df2000thread stack allocated by vmalloc: addr c0df6000
+thread stack allocated by vmalloc: addr c0dfa000thread stack allocated by vmalloc: addr c0dfe000
+thread stack allocated by vmalloc: addr c0e02000thread stack allocated by vmalloc: addr c0e06000
+thread stack allocated by vmalloc: addr c0e0a000thread stack allocated by vmalloc: addr c0e0e000
+thread stack allocated by vmalloc: addr c0e12000thread stack allocated by vmalloc: addr c0e16000
+thread stack allocated by vmalloc: addr c0e1a000thread stack allocated by vmalloc: addr c0e1e000
+thread stack allocated by vmalloc: addr c0e22000thread stack allocated by vmalloc: addr c0e26000
+thread stack allocated by vmalloc: addr c0e2a000thread stack allocated by vmalloc: addr c0e2e000
+thread stack allocated by vmalloc: addr c0e32000thread stack allocated by vmalloc: addr c0e36000
+thread stack allocated by vmalloc: addr c0e3a000thread stack allocated by vmalloc: addr c0e3e000
+thread stack allocated by vmalloc: addr c0e42000thread stack allocated by vmalloc: addr c0e46000
+thread stack allocated by vmalloc: addr c0e4a000thread stack allocated by vmalloc: addr c0e4e000
+thread stack allocated by vmalloc: addr c0e52000thread stack allocated by vmalloc: addr c0e56000
+thread stack allocated by vmalloc: addr c0e5a000thread stack allocated by vmalloc: addr c0e5e000
+thread stack allocated by vmalloc: addr c0e62000thread stack allocated by vmalloc: addr c0e66000
+thread stack allocated by vmalloc: addr c0e6a000thread stack allocated by vmalloc: addr c0e6e000
+thread stack allocated by vmalloc: addr c0e72000thread stack allocated by vmalloc: addr c0e76000
+thread stack allocated by vmalloc: addr c0e7a000thread stack allocated by vmalloc: addr c0e7e000
+thread stack allocated by vmalloc: addr c0e82000thread stack allocated by vmalloc: addr c0e86000
+thread stack allocated by vmalloc: addr c0e8a000thread stack allocated by vmalloc: addr c0e8e000
+thread stack allocated by vmalloc: addr c0e92000thread stack allocated by vmalloc: addr c0e96000
+thread stack allocated by vmalloc: addr c0e9a000thread stack allocated by vmalloc: addr c0e9e000
+thread stack allocated by vmalloc: addr c0ea2000thread stack allocated by vmalloc: addr c0ea6000
+thread stack allocated by vmalloc: addr c0eaa000thread stack allocated by vmalloc: addr c0eae000
+thread stack allocated by vmalloc: addr c0eb2000thread stack allocated by vmalloc: addr c0eb6000
+thread stack allocated by vmalloc: addr c0eba000Unable to handle kernel paging request at virtual address c0eb4000
+pgd = ac304000
+[c0eb4000] *pgd=3c4b9811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 807 [#1] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 272 Comm: plymouth Not tainted 3.10.17+ #5
+task: ac4b7000 ti: c0eb2000 task.ti: c0eb2000
+PC is at __dabt_svc+0xc/0x60
+LR is at __switch_to+0x2c/0x5c
+pc : [<8000dbec>]    lr : [<8000e050>]    psr: 60000193
+sp : c0eb3fdc  ip : c0eb2044  fp : c0eb3ec4
+r10: ac69ac80  r9 : ac69a3c0  r8 : 80e907b8
+r7 : ac401000  r6 : c0eb2028  r5 : ac4b7000  r4 : c0c9201c
+r3 : 76d6e4c0  r2 : c0c92000  r1 : 00000002  r0 : 80f1c8cc
+Flags: nZCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 3c6d004a  DAC: 00000015
+Process plymouth (pid: 272, stack limit = 0xc0eb2238)
+Stack: (0xc0eb3fdc to 0xc0eb4000)
+3fc0:                                                                00000002
+3fe0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+Unable to handle kernel paging request at virtual address c0eb4000
+pgd = ac304000
+[c0eb4000] *pgd=3c4b9811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#2] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 272 Comm: plymouth Not tainted 3.10.17+ #5
+task: ac4b7000 ti: c0eb2000 task.ti: c0eb2000
+PC is at unwind_frame+0x284/0x4b4
+LR is at unwind_frame+0x264/0x4b4
+pc : [<8001377c>]    lr : [<8001375c>]    psr: 20000193
+sp : c0eb3d38  ip : 80e3ec94  fp : 00000001
+r10: 00008f00  r9 : c0eb4000  r8 : c0eb3d3c
+r7 : 00000000  r6 : c0eb3db0  r5 : c0eb4000  r4 : c0eb3fdc
+r3 : 0000007f  r2 : c0eb3d54  r1 : ac69a3c0  r0 : 00000200
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 3c6d004a  DAC: 00000015
+Process plymouth (pid: 272, stack limit = 0xc0eb2238)
+Stack: (0xc0eb3d38 to 0xc0eb4000)
+3d20:                                                       00003fe0 00000002
+3d40: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3d60: 64363720 63346536 c0eb3ec4 30323963 c0eb3fec 8000e050 00000000 80e3ec94
+3d80: 00000001 00000001 30303130 8000dbec c0eb2010 c0eb3f90 80d1a718 00000807
+3da0: ac4b7000 80d190d8 c0eb3dcc 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3dc0: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+3de0: 00000000 c0eb2000 80f1e1b4 00000001 00000000 c0eb2010 00000000 00000000
+3e00: c0eb3f90 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000 ac4b7000 ac69ac80
+3e20: c0eb3ec4 80740424 80d61d88 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000
+3e40: ac4b7000 ac69ac80 c0eb3ec4 807401d4 ac69a3c0 8001822c c0eb3000 80008394
+3e60: ffffffff c0eb3ea4 80e907b8 8000dc18 00000029 00000800 c0c92000 76d6e4c0
+3e80: c0c9201c ac4b7000 c0eb2028 ac401000 00000005 00000805 8001839c 80e96358
+3ea0: c0eb3000 80008394 ffffffff c0eb3eec 80e907b8 8000dc18 80f1c8cc 00000002
+3ec0: c0c92000 76d6e4c0 c0c9201c 00000807 80017f78 80e96378 c0eb4000 c0eb3f90
+3ee0: ac69a3c0 ac69ac80 c0eb3ec4 80008394 ffffffff c0eb3f34 80e907b8 8000dc18
+3f00: 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000
+3f20: 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193 ffffffff c0eb3f7c
+3f40: 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000
+3f60: c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193
+3f80: ffffffff c0eb3fc4 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff 7e91baaf 00000002
+3fe0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3f90 to 0xc0eb3fd8)
+3f80:                                     80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8000dbec>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c0eb4000
+pgd = ac304000
+[c0eb4000] *pgd=3c4b9811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#3] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 272 Comm: plymouth Not tainted 3.10.17+ #5
+task: ac4b7000 ti: c0eb2000 task.ti: c0eb2000
+PC is at unwind_frame+0x284/0x4b4
+LR is at unwind_frame+0x264/0x4b4
+pc : [<8001377c>]    lr : [<8001375c>]    psr: 20000193
+sp : c0eb3a98  ip : 80e3ec94  fp : 00000001
+r10: 00008f00  r9 : c0eb4000  r8 : c0eb3a9c
+r7 : 00000000  r6 : c0eb3b10  r5 : c0eb4000  r4 : c0eb3fdc
+r3 : 0000007f  r2 : c0eb3ab4  r1 : ac69a3c0  r0 : 00000200
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 3c6d004a  DAC: 00000015
+Process plymouth (pid: 272, stack limit = 0xc0eb2238)
+Stack: (0xc0eb3a98 to 0xc0eb4000)
+3a80:                                                       00000000 00000002
+3aa0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3ac0: ac4b7000 80d190d8 c0eb3ec4 80740424 c0eb3fec 8000e050 00000000 80e3ec94
+3ae0: 00000001 00000001 80d1908c 8000dbec c0eb2030 c0eb3cf0 80d1a718 00000007
+3b00: ac4b7000 80d190d8 c0eb3b2c 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3b20: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+3b40: 00000000 c0eb2020 80f1e1b4 00000001 00000000 c0eb2030 00000000 00000000
+3b60: c0eb3cf0 c0eb4000 00000007 ac69a3c0 c0eb3cf0 c0eb4000 ac4b7000 00008f00
+3b80: 00000001 80740424 80d61d88 c0eb4000 00000007 ac69a3c0 c0eb3cf0 c0eb4000
+3ba0: ac4b7000 00008f00 00000001 807401d4 ac69a3c0 8001822c 00000400 00000000
+3bc0: 80f1d8c0 20000193 80e98534 00000001 00000028 00000000 00000021 00000010
+3be0: 00000004 00000004 00000000 00000000 00000000 80540964 00000000 ac29c810
+3c00: ac0291c0 80f1dd94 00000000 ac29c810 0000004e 80f1dd94 00005027 802f33cc
+3c20: 00000000 80540964 00000000 00000007 80017f78 80e96378 c0eb4000 c0eb3cf0
+3c40: c0eb4000 00008f00 00000001 80008394 00000000 80e90518 00000000 00000000
+3c60: 0000004e 80f2c8f0 0000e330 80f1d8c0 00000000 0000035b 0000035c 80026e30
+3c80: 00000400 00000000 80f1d8c0 20000193 80e98534 00000001 80f1d8c0 80e98534
+3ca0: 80f1d8c0 0000004d 00000001 00000000 00000000 00000000 80e98534 80027254
+3cc0: 00000000 00000000 00000000 00000000 80f1e1b6 0000004d 8001377c 20000193
+3ce0: ffffffff c0eb3d24 c0eb3d3c 8000dc18 00000200 ac69a3c0 c0eb3d54 0000007f
+3d00: c0eb3fdc c0eb4000 c0eb3db0 00000000 c0eb3d3c c0eb4000 00008f00 00000001
+3d20: 80e3ec94 c0eb3d38 8001375c 8001377c 20000193 ffffffff 00003fe0 00000002
+3d40: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3d60: 64363720 63346536 c0eb3ec4 30323963 c0eb3fec 8000e050 00000000 80e3ec94
+3d80: 00000001 00000001 30303130 8000dbec c0eb2010 c0eb3f90 80d1a718 00000807
+3da0: ac4b7000 80d190d8 c0eb3dcc 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3dc0: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+3de0: 00000000 c0eb2000 80f1e1b4 00000001 00000000 c0eb2010 00000000 00000000
+3e00: c0eb3f90 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000 ac4b7000 ac69ac80
+3e20: c0eb3ec4 80740424 80d61d88 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000
+3e40: ac4b7000 ac69ac80 c0eb3ec4 807401d4 ac69a3c0 8001822c c0eb3000 80008394
+3e60: ffffffff c0eb3ea4 80e907b8 8000dc18 00000029 00000800 c0c92000 76d6e4c0
+3e80: c0c9201c ac4b7000 c0eb2028 ac401000 00000005 00000805 8001839c 80e96358
+3ea0: c0eb3000 80008394 ffffffff c0eb3eec 80e907b8 8000dc18 80f1c8cc 00000002
+3ec0: c0c92000 76d6e4c0 c0c9201c 00000807 80017f78 80e96378 c0eb4000 c0eb3f90
+3ee0: ac69a3c0 ac69ac80 c0eb3ec4 80008394 ffffffff c0eb3f34 80e907b8 8000dc18
+3f00: 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000
+3f20: 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193 ffffffff c0eb3f7c
+3f40: 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000
+3f60: c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193
+3f80: ffffffff c0eb3fc4 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff 7e91baaf 00000002
+3fe0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3cf0 to 0xc0eb3d38)
+3ce0:                                     00000200 ac69a3c0 c0eb3d54 0000007f
+3d00: c0eb3fdc c0eb4000 c0eb3db0 00000000 c0eb3d3c c0eb4000 00008f00 00000001
+3d20: 80e3ec94 c0eb3d38 8001375c 8001377c 20000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8001377c>] (unwind_frame+0x284/0x4b4)
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3f90 to 0xc0eb3fd8)
+3f80:                                     80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8000dbec>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c0eb4000
+pgd = ac304000
+[c0eb4000] *pgd=3c4b9811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#4] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 272 Comm: plymouth Not tainted 3.10.17+ #5
+task: ac4b7000 ti: c0eb2000 task.ti: c0eb2000
+PC is at unwind_frame+0x284/0x4b4
+LR is at unwind_frame+0x264/0x4b4
+pc : [<8001377c>]    lr : [<8001375c>]    psr: 20000193
+sp : c0eb37f8  ip : 80e3ec94  fp : 00000001
+r10: 00008f00  r9 : c0eb4000  r8 : c0eb37fc
+r7 : 00000000  r6 : c0eb3870  r5 : c0eb4000  r4 : c0eb3fdc
+r3 : 0000007f  r2 : c0eb3814  r1 : ac69a3c0  r0 : 00000200
+Flags: nzCv  IRQs off  FIQs on  Mode SVC_32  ISA ARM  Segment user
+Control: 10c53c7d  Table: 3c6d004a  DAC: 00000015
+Process plymouth (pid: 272, stack limit = 0xc0eb2238)
+Stack: (0xc0eb37f8 to 0xc0eb4000)
+37e0:                                                       00000000 00000002
+3800: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3820: ac4b7000 80d190d8 c0eb3ec4 80740424 c0eb3fec 8000e050 00000000 80e3ec94
+3840: 00000001 00000001 80d1908c 8000dbec c0eb2010 c0eb3a50 80d1a718 00000007
+3860: ac4b7000 80d190d8 c0eb388c 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3880: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+38a0: 00000000 c0eb2000 80f1e1b4 00000001 00000000 c0eb2010 00000000 00000000
+38c0: c0eb3a50 c0eb4000 00000007 ac69a3c0 c0eb3a50 c0eb4000 ac4b7000 00008f00
+38e0: 00000001 80740424 80d61d88 c0eb4000 00000007 ac69a3c0 c0eb3a50 c0eb4000
+3900: ac4b7000 00008f00 00000001 807401d4 ac69a3c0 8001822c 00000021 00000010
+3920: 00000004 00000004 00000000 00000000 00000028 00000000 00000000 ac29c810
+3940: ac0291c0 80f1dd94 00000000 ac29c810 0000003c 80f1dd94 00005027 802f33cc
+3960: 00000000 80540964 00000000 80ead5dc ac029240 8074b36c 00000000 80ead5dc
+3980: 80f1d8c0 8074b36c 802f3214 00000007 80017f78 80e96378 c0eb4000 c0eb3a50
+39a0: c0eb4000 00008f00 00000001 80008394 00000000 ac29c810 ac0291c0 80f1dd94
+39c0: 00000000 ac29c810 0000004c 80f1dd94 00005027 802f33cc 00000000 80540964
+39e0: 00000000 80ead5dc ac029240 8074b36c 00000000 80ead5dc 80f1d8c0 8074b36c
+3a00: 802f3214 80026b14 00000000 80e90518 00000000 00000004 0000004c 80f2da40
+3a20: 0000f480 80f1d8c0 00000000 0000038e 0000038f 80026e30 8001377c 20000193
+3a40: ffffffff c0eb3a84 c0eb3a9c 8000dc18 00000200 ac69a3c0 c0eb3ab4 0000007f
+3a60: c0eb3fdc c0eb4000 c0eb3b10 00000000 c0eb3a9c c0eb4000 00008f00 00000001
+3a80: 80e3ec94 c0eb3a98 8001375c 8001377c 20000193 ffffffff 00000000 00000002
+3aa0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3ac0: ac4b7000 80d190d8 c0eb3ec4 80740424 c0eb3fec 8000e050 00000000 80e3ec94
+3ae0: 00000001 00000001 80d1908c 8000dbec c0eb2030 c0eb3cf0 80d1a718 00000007
+3b00: ac4b7000 80d190d8 c0eb3b2c 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3b20: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+3b40: 00000000 c0eb2020 80f1e1b4 00000001 00000000 c0eb2030 00000000 00000000
+3b60: c0eb3cf0 c0eb4000 00000007 ac69a3c0 c0eb3cf0 c0eb4000 ac4b7000 00008f00
+3b80: 00000001 80740424 80d61d88 c0eb4000 00000007 ac69a3c0 c0eb3cf0 c0eb4000
+3ba0: ac4b7000 00008f00 00000001 807401d4 ac69a3c0 8001822c 00000400 00000000
+3bc0: 80f1d8c0 20000193 80e98534 00000001 00000028 00000000 00000021 00000010
+3be0: 00000004 00000004 00000000 00000000 00000000 80540964 00000000 ac29c810
+3c00: ac0291c0 80f1dd94 00000000 ac29c810 0000004e 80f1dd94 00005027 802f33cc
+3c20: 00000000 80540964 00000000 00000007 80017f78 80e96378 c0eb4000 c0eb3cf0
+3c40: c0eb4000 00008f00 00000001 80008394 00000000 80e90518 00000000 00000000
+3c60: 0000004e 80f2c8f0 0000e330 80f1d8c0 00000000 0000035b 0000035c 80026e30
+3c80: 00000400 00000000 80f1d8c0 20000193 80e98534 00000001 80f1d8c0 80e98534
+3ca0: 80f1d8c0 0000004d 00000001 00000000 00000000 00000000 80e98534 80027254
+3cc0: 00000000 00000000 00000000 00000000 80f1e1b6 0000004d 8001377c 20000193
+3ce0: ffffffff c0eb3d24 c0eb3d3c 8000dc18 00000200 ac69a3c0 c0eb3d54 0000007f
+3d00: c0eb3fdc c0eb4000 c0eb3db0 00000000 c0eb3d3c c0eb4000 00008f00 00000001
+3d20: 80e3ec94 c0eb3d38 8001375c 8001377c 20000193 ffffffff 00003fe0 00000002
+3d40: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+3d60: 64363720 63346536 c0eb3ec4 30323963 c0eb3fec 8000e050 00000000 80e3ec94
+3d80: 00000001 00000001 30303130 8000dbec c0eb2010 c0eb3f90 80d1a718 00000807
+3da0: ac4b7000 80d190d8 c0eb3dcc 80013a28 c0eb3ec4 c0eb3fdc 8000e050 8000dbec
+3dc0: ac4b7000 80e95a48 80f1ca04 80011848 c0eb2238 0000000b 80f1e1b4 60000193
+3de0: 00000000 c0eb2000 80f1e1b4 00000001 00000000 c0eb2010 00000000 00000000
+3e00: c0eb3f90 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000 ac4b7000 ac69ac80
+3e20: c0eb3ec4 80740424 80d61d88 c0eb4000 00000807 ac69a3c0 c0eb3f90 c0eb4000
+3e40: ac4b7000 ac69ac80 c0eb3ec4 807401d4 ac69a3c0 8001822c c0eb3000 80008394
+3e60: ffffffff c0eb3ea4 80e907b8 8000dc18 00000029 00000800 c0c92000 76d6e4c0
+3e80: c0c9201c ac4b7000 c0eb2028 ac401000 00000005 00000805 8001839c 80e96358
+3ea0: c0eb3000 80008394 ffffffff c0eb3eec 80e907b8 8000dc18 80f1c8cc 00000002
+3ec0: c0c92000 76d6e4c0 c0c9201c 00000807 80017f78 80e96378 c0eb4000 c0eb3f90
+3ee0: ac69a3c0 ac69ac80 c0eb3ec4 80008394 ffffffff c0eb3f34 80e907b8 8000dc18
+3f00: 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000
+3f20: 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193 ffffffff c0eb3f7c
+3f40: 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0 c0c9201c ac4b7000
+3f60: c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4 8000dbec 60000193
+3f80: ffffffff c0eb3fc4 80e907b8 8000dc18 80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff 7e91baaf 00000002
+3fe0: c0c92000 76d6e4c0 c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3a50 to 0xc0eb3a98)
+3a40:                                     00000200 ac69a3c0 c0eb3ab4 0000007f
+3a60: c0eb3fdc c0eb4000 c0eb3b10 00000000 c0eb3a9c c0eb4000 00008f00 00000001
+3a80: 80e3ec94 c0eb3a98 8001375c 8001377c 20000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8001377c>] (unwind_frame+0x284/0x4b4)
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3cf0 to 0xc0eb3d38)
+3ce0:                                     00000200 ac69a3c0 c0eb3d54 0000007f
+3d00: c0eb3fdc c0eb4000 c0eb3db0 00000000 c0eb3d3c c0eb4000 00008f00 00000001
+3d20: 80e3ec94 c0eb3d38 8001375c 8001377c 20000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8001377c>] (unwind_frame+0x284/0x4b4)
+[<8001377c>] (unwind_frame+0x284/0x4b4) from [<80013a28>] (unwind_backtrace+0x7c/0xf4)
+[<80013a28>] (unwind_backtrace+0x7c/0xf4) from [<80011848>] (die+0x294/0x3d4)
+[<80011848>] (die+0x294/0x3d4) from [<807401d4>] (__do_kernel_fault.part.11+0x64/0x74)
+[<807401d4>] (__do_kernel_fault.part.11+0x64/0x74) from [<8001822c>] (do_page_fault+0x2b4/0x390)
+[<8001822c>] (do_page_fault+0x2b4/0x390) from [<80008394>] (do_DataAbort+0x38/0x98)
+[<80008394>] (do_DataAbort+0x38/0x98) from [<8000dc18>] (__dabt_svc+0x38/0x60)
+Exception stack(0xc0eb3f90 to 0xc0eb3fd8)
+3f80:                                     80f1c8cc 00000002 c0c92000 76d6e4c0
+3fa0: c0c9201c ac4b7000 c0eb2028 ac401000 80e907b8 ac69a3c0 ac69ac80 c0eb3ec4
+3fc0: c0eb2044 c0eb3fdc 8000e050 8000dbec 60000193 ffffffff
+[<8000dc18>] (__dabt_svc+0x38/0x60) from [<8000dbec>] (__dabt_svc+0xc/0x60)
+Unable to handle kernel paging request at virtual address c0eb4000
+pgd = ac304000
+[c0eb4000] *pgd=3c4b9811, *pte=00000000, *ppte=00000000
+Internal error: Oops: 7 [#5] PREEMPT SMP ARM
+Modules linked in:
+CPU: 0 PID: 272 Comm: plymouth Not tainted 3.10.17+ #5
+task: ac4b7000 ti: c0eb2000 task.ti: c0eb2000
