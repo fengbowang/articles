@@ -1,0 +1,62 @@
+AP:
+
+
+
+wpa_supplicant -Dnl80211 -iwlan3 -c/etc/wpa_supplicant.conf -B
+
+wpa_cli -i wlan3 p2p_group_add persistent=1
+
+
+ifconfig p2p-wlan3-0 192.168.1.1
+
+echo "1" > /proc/sys/net/ipv4/ip_forward 
+
+iptables  -t nat  -A POSTROUTING -o p2p-wlan3-0 -j MASQUERADE
+
+iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to 192.168.86.241
+
+udhcpd /etc/udhcpd.conf 
+
+
+cat /etc/wpa_supplicant.conf 
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+update_config=1
+
+network={
+        key_mgmt=NONE
+}
+
+network={
+        ssid="1111"
+        bssid=94:a1:a2:79:c2:56
+        psk="11111111"
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP
+        auth_alg=OPEN
+        mode=3
+        disabled=2
+}
+root@aaa:~# 
+
+station:
+
+root@imx6sxsabresd:~# cat /etc/wpa_supplicant.conf 
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+
+ap_scan=1
+network={
+    ssid="1111"
+    psk="g11111111"
+}
+
+
+
+wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf -B
+
+
+
+
+
