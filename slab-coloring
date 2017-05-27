@@ -1,0 +1,42 @@
+static struct slab *alloc_slabmgmt(struct kmem_cache *cachep, void *objp,
+				   int colour_off, gfp_t local_flags,
+				   int nodeid)
+{
+	struct slab *slabp;
+
+	if (OFF_SLAB(cachep)) {
+		/* Slab management obj is off-slab. */
+		slabp = kmem_cache_alloc_node(cachep->slabp_cache,
+					      local_flags, nodeid);
+		/*
+		 * If the first object in the slab is leaked (it's allocated
+		 * but no one has a reference to it), we want to make sure
+		 * kmemleak does not treat the ->s_mem pointer as a reference
+		 * to the object. Otherwise we will not report the leak.
+		 */
+		kmemleak_scan_area(&slabp->list, sizeof(struct list_head),
+				   local_flags);
+		if (!slabp)
+			return NULL;
+	} else {
+		slabp = objp + colour_off;
+		colour_off += cachep->slab_size;
+	}
+	slabp->inuse = 0;
+	slabp->colouroff = colour_off;
+	slabp->s_mem = objp + colour_off;
+	slabp->nodeid = nodeid;
+	slabp->free = 0;
+	return slabp;
+}
+
+struct kmem_cache {
+	unsigned int object_size;/* The original size of the object */
+	unsigned int size;	/* The aligned/padded/added on size  */
+	unsigned int align;	/* Alignment as calculated */
+	unsigned long flags;	/* Active flags on the slab */
+	const char *name;	/* Slab name for sysfs */
+	int refcount;		/* Use counter */
+	void (*ctor)(void *);	/* Called on object slot creation */
+	struct list_head list;	/* List of all slab caches on the system */
+};
