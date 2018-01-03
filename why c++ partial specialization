@@ -8,6 +8,25 @@ public:
 };
 
 
+template <class T>
+class AA
+{
+typedef T val_type;
+public:
+	
+   T t;
+};
+
+template <typename T>
+class Traits
+{
+      typedef typename T::val_type val_type;
+};
+
+
+
+
+
 
 template <class T> 
 T  Foo(A<T> i)
@@ -16,11 +35,26 @@ T  Foo(A<T> i)
    return i.t;
 }
 
+template <class T> 
+T  Foo(A<T> *i)
+{
+   printf ("Foo poniter OK\r\n");
+   return i->t;
+}
+
+typename Traits<T>::val_type goo(
+
+
 int main ()
 {
-    A<int> a, b;
+    A<int> a, b, c;
 	
     a.t = 99999999;
 	b.t = Foo(a);
+	c.t = Foo(&a);
 	printf ("A<int> b.t = %u \r\n", b.t);
+	printf ("A<int> c.t = %u \r\n", c.t);
 }
+
+//ÕâÑù²»ÊÇÍ¦ºÃÃ´£¬ÎªºÎÒª¸ãÊ²Ã´Æ«ÌØ£¬ÝÍÈ¡
+
