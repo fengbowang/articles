@@ -1,0 +1,26 @@
+#include <stdio.h>
+template <class T>
+class A
+{
+public:
+	
+   T t;
+};
+
+
+
+template <class T> 
+T  Foo(A<T> i)
+{
+   printf ("Foo OK\r\n");
+   return i.t;
+}
+
+int main ()
+{
+    A<int> a, b;
+	
+    a.t = 99999999;
+	b.t = Foo(a);
+	printf ("A<int> b.t = %u \r\n", b.t);
+}
