@@ -1,0 +1,95 @@
+wyf@ubuntu:~$ cat  .msmtprc
+
+# default
+account gmail
+protocol smtp
+host smtp-mail.outlook.com
+from mordorw@hotmail.com
+user mordorw@hotmail.com
+password sober801
+port 587 
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+syslog LOG_MAIL
+
+# set a default account
+account default : gmail
+
+
+wyf@ubuntu:~$ 
+
+
+
+1.install git git-email
+yum install git
+yum install git-email
+
+2.download the source code of kernel
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+git clone git://libvirt.org/libvirt.git
+ git clone git://git.qemu-project.org/qemu.git
+
+3.configure git 
+
+
+git config --global user.name "mordor"
+git config --global user.email "mordorw@hotmail.com"
+git config --list
+
+4.configure git-sendmail
+
+
+git config --global sendemail.smtpencryption tls
+git config --global sendemail.smtpserver smtp-mail.outlook.com
+git config --global sendemail.smtpuser mordorw@hotmail.com
+git config --global sendemail.smtpserverport 587
+git config --global sendemail.smtppass sober801
+
+执行如下命令，验证发送邮件是否成功。填写自己的邮箱地址。
+echo -e "Subject: Test Mail\r\n\r\nThis is a test mail" |msmtp --debug -t mordorw@hotmail.com
+
+git send-email --smtp-server /usr/bin/msmtp --to xxx --to 
+如果成功，继续后续步骤。
+
+5.开发自己的补丁
+
+git checkout -b dev    //创建自己的开发分支
+vi kernel/sched/core.c   //修改代码
+make -j2           
+make modules_install
+make install                    //编译内核，验证修改是否满足预期
+
+git commit -a -s -m 'sched: fix BUG in preempt_notifier' -e    //提交修改
+
+git commit -a -s -m 'slab: fix /proc/slabinfo alignment' -e  
+ 
+/proc/slabinfo is not aligned, it is difficult to read, so correct it
+
+ 
+git format-patch -1                                                                   //生成补丁
+./scripts/checkpatch.pl 0001-sched-fix-BUG-in-preempt_notifier.patch   //检查补丁是否符合规范
+./scripts/get_maintainer.pl kernel/sched/ -f                                               //查看对应模块的维护者
+git send-email --smtp-server /usr/bin/msmtp --to xxx --to xxx --cc linux-kernel@vger.kernel.org 0001-sched-fix-BUG-in-preempt_notifier.patch  //发送邮件给对应的维护者和maillist
+
+
+git send-email --smtp-server /usr/bin/msmtp --to rientjes@google.com --cc mordorw@hotmail.com
+
+ git send-email --smtp-server /usr/bin/msmtp --to mordorw@hotmail.com 0001-slab-proc-slabinfo-alignment.patch --cc fengbo.wang@echiev.com
+ 
+ .com
+
+© 2018
+
+ GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
