@@ -44,7 +44,7 @@ git config --global sendemail.smtpencryption tls
 git config --global sendemail.smtpserver smtp-mail.outlook.com
 git config --global sendemail.smtpuser mordorw@hotmail.com
 git config --global sendemail.smtpserverport 587
-git config --global sendemail.smtppass sober801
+git config --global sendemail.smtppass 
 
 执行如下命令，验证发送邮件是否成功。填写自己的邮箱地址。
 echo -e "Subject: Test Mail\r\n\r\nThis is a test mail" |msmtp --debug -t mordorw@hotmail.com
