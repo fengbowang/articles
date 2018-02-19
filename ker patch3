@@ -1,3 +1,9 @@
+
+git reset --soft  
+
+git reset
+ git config --global format.signoff true
+
 wyf@ubuntu:~$ cat  .msmtprc
 
 # default
