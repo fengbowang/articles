@@ -1,3 +1,8 @@
+git reset --soft  
+
+git reset
+ git config --global format.signoff true
+
 http://www.xuebuyuan.com/3206889.html
 
 web前端
