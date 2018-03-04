@@ -1,0 +1,231 @@
+
+Start of #perfbook buffer: Sun Mar 04 11:14:40 2018
+* Now talking in #perfbook
+<paulmck> Good morning in China!
+<xiebaoyou> Welcome Paul!
+<Jasonm> I have studied perfbook 5 times,but still not really get
+* china-kernel (b95cdd0d@gateway/web/freenode/ip.185.92.221.13) Quit (Client Quit)
+<jeff-xie> Welcome Paul ,666
+<xiebaoyou>  Welcome Paul^-^
+<paulmck> And you, xiebaoyou, Jasonm, and jeff-xie!
+* sage____ (a5e3057e@gateway/web/freenode/ip.165.227.5.126) has joined #perfbook
+<ylu> 666 is a Chinese web slang, it means good luck, cool, impressive, and a lot of positive things.
+<weiyang> A big party on internet~
+* Hao (~Android@101.83.116.149) has joined #perfbook
+<paulmck> Jasonm: It took me more than 25 years to learn it, so it might take some time.  One good way to learn it faster is to write small programs around points of confusion.  Hey, that is what I do!  :-)
+<paulmck> Ah, ylu, thank you for the translation.   666!
+<Yubin> and there is me
+<Yubin> 666!
+* jingshne (~jingshne@220.200.43.205) has joined #perfbook
+<paulmck> Good to see your name again, Yubin!
+<xiebaoyou> Many people says that it's hard to understand this book, for example memory birrer:)
+<Jasonm> Got it Paul!
+* wanghaitao (~wanghaita@222.209.158.240) has joined #perfbook
+<Yubin> It take me several months to fully understand the topic memory barrier
+<paulmck> xiebaoyou: Indeed, the memory-barrier section was one of the oldest and least helpful sections.  I rewrote it and made it a chapter in the English version a few months ago, but was too slow to be in time for the translation.
+<paulmck> weiyang: Good party!  ;-)
+<weiyang> Because the hardware changes too much?
+<scxby> Sounds good:)
+<paulmck> Another good recent resource for memory barriers are these two LWN articles: https://lwn.net/Articles/718628/ https://lwn.net/Articles/720550/
+* wrw (6a2729ae@gateway/web/freenode/ip.106.39.41.174) has joined #perfbook
+* zhitingz (~zhitingz@chopin.csres.utexas.edu) has joined #perfbook
+<weiyang> Thanks for your reference
+<Yubin> paulmck: the most obscure part of memory barrier is the smp_barrier_depend() interface
+<paulmck> weiyang: The hardware does change, but there have been great advances in the understanding of memory barriers since I wrote that section.  Peter Sewell of Cambridge University produces formal memory models for several CPU architectures (http://www.cl.cam.ac.uk/~pes20/papers/topics.html#relaxed_all) and Jade Alglave, Luc Maranget and others produced herd, which can be thought of as a specialized language for memory ordering
+<paulmck> (http://diy.inria.fr/sources/index.html for herd.)
+* dimoxini (~dimoxini@140.224.71.143) has joined #perfbook
+* YannisWu (~Mutter@122.224.55.56) has joined #perfbook
+<weiyang> Sounds interesting
+<paulmck> Yubin: Perhaps you will be happy to hear that the Linux kernel recently banished both smp_read_barrier_depends() and read_barrier_depends() to READ_ONCE() and DEC Alpha architecture-support code.  :-)
+<Yubin> paulmck: Linux give up supports for DEC Alpha?
+<paulmck> weiyang: It made a huge difference in my own understanding of memory barriers.  ;-)
+<weiyang> Thanks to Cambridge :)
+<paulmck> Yubin: Actually not.  It was a clever idea from Andrea Parri: If we put an smp_read_barrier_depends() in the definition of READ_ONCE(), we don't need any smp_read_barrier_depends() calls anywhere else in the kernel, other than in DEC Alpha architecture-support code.
+<Hao> paulmck :  would you maintain the rcu of riscv ? 
+<Yubin> paulmck: can you provide the commit link or hash?
+<paulmck> weiyang: Agreed!  In fairness, though, although Peter led the effort, there were contributions from Inria Paris, Kent University, University of St. Andrews, and hardware architects at ARM, Intel, and IBM.
+<paulmck> Hao: As far as I know, RCU does not need to change for RISC-V.  Or are you asking about userspace RCU?
+<weiyang> paulmck, agree, these are the joint work. Thanks to all of them
+* YannisWu (~Mutter@122.224.55.56) Quit (Quit: Mutter: www.mutterirc.com)
+* pingbo (~Mutter@183.48.245.119) has joined #perfbook
+<ylu> Reader www asks a question: let's take this code snippet as an example, while (b == 0) continue; if the machine enables hyperthread, L1 cache is shared by multiple hyperthreads within the same CPU core, would it possible that the invalidate request of variable b never reach the target CPU because the cache is super busy?  
+<Yubin> I think I read about those patch once in the mailing list, but not so carefully
+* BruceSong (~BruceSong@27.189.234.198) has joined #perfbook
+<paulmck> Yubin: Please email asking and I will provide the hash.  It was at least one series of patches.
+<Yubin> paulmck: OK
+* afanda (~androirc@218.206.217.147) has joined #perfbook
+* YannisWu (~Mutter@122.224.55.56) has joined #perfbook
+<Yubin> paulmck: ylu: we were discussing this case a few days ago and can't get a agreement on it
+<paulmck> ylu, www: If an invalidate request takes forever to reach a given CPU, I would argue that this is a hardware bug.  That said, hardware vendors don't normally provide any time limit for cache-invalidation latency.
+<paulmck> ylu, www: So while I would argue that this would be a hardware bug, the hardware architects might well argue back.  ;-)
+<paulmck> Yubin: But given the pause in the conversation, here is the main commit: 76ebbe78f7390 (Will Deacon     2017-10-24 11:22:47 +0100 255)   smp_read_barrier_depends(); /* Enforce dependency ordering from x */
+<ylu> paulmck: I agree, in production environment this kind of extreme situation is, if exists, very rare.  
+<paulmck> This is in include/linux/compiler.h.  There were quite a few related commits that removed smp_read_barrier_depends() and read_barrier_depends() from various places.  Some have no doubt survived, and others have no doubt crept in. 
+* pingbo (~Mutter@183.48.245.119) Quit (Quit: Mutter: www.mutterirc.com)
+* georgejguo (~dongtaigu@219.147.95.163) has joined #perfbook
+<paulmck> ylu, www: Given that there is quite a bit of software that implicitly assumes that invalidations make it to their target CPUs in a reasonably short amount of time, I agree with your hope that this is non-existent, or failing that, rare.  ;-0
+<Yubin> paulmck: From my experience, most misunderstanding of memory barrier come from the *ordering* issue, that is, memory barrier is about memory ordering. So, I think you can emphasize your rule of thumb "you only need memory barrier when your are communicating using two (or more) variables"
+* tod (~tod@114.253.32.157) has joined #perfbook
+<paulmck> Yubin: Agreed.  Let me find some figures...
+* shaoweiwang (~shaoweiwa@223.255.127.133) Quit (Ping timeout: 240 seconds)
+<paulmck> Yubin: Please see the first figure in https://lwn.net/Articles/573436/
+* chuhu (~chuhu@111.199.184.156) has joined #perfbook
+<scxby> hi, paul, what's the plan of rcu in future?
+<paulmck> Yubin: You need more than one variable, as you say, and also the ordering is of an if-then type.  In the first figure at that URL, r2 is guaranteed to see the value 1 only if r1 also saw the value 1.
+<Yubin> paulmck: Yes, that is exactly what I mean, and thanks for the "if-then type"
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<paulmck> scxby: Trying to get the equivalent of rcu_dereference() into C and C++, add higher-level RCU algorithms to perfbook, fix a very rare (but very irritating) race condition in Linux-kernel RCU, make it possible to use rcu_barrier() in CPU hotplug notifiers,
+* YannisWu (~Mutter@122.224.55.56) Quit (Quit: Mutter: www.mutterirc.com)
+* htan (~haiyang@36.102.212.219) has joined #perfbook
+* felixyzg_ (~felixyzg@45.64.52.123) has joined #perfbook
+<Yubin> FYI, that "rule of thumb" is in the answer to quick quiz 4.17, page 399 in the lastest snapshot of perfbook
+<paulmck> scxby: simplify the code where possible, speed up expedited grace periods for larger numbers of CPUs, and more stuff.  I have to keep written lists, too much to keep in my head.
+<Yubin> "You do not need memory barriers unless you are using more than one variable to communicate between multiple threads"
+<paulmck> scxby: For userspace RCU, automatically adapting the number of call_rcu() worker threads, for one.
+<scxby> that is great.
+<paulmck> Yubin: Well, then we at least answered one Quick Quiz during this IRC session.  ;-)
+<paulmck> scxby: It keeps things interesting.  :-)
+<Yubin> paulmck: ;-)
+<Yubin> paulmck: Are there any plans for support userspace RCU across different process?
+<weiyang> So memory barrier will take effect where there are more than one variable and more than one thread, right?
+<paulmck> scxby: For a sneak preview of some of the higher-level RCU algorithms: http://www.rdrop.com/users/paulmck/RCU/Updates.2017.09.11c.SVLUG.pdf
+* JordonWu (~JordonWu@36.63.192.36) Quit (Quit: Mutter: www.mutterirc.com)
+* chunyan (uid61415@gateway/web/irccloud.com/x-voouwamsjopkchls) Quit (Quit: Connection closed for inactivity)
+<paulmck> Yubin: As in when you have multiple user-level processes (each potentially with multiple threads) sharing memory and using RCU to protect that shared memory?  There has been discussion of this, and there might well be an implementation out there somewhere.
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<paulmck> weiyang: Exactly, there must be two or more variables and also two or more threads for memory ordering to be an issue.
+<Yubin> weiyang: That quote try to make it clear about "what memory barrier is NOT about"
+<ylu> Let me ask a non technical question, as a translator I want to work on a stable but latest version of perfbook, what's your future plan of the book? I remember my first impression of this book is https://lwn.net/Articles/421425/.
+<weiyang> paulmck, Yubin, thanks:)
+<weiyang> I guess we could have a group to do the translation?
+<Yubin> Yes, a group of translator will be interesting. Maybe setup a git repo or what.
+<paulmck> ylu: There are quite a few RCU implementations out there, and I have added some words about them in Section 9.5.5 in the latest release, but there is more to add.
+<paulmck> ylu: I mentioned advanced uses of RCU, and there have also been advances in both uses and implementations of hazard pointers.
+* tod (~tod@114.253.32.157) Quit (Ping timeout: 252 seconds)
+<paulmck> ylu: Quantum computing is an interesting fast-moving target, so I expect more change there.
+* YannisWu (~Mutter@122.224.55.56) has joined #perfbook
+<paulmck> ylu: I hope to add more on data structures, as it is pretty much only linked lists and hash tables now.
+<paulmck> ylu: But what would you all like to see?  (Not that I can guarantee that I will write something -- for example, there are other people who would be better guides to GPGPUs.)
+<weiyang> Would quantum change the computation model totally?
+<paulmck> weiyang: At the moment, quantum computing looks to be something that you add to a classical computer, much as you might add an FPGA or a GPGPU.  But it is very early days for quantum computing, so no one really knows for sure yet.
+* JordonWu (~JordonWu@36.63.192.36) Quit (Quit: Mutter: www.mutterirc.com)
+<paulmck> Here is my Linux Plumbers Conference presentation from last August: http://www.rdrop.com/users/paulmck/scalability/paper/QC-slides.2017.09.13f.pdf
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<Yubin> paulmck: ylu: here is a hello world introduction to GPGPU programming (in CUDA): https://www.nvidia.com/docs/IO/116711/sc11-cuda-c-basics.pdf
+<paulmck> Quantum computing being what it is, that presentation is a bit out of date.  For whatever reason, the more recent presentations have been non-public, but I might do an updated public presentation later this year.  And there is now a section in the book.
+<weiyang> paulmck, interesting~
+<weiyang> Thanks for your slide
+* jingshne (~jingshne@220.200.43.205) Quit (Quit: Leaving)
+<paulmck> Yubin: Not bad, perhaps I should add this to my GPGPU list.
+<ylu> weiyang: Imaging a quantum computer can easily crack SHA-256 algorithm in reasonable period of time, a lot of things build upon it would be unsafe.
+<weiyang> ylu, yep
+<Yubin> paulmck: weiyang: at least quantum computing will greatly advance the development of many machine learning task. Just think of how dirty it will be to train a machine learning model for several days to get a result. Many people (including me) will definitely want that.
+<xiebaoyou> Is quantum computer REAL??
+* JordonWu (~JordonWu@36.63.192.36) Quit (Read error: Connection reset by peer)
+<paulmck> ylu, weiyang: Indeed, factoring large primes was the first quantum algorithm.  But the error rate of current quantum computers is quite high, and those algorithms need perfect qubits.
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<weiyang> So we should  abandon our computers :)
+<paulmck> xiebaoyou: Yes.  See for example: https://quantumexperience.ng.bluemix.net/qx/experience
+<Yubin> xiebaoyou: It it real. Currently people can control at most 15 quantum
+<paulmck> Anyone in the world can create an account on that website, take a tutorial, and write quantum algorithms, test them on a simulator, and, to a limited extent on real hardware.
+<Yubin> xiebaoyou: And I heard that the computation capability of a group of 50 quantum eqauls that of the most advanced super computer nowadays.
+<weiyang> Sounds amazing
+<Yubin> paulmck: thanks for that
+<paulmck> Yubin: Make it 20: https://quantumexperience.ng.bluemix.net/qx/devices
+<ylu> Thanks Paul, I'd like to know more about the quantum computing, every body talks about it but no one explain how it works in detail text.  
+<weiyang> Oops, this is a IBM website
+<Yubin> paulmck: cool. I think I am a bit outdated ;-)
+* JordonWu (~JordonWu@36.63.192.36) Quit (Client Quit)
+<paulmck> weiyang: Yes, but it is open to the public.  Anyone anywhere can play with some of IBMs quantum-computing infrastructure.
+<weiyang> IBM is really a great company
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<paulmck> ylu: Some parts of quantum computing, such as entanglement, no one understands, not even quantum physicists.  Recent experiments have ruled out all reasonable explanations.  :-)
+<weiyang> Oh, I see the 20 qubit device
+<paulmck> weiyang: I like IBM, but some might argue that I am biased, given that I am an employee.  :-)
+<Yubin> Ah, I came across a email archive a few days before: http://yarchive.net/comp/linux/store_buffer.html. It is from Linus Torvald, but I thinks these emails record will be helpful to anyone concerning with the topic of memory barrier
+<paulmck> weiyang: There is said to be a larger device working in the laboratory.  Well, it was seen outside the laboratory once: https://www.engadget.com/2018/01/09/this-is-what-a-50-qubit-quantum-computer-looks-like/#/
+<xiebaoyou> IBM is great:)
+* sage____ (a5e3057e@gateway/web/freenode/ip.165.227.5.126) Quit (Quit: Page closed)
+<weiyang> paulmck, yep, there are good point and bad point. One company couldn't be perfect, especially one is more than century. :)
+<paulmck> Yubin: Yes, Linus has it exactly right when he calls out the store buffer as a complicating factor.  But it is also something that enable higher performance, so...
+<paulmck> xiebaoyou: ;-)
+<xiebaoyou> weiyang, being humble:)
+* JordonWu (~JordonWu@36.63.192.36) Quit (Client Quit)
+<weiyang> Or Hungry, :)
+* dimoxini (~dimoxini@140.224.71.143) Quit
+<paulmck> My really hungry days were many decades ago.  My appetite has (thankfully) decreased with age.  ;-)
+<weiyang> paulmck, which channel you would usually join?
+<weiyang> paulmck, haha, I found I could eat more these days, maybe it is winter now:)
+<paulmck> weiyang: I am often on OFTC #linux-rt, but that is for real-time linux.  And I am on travel the next few weeks, so won't be online as often.
+<paulmck> weiyang: Or did you take up exercise?  :-)
+<weiyang> paulmck, yep, got it
+<paulmck> weiyang: That will do it!  :-)
+* Jasonm (~Mutter@223.104.5.210) Quit (Quit: Mutter: www.mutterirc.com)
+<xiebaoyou> paul, could you give some advance to chinese guys in linux or career?
+<weiyang> paulmck, maybe you have forgotten, we have met in Shanghai 7 years ago.
+<ylu> advance = advice?
+<xiebaoyou> yes
+<paulmck> xiebaoyou: 2011!  Three young men with three books with red covers, if I recall correctly.  ;-)
+<ylu> That's xiebaoyou, me and another guy not here today.
+<xiebaoyou>  paul, could you give some advice to chinese guys in linux or career?
+<Yubin> ylu: Cool
+<freeman_> paulmck: for the hardware flaw, meltdown and spetrc, does it affect the use of locks or has some another more attentions when using locks?
+* YannisWu (~Mutter@122.224.55.56) Quit (Quit: Mutter: www.mutterirc.com)
+<ylu> And the cover is blue ;-)
+<paulmck> xiebaoyou: I could give a lot, but it depends on what you want from your life and your career.
+<weiyang> Not me :)
+<paulmck> ylu: It is now!  Weren't the copies you three had in 2011 red?  Or am I confused?
+<xiebaoyou> cool, the three yong men are ylu, me, and another guy:)
+<weiyang> hah
+<paulmck> xiebaoyou:  If you want a comfortable life, choose something less cool, but critically important.  Perhaps a Linux-kernel device drivers for a boring but critically important device.
+<Yubin> xiebaoyou: Paul once gave some advices on parttime PhD student: http://www2.rdrop.com/~paulmck/personal/PartTimePhDAdvice.html
+<weiyang> paulmck, haha, you are right
+<paulmck> xiebaoyou:  If you want to do cool things, it is necessary to invest large amounts of time learning and (especially!) practicing.  Coding well is sort of like playing a musical instrument -- in both cases, constant practice is required to maintain excellent performance.
+<weiyang> And then you would feel the amusement
+<Yubin> Friends, what's your favorite part of perfbook?
+<paulmck> xiebaoyou: And if you want to make new things happen, go looking for trouble.  This may sound strange, but if a group of people know that they can get the job done, they often don't want to try something new.
+<xiebaoyou> Agree you totally.  it is necessary to invest large amounts of time learning and (especially!) practicing. 
+<paulmck> xiebaoyou: But if they have no idea how to get the job done (perhaps because no one has ever done it before), they are more likely to be open to trying something new.
+<paulmck> xiebaoyou: That is why you look for trouble.  If you have a group of people who don't know how to get their job done, there will be trouble.  Now, it might be that they are just confused or don't know their jobs all that well, but in that case it is easy to help them and move on to the next.
+<georgejguo> i m a newer, paul, it's very nice to get your advice at the first time. 
+<ylu> For young developers who would like to choose Linux kernel as their career, Paul, do you think any operation system would replace Linux's role in the mid-future? Given the fact that some tech-giants like Google have started ambitious projects to write a new OS that outperforms Linux. 
+<Yubin> paulmck: do Arkia use IRC? It will be great to chat with him.
+<paulmck> xiebaoyou: Maybe a few times out of 100, something new and generally useful will be required.  And yes, this Grimm Brothers fairy tale is relevant: https://en.wikipedia.org/wiki/The_Frog_Prince.  To find your prince (a new discovery), sometimes you have to kiss a lot of frogs (help a lot of teams).
+<paulmck> georgejguo: Glad you like  it!
+<paulmck> ylu: https://en.wikipedia.org/wiki/Google_Fuchsia, for example.  ;-)
+* JordonWu (~JordonWu@36.63.192.36) has joined #perfbook
+<weiyang> Kiss a lot of frogs..
+<paulmck> ylu: One of the advantages of youth is high levels of energy, which allows multiple choices to be made.  Certainly Google's size and scale means that one should pay at least some attention to their new OSes.
+<ylu> Yes, in WeChat group chat channel we've discussed Google Fuchsia, though it's new but looks promising.
+<paulmck> ylu: But I expect that Linux will be around longer than I will be, and perhaps longer than all of you will be as well.   This is not strictly theoretical, given that both FORTRAN and COBOL are still in production use.
+<ylu> That's also true :-), FORTRAN was born in 1950s.
+<paulmck> ylu: Then again, size and scale are not absolute guarantees.  Intel Itanium is a case in point, as is IBM's EBCDIC -- and a great many other projects from a great many other companies.
+<weiyang> For linux kernel, do you see some challenges from other kernel? paulmck 
+* lbw (cf94608e@gateway/web/freenode/ip.207.148.96.142) has joined #perfbook
+<paulmck> weiyang: Agreed, not the most appetizing analogy out there.  Perhaps there is a better one from Chinese fairy tales or other Chinese literature.
+* JordonWu (~JordonWu@36.63.192.36) Quit (Quit: Mutter: www.mutterirc.com)
+<paulmck> weiyang: Other than Fuchsia's Zircon, you mean?  Some people believe that one of the IoT kernels (which need to run on very tiny computers) might come up from below, but others believe that there are too many of them at the moment.
+<paulmck> weiyang: In my experience, projects are born, they live, and the eventually die, just like people.  Linux looks like it has a long live ahead of it, but you never know.
+<paulmck> weiyang: Which leads to my other piece of career advice:  There will be plenty of time to stop learning after your funeral.  ;-)
+<ylu> And no more weight lifting..haha 
+<paulmck> ;-)  But in the spirit of our earlier discussion about hunger and appetite, I should go up for dinner.  It has been great chatting with you, thank you for your interest in perfbook, quantum computing, Linux, and computing in general, and have a great day!
+<weiyang> Haha,
+<weiyang> paulmck, thanks for your time and contribution to the community
+<ylu> Okay everyone, our initial plan is an one-hour session that Paul answers reader's question, now it's a little late in Portland, anyone has more question?
+<freeman_> paulmck, i has a question, for the hardware flaw, meltdown and spetrc, does it affect the use of locks or has some another more attentions when using locks?
+<xiebaoyou> Paul's advises is so helpful. thanks.
+<paulmck> freeman_: As far as I know, locks have not yet been the subject of a Meltdown-like or Spectre-like side-channel attack.  But I suppose that it is only a matter of time, and perhaps someone has already manage it.  If you know of one, please let me know.  ;-)
+<Yubin> freeman_: I don't think so. Locking will work as it is.
+<ylu> Thank you, Paul and everyone join this channel. If you still have questions want to ask, shoot Paul an email, I believe he will happy to answer you.
+<Yubin> Meltdown and Spectre use "side-channel", and side-channel does not affect locking AFAIK
+<paulmck> ylu: Thank you for setting this up, and yes, you can easily find my email address.  ;-)
+* Hao_ (~Android@112.65.48.218) has joined #perfbook
+* Hao (~Android@101.83.116.149) Quit (Read error: Connection reset by peer)
+* lz (68eeb48d@gateway/web/freenode/ip.104.238.180.141) Quit (Ping timeout: 260 seconds)
+<ylu> That's a must-know in reader's group :). You have a good day. Thank you!
+<paulmck> ;-)
+* Hao (~Android@101.83.116.149) has joined #perfbook
+<freeman_> paulmck: ok, thanks you for your answer.
+<xiebaoyou> Thanks for paul, and everyone.
+<lbw> sorry im late.where can i find chat history?
+End of #perfbook buffer    Sun Mar 04 11:14:40 2018
