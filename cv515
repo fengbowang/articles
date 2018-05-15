@@ -18,6 +18,11 @@ writing patent
 
 A little company which provides high performance firewall and network flow control products(fpga+linux)
 Position: linux software team leader
+product:
+        user-based and service-based network flow controlling device
+        supporting network-data logging and analyse
+        supporting L2 and L3 switch
+        FPGA+linux based
 
 repsonsible for software devolepment of 10GE firewall, following achivements: improvementing system's performance、 reliability and productivity
 
