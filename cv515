@@ -1,0 +1,76 @@
+v2x sdk writing patent
+
+
+team leader and system engineer for IP camera developments(on linux arm)
+
+responsible for ambarella A5S/S2L based IP camera and battery-powered-low-power IP camera  
+
+analysing standard specification of IP camera:  PSIA/openhome interface
+communicating requirements with customer 
+communicating solutions  with supplier
+communicating requirements and solutions with cloud server team and client application team
+writing requirement and designing documents and promoting  development activity, and manager assigning tasks to eningeer according the designing
+reviewing source code(java and apple system)
+solving problem from testing department
+writing patent
+
+
+
+A little company which provides high performance firewall and network flow control products(fpga+linux)
+Position: linux software team leader
+
+repsonsible for software devolepment of 10GE firewall, following achivements: improvementing system's performance、 reliability and productivity
+
+leading following software parts development: Hardware(NIC/switch) driver,  netfilter/session management, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
+
+1 linux NIC driver debug(PCIE 10GE) and problem correction 
+2 linux kernel panic and kernel death debugging and problem correction
+3 performance improvements of packet processing module(l2/l3 switch) in linux kernel by many methods including,
+    porting system to X86 64bits-multi-core linux platform)
+    wrting documents to guide the porting
+4 software maintainability improvements and daily auto testing of software version(with self-developed tools),  and making the sw development process agile, improving the quality and productivity of sw dev.
+5 writing  testing tools which can simulate user of many kinds of internet applications(such as QQ/skype) to replace the old expensive and deficient IXIA testing devices,  
+6 instructing others on specific technology, leading software dev.
+Achievements: The firewall running on CMCC network produced only one functional bug.
+
+familiar with the various software and hardware installation, configuration and maintenance; sql server database design, management and maintenance. 
+familiar with the iis asp + + sql server web site design and maintenance.
+familiar with the tcp / ip, netbios network protocol and subnet division.
+familiar with wins、dns、 dhcp、 exchange、 proxy and network server configuration, management and maintenance. 
+good at learning new knowledge and has a certain language skills and management experience and strong computer professional english reading ability.
+
+Skills
+proficient in linux including kernel, especially kernel networking subsystem and relative subsystems/features
+          such as synchronization, parallel computing, software performance improvements, software debugging on linux
+          
+proficient in networking, including networking application development, L2/L3 switching, access network
+
+nearly proficient in  linux cloud networking, cloud computing
+      Follow up some related technology, such as docker(ns, device mapper...)/SDN/dpdk/unikernel...
+nearly proficient in c++ language
+1 implicit this pointer
+      global variable in function stack shared between different (member) functons in class
+      instantiation of global variable in function stack by thread/coroutines
+2 resource got on declaration
+  resource released automatically
+  
+3 operator Overload cin cout
+  Overload、Overwrite及Override
+
+4 polymorphic
+      Follow up some related technology, such as golang/java/coroutine.
+
+
+Self evaluation
+
+very professional in software develeopment because of my software methodology
+         
+         isolation between requirements/problems and solutions
+         lower hierarchy implements higher hierarchy
+         many ones do not care what they do not know its existence
+         isolation, sharing, getting-through
+         
+  proficient in analysis and communication of software requirements
+  proficient in analysis and communication of software function implementation 
+  proficient in software  process management 
+  loving technology analysis, loving communicating requirements  and designing
