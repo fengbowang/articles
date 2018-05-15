@@ -1,4 +1,29 @@
-v2x sdk writing patent
+
+
+Work experience
+2016.1-At  present    xxxxxxx linux software engineer
+  2016.1-2017.5
+  1 Responsible for software development of  wireless Vehicle communication protocol and application(traffic light, v2v security etc.) on  it(c/c++ language on linux).
+   The supplier would not provide source code of kernel module,  so we need write the whole protocol function  including kernel mode and user mode to make  the  kernel  module run on linux our kernel. 
+    lines of code:  protocol  17000  application 12000
+  2 Responsible for software development of vehicle data gathering server(c++ language on linux)
+    The server  gathers data from vehices(through  wireless) and stores data in hbase for hadoop processing
+  3 other application such as device upgrade, logging function
+  4 passing  the  testing in chongqing auto engineering  institute
+ 2017.6-2018.1
+  self-driving system(c/c++ language on linux)
+   1  responsible for development and deployment , maintenance of  data gathering system on the testing  car, including vehicle refitting.
+   2  designing of replaying of the gathered data
+   3  responsible for development of  control software, including data gathering and replaying
+ 2018.1-at present
+   Responsible for software development of  the same wireless Vehicle communication protocol.
+   1 rewriting the driver of communication device(wireless  NIC) (c language on linux)
+   2 providing sdk to clients
+   3 writing patents
+   4 other work such as assit  in tbox development and data gathering and recruiting
+  
+  
+
 
 
 team leader and system engineer for IP camera developments(on linux arm)
@@ -62,6 +87,47 @@ nearly proficient in c++ language
 
 4 polymorphic
       Follow up some related technology, such as golang/java/coroutine.
+      
+      
+
+software engineer
+Company NameHuawei Technologies
+Dates EmployedNov 2005 – Mar 2012
+ 
+Employment Duration6 yrs 5 mos
+
+Position: sw engineer and tech researcher
+1 Wimax access gateway development: user access management and network flow control
+2 access gateway flow control technology research(PCC)
+3 IMS(VoIP) system cost reduction for CMCC: 
+developing p2p IMS(VoIP) on linux 
+analyzation of cloud platform(virtualization environments)deployments
+•	Edit position software engineer
+
+ 
+software engineer
+Company NameUTstarcom
+Dates EmployedDec 2003 – Nov 2005
+ 
+Employment Duration2 yrs
+Locationshenzhen
+
+Position: sw engineer
+Develepments of GGSN(3g access Gateway): user access management and network flow controlling
+•	Edit position Software Engineer
+
+
+Software Engineer
+Company Namehuawei
+Dates EmployedJun 2000 – Mar 2003
+ 
+Employment Duration2 yrs 10 mos
+Locationshenzhen
+
+Position: sw engineer
+Developmets of BAS(broad access gateway): user access management and forwarding table maintenance
+ATM PNNI routing protocol software maintaining
+
 
 
 Self evaluation
