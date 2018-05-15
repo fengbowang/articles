@@ -24,17 +24,19 @@ repsonsible for following product:
         supporting L2 and L3 and 10GE switch
         FPGA+linux based
         
- 1、writing architecture document for the system
+ achievements: improving system's performance、 reliability and development productivity 
+        
+ 1、writing architecture documents for the system and assigning tasks
+      Hardware(NIC/switch) driver,  netfilter/session management, nat/alg, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
 
-repsonsible for improving system's performance、 reliability and productivity by implanting the whole software from 32bits-CPU to 64bits-CPU
-
-leading following software parts development: Hardware(NIC/switch) driver,  netfilter/session management, nat/alg, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
-
-1 linux NIC driver debug(PCIE 10GE) and problem correction 
-2 linux kernel panic and kernel death debugging and problem correction
+ 2 linux NIC driver debug(PCIE 10GE) and problem correction 
+          such as PCIE register writing error
+ 3 linux kernel panic and kernel death debugging and problem correction
+      such as kernel memory leak, kernel buffer overflow, kernel deadlock
 3 performance improvements of packet processing module(l2/l3 switch) in linux kernel by many methods including,
     porting system to X86 64bits-multi-core linux platform)
-    wrting documents to guide the porting
+    wrting rules to guide the porting
+    changing register accessing to DMA
 4 software maintainability improvements and daily auto testing of software version(with self-developed tools),  and making the sw development process agile, improving the quality and productivity of sw dev.
 5 writing  testing tools which can simulate user of many kinds of internet applications(such as QQ/skype) to replace the old expensive and deficient IXIA testing devices,  
 6 instructing others on specific technology, leading software dev.
