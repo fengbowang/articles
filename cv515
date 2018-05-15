@@ -34,12 +34,12 @@ repsonsible for following product:
  3 linux kernel panic and kernel death debugging and problem correction
       such as kernel memory leak, kernel buffer overflow, kernel deadlock
 3 performance improvements of packet processing module(l2/l3 switch) in linux kernel by many methods including,
-    porting system to X86 64bits-multi-core linux platform)
-    wrting rules to guide the porting
+    porting system to X86 64bits-multi-core linux platform
+    writing rules to guide the porting
     changing register accessing to DMA
 4 software maintainability improvements and daily auto testing of software version(with self-developed tools),  and making the sw development process agile, improving the quality and productivity of sw dev.
 5 writing  testing tools which can simulate user of many kinds of internet applications(such as QQ/skype) to replace the old expensive and deficient IXIA testing devices,  
-6 instructing others on specific technology, leading software dev.
+6 instructing others on specific technology.
 Achievements: The firewall running on CMCC network produced only one functional bug.
 
 Skills
