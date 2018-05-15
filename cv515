@@ -20,11 +20,11 @@ A little company which provides high performance firewall and network flow contr
 Position: linux software team leader
 product:
         user-based and service-based network flow controlling device
-        supporting network-data logging and analyse
-        supporting L2 and L3 switch
+        supporting network-flow logging and analysis
+        supporting L2 and L3 and 10GE switch
         FPGA+linux based
 
-repsonsible for software devolepment of 10GE firewall, following achivements: improvementing system's performance、 reliability and productivity
+repsonsible for improvementing system's performance、 reliability and productivity by implanting the whole software from 32bits-CPU to 64bits-CPU
 
 leading following software parts development: Hardware(NIC/switch) driver,  netfilter/session management, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
 
