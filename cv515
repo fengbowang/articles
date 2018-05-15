@@ -2,7 +2,7 @@
 
 Work experience
 2016.1-At  present    xxxxxxx linux software engineer
-  2016.1-2017.5
+  2016.1-2017.5（networking device c++ linux）
   1 Responsible for software development of  wireless Vehicle communication protocol and application(traffic light, v2v security etc.) on  it(c/c++ language on linux).
    The supplier would not provide source code of kernel module,  so we need write the whole protocol function  including kernel mode and user mode to make  the  kernel  module run on linux our kernel. 
     lines of code:  protocol  17000  application 12000
@@ -12,7 +12,7 @@ Work experience
   4 passing  the  testing in chongqing auto engineering  institute
  2017.6-2018.1
   self-driving system(c/c++ language on linux)
-   1  responsible for development and deployment , maintenance of  data gathering system on the testing  car, including vehicle refitting.
+   1  responsible for designing development and building, maintenance of  data gathering system on the testing car, including vehicle retrofitting.
    2  designing of replaying of the gathered data
    3  responsible for development of  control software, including data gathering and replaying
  2018.1-at present
@@ -26,7 +26,7 @@ Work experience
 
 
 
-team leader and system engineer for IP camera developments(on linux arm)
+team leader and system engineer for IP camera developments(networking camera c++ linux)
 
 responsible for ambarella A5S/S2L based IP camera and battery-powered-low-power IP camera、 smart camera lock  
 
@@ -41,7 +41,7 @@ writing patent
 
 
 
-A little company which provides high performance firewall and network flow control products(fpga+linux)
+greaty-tech(networking device c linux)
 Position: linux software team leader
 repsonsible for following XGE product:
         user-based and service-based network flow controlling device
