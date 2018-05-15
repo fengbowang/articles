@@ -5,9 +5,9 @@ team leader and system engineer for IP camera developments(on linux arm)
 
 responsible for ambarella A5S/S2L based IP camera and battery-powered-low-power IP camera  
 
-analysing standard specification of IP camera:  PSIA/openhome interface
-communicating requirements with customer 
-communicating solutions  with supplier
+analysing standard specification of IP camera:  PSIA/openhome interface document
+communicating requirements with customers 
+communicating solutions  with suppliers
 communicating requirements and solutions with cloud server team and client application team
 writing requirement and designing documents and promoting  development activity, and manager assigning tasks to eningeer according the designing
 reviewing source code(java and apple system)
