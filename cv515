@@ -18,15 +18,17 @@ writing patent
 
 A little company which provides high performance firewall and network flow control products(fpga+linux)
 Position: linux software team leader
-product:
+repsonsible for following product:
         user-based and service-based network flow controlling device
         supporting network-flow logging and analysis
         supporting L2 and L3 and 10GE switch
         FPGA+linux based
+        
+ 1、writing architecture document for the system
 
-repsonsible for improvementing system's performance、 reliability and productivity by implanting the whole software from 32bits-CPU to 64bits-CPU
+repsonsible for improving system's performance、 reliability and productivity by implanting the whole software from 32bits-CPU to 64bits-CPU
 
-leading following software parts development: Hardware(NIC/switch) driver,  netfilter/session management, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
+leading following software parts development: Hardware(NIC/switch) driver,  netfilter/session management, nat/alg, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
 
 1 linux NIC driver debug(PCIE 10GE) and problem correction 
 2 linux kernel panic and kernel death debugging and problem correction
