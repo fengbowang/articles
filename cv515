@@ -2,80 +2,127 @@
 
 Work experience
 2016.1-At  present    xxxxxxx linux software engineer
-  2016.1-2017.5（networking device c++ linux）
-  1 Responsible for software development of  wireless Vehicle communication protocol and application(traffic light, v2v security etc.) on  it(c/c++ language on linux).
-   The supplier would not provide source code of kernel module,  so we need write the whole protocol function  including kernel mode and user mode to make  the  kernel  module run on linux our kernel. 
-    lines of code:  protocol  17000  application 12000
-  2 Responsible for software development of vehicle data gathering server(c++ language on linux)
+
+ 2016.1-2017.5（networking-device c++/linux）
+  1 Responsible for software development of  low-delay wireless Vehicle communication protocol and application(traffic light, v2v security etc.).
+   The supplier would not provide source code ,  so we need write the whole protocol function  including kernel mode part and user mode part to make  the  kernel  module run on our linux kernel verion . 
+    lines of code:  protocol  17000(c language)  application 12000(c/c++ language)
+  2 Responsible for software development of vehicle data gathering server(c++ language)
     The server  gathers data from vehices(through  wireless) and stores data in hbase for hadoop processing
-  3 other application such as device upgrade, logging function
-  4 passing  the  testing in chongqing auto engineering  institute
+    lines of code:  11000
+  3 other application such as device upgrade, logging function(c language)
+  4 passing  the  testing in chongqing auto engineering  institute 
+  
  2017.6-2018.1
   self-driving system(c/c++ language on linux)
    1  responsible for designing development and building, maintenance of  data gathering system on the testing car, including vehicle retrofitting.
    2  designing of replaying of the gathered data
    3  responsible for development of  control software, including data gathering and replaying
+   4  writing patents
+   
  2018.1-at present
    Responsible for software development of  the same wireless Vehicle communication protocol.
    1 rewriting the driver of communication device(wireless  NIC) (c language on linux)
    2 providing sdk to clients
    3 writing patents
-   4 other work such as assit  in tbox development and data gathering and recruiting
+
   
   
 
 
 
-team leader and system engineer for IP camera developments(networking camera c++ linux)
+team leader and system engineer for IP camera developments(networking-camera c++/linux)
 
-responsible for ambarella A5S/S2L based IP camera and battery-powered-low-power IP camera、 smart camera lock  
+responsible for ambarella A5S/S2L based networking camera and battery-powered-low-power networking camera、 camera-assited gate-lock, etc.  
 
-analysing standard specification of IP camera:  PSIA/openhome interface document
-communicating requirements with customers 
-communicating solutions  with suppliers
-communicating requirements and solutions with cloud server team and client application team
-writing requirement and designing documents and promoting  development activity, and manager assigning tasks to eningeers according the designing
-reviewing source code(java and apple system)
-solving problem from testing department
-writing patent
+1 analysing standard specification of IP camera:  PSIA/openhome interface document
+2 communicating requirements with customers 
+3 communicating solutions  with suppliers
+4 communicating requirements and solutions with cloud server team and client application team to compose a whole monitoring system
+5 writing requirement and designing documents and promoting  development activity, and manager assigning tasks to eningeers according the designing
+6 reviewing source code, solving problem from testing department, writing patents, etc.
 
 
 
-greaty-tech(networking device c linux)
+
+
+greaty-tech(networking device c/c++/linux)
 Position: linux software team leader
-repsonsible for following XGE product:
+repsonsible for software of following XGE product:
         user-based and service-based network flow controlling device
         supporting network-flow logging and analysis
         supporting L2 and L3 and 10GE switch
         FPGA+linux based
-        
- achievements: improving system's performance、 reliability and development productivity 
-        
- 1、writing architecture documents for the system and assigning tasks
-      Hardware(NIC/switch) driver,  netfilter/session management, nat/alg, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
 
- 2 linux NIC driver debug(PCIE 10GE) and problem correction 
+
+ 1、writing architecture documents to guide the development and assigning tasks
+      Hardware(NIC/switch) driver,  netfilter/session management, nat/alg, dpi, L2/L3 forwarding, configurement, snmp, logging and reportting
+ 2、put emphasis on following  goals: improving system's performance、 reliability and development productivity 
+        
+
+
+ 2.1  linux NIC driver debug(PCIE 10GE) and problem correction 
           such as PCIE register writing error
- 3 linux kernel panic and kernel death debugging and problem correction
-      such as kernel memory leak, kernel buffer overflow, kernel deadlock
-3 performance improvements of packet processing module(l2/l3 switch) in linux kernel by many methods including,
+ 2.2  linux kernel panic and kernel death debugging and problem correction
+          such as kernel memory leak, kernel buffer overflow, kernel deadlock
+ 2.3 performance improvements of packet processing module(l2/l3 switch) in linux kernel by many methods including,
     porting system to X86 64bits-multi-core linux platform
     writing rules to guide the porting
-    changing register accessing to DMA
-4 software maintainability improvements and daily auto testing of software version(with self-developed tools),  and making the sw development process agile, improving the quality and productivity of sw dev.
-5 writing  testing tools which can simulate user of many kinds of internet applications(such as QQ/skype) to replace the old expensive and deficient IXIA testing devices,  
-6 instructing others on specific technology.
-Achievements: The firewall running on CMCC network produced only one functional bug.
+    changing register accessing to DMA(Increasing throughput by 60%)
+ 2.4 software maintainability improvements and daily auto testing of software version(with self-developed tools),  and making the sw development process agile, improving the quality and productivity of software dev.
+ 2.5 writing  auto testing tools which can simulate user of many kinds of internet applications(such as QQ/skype/MSN) to replace the old expensive and deficient IXIA testing device 
+
+Achievements: The firewall running on CMCC network raised only one functional bug.
+
+
+    
+
+Huawei Technologies
+
+2005.12 – 2012.5
+
+software engineer and tech. researcher(c/linux/vxworks)
+ 
+1 Wimax access gateway development: user access management and network flow control
+2 access gateway flow control technology research (PCC)
+3 IMS(VoIP) system cost reduction for CMCC: 
+  3.1 developing p2p IMS(VoIP) on linux 
+  3.2 analysing  benefits of cloud platform(virtualization environments) deployments
+4 writing patents
+
+
+ 
+
+UTstarcom
+2003.12–2005.12
+software engineer
+Develepments of GGSN(3g access Gateway): user access management and network flow controlling
+
+
+
+Software Engineer
+huawei
+2000.6-2003.12
+ 
+software engineer
+1、Developmets of BAS(broad access gateway): user access management and forwarding table maintenance
+2、ATM PNNI routing protocol software maintaining
+3、writing patents
+
+
+
 
 Skills
 proficient in linux including kernel, especially kernel networking subsystem and relative subsystems/features
-          such as synchronization, parallel computing, software performance improvements, software debugging on linux
+          such as synchronization, concurrency/parallelling, software performance improvements, software debugging on linux
           
-proficient in networking, including networking application development, L2/L3 switching, access network
+proficient in networking, including L2/L3 switching, access network, networking device, networking application development
 
 nearly proficient in  linux cloud networking, cloud computing
       Follow up some related technology, such as docker(ns, device mapper...)/SDN/dpdk/unikernel...
 nearly proficient in c++ language
+      Follow up some related technology, such as golang/java/coroutine.
+      
 1 implicit this pointer
       global variable in function stack shared between different (member) functons in class
       instantiation of global variable in function stack by thread/coroutines
@@ -86,49 +133,11 @@ nearly proficient in c++ language
   Overload、Overwrite及Override
 
 4 polymorphic
-      Follow up some related technology, such as golang/java/coroutine.
+   Overload、Overwrite及Override
+   template
       
       
-
-software engineer
-Company NameHuawei Technologies
-Dates EmployedNov 2005 – Mar 2012
- 
-Employment Duration6 yrs 5 mos
-
-Position: sw engineer and tech researcher
-1 Wimax access gateway development: user access management and network flow control
-2 access gateway flow control technology research(PCC)
-3 IMS(VoIP) system cost reduction for CMCC: 
-developing p2p IMS(VoIP) on linux 
-analyzation of cloud platform(virtualization environments)deployments
-•	Edit position software engineer
-
- 
-software engineer
-Company NameUTstarcom
-Dates EmployedDec 2003 – Nov 2005
- 
-Employment Duration2 yrs
-Locationshenzhen
-
-Position: sw engineer
-Develepments of GGSN(3g access Gateway): user access management and network flow controlling
-•	Edit position Software Engineer
-
-
-Software Engineer
-Company Namehuawei
-Dates EmployedJun 2000 – Mar 2003
- 
-Employment Duration2 yrs 10 mos
-Locationshenzhen
-
-Position: sw engineer
-Developmets of BAS(broad access gateway): user access management and forwarding table maintenance
-ATM PNNI routing protocol software maintaining
-
-
+  
 
 Self evaluation
 
