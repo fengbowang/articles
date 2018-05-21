@@ -15,7 +15,7 @@
   kernel memory leak, kernel buffer overflow, kernel deadlock bug、
   porting system to X86 64bits-multi-core linux platform
   每日自动化版本测试，包含脚本工具和测试工具
-  开发自动化测试工具，模拟真实现网上大量各种不同业务（QQ/skype/MSN...）的用户上网测试，取代昂贵的，功能不全的IXIA测试仪，达到了提升效率和质量，降低成本的作用
+  开发自动化测试工具，模拟真实现网上大量各种不同业务（QQ/skype/MSN...）的用户上网测试，取代昂贵的，功能不全的IXIA测试仪，尤其是对设备的老化测试，达到了提升效率和质量，降低成本的作用
   软件工程师/网络技术研究人员(c/linux/vxworks)
 
 linux软件工程师
