@@ -1,0 +1,257 @@
+CC = /devdata2/mamengmeng/arm64/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
+CPP = /devdata2/mamengmeng/arm64/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++
+
+
+ROOT = ./
+#ROOT = /home/mamengmeng/921
+ROOT_PARENT = ../
+OBJDIR = $(ROOT)
+
+THIRDPARTY = /devdata2/mamengmeng/arm64/3rdparty/
+#ROOTFS_DIR = /devdata2/mamengmeng/arm64/rootfs-aarch64-new
+ROOTFS_DIR = /devdata2/mamengmeng/arm64/rfs
+
+# /devdata2/mamengmeng/arm64/3rdparty/opencv-hw/opencv/include/opencv
+#fpermissive
+#ROOT = /home/launch/samba/svn/wangfengbo/v2x_launch/  -std=c++0x
+#-std=c99 
+GTK_INCLUDE = -I`pkg-config --cflags --libs gtk+-2.0`
+
+DRV_RS16_DIR = $(ROOT)/driver/rs16
+DRV_VEL32_DIR = $(ROOT)/driver/vel32
+DRV_VEL16_DIR = $(ROOT)/driver/vel16
+DRV_LS16PRE_DIR = $(ROOT)/driver/ls16pre
+DRV_LS1_DIR = $(ROOT)/driver/ls1
+DRV_VEL16_INC_DIR = $(ROOT)/driver/
+
+YAML_DIR = $(THIRDPARTY)/yaml
+YAML_LIB_DIR = $(YAML_DIR)/lib64
+
+PRJ = 912
+#CFLAGS = -DU_MICRO_VERSION=\"$(VER)\"
+#CPPFLAGS = -DU_MICRO_VERSION=\"$(VER)\"
+
+CFLAGS = -D MINOR_VERSION=$(PRJ)
+CPPFLAGS = -D MINOR_VERSION=$(PRJ)
+
+#-fsanitize=address vtk/include/vtk-6.3
+CFLAGS +=  -Wno-deprecated -O3 -Wall -g -fopenmp  -I$(ROOT)/spe_include -I. -I$(THIRDPARTY)/pcl/include/pcl-1.8 -I$(THIRDPARTY)/opencv-hw/opencv/include/ \
+	-I$(THIRDPARTY)/opencv-hw/opencv/include/opencv   -I$(THIRDPARTY)/eigen/include -I$(THIRDPARTY)/eigen/include/eigen3 \
+	-I$(THIRDPARTY)/boost/include -I$(THIRDPARTY)/vtk/include/vtk-6.3 -I$(THIRDPARTY)/libconfig/include -I$(ROOT)/include/  \
+	-I$(THIRDPARTY)/flann/include  -I$(THIRDPARTY)/proj4/include -I$(ROOT)/roifilter  -I$(DRV_VEL16_INC_DIR)   \
+	-I$(DRV_RS16_DIR) -I$(DRV_VEL32_DIR) -I$(DRV_LS16PRE_DIR) -I$(DRV_LS1_DIR) -I$(THIRDPARTY)/comm/comm_2.6.2/include -I$(YAML_DIR)/include 
+
+CPPFLAGS += -std=c++11 -Wno-deprecated -O3 -Wall -g -fopenmp  -I$(ROOT)/spe_include -I. -I$(THIRDPARTY)/pcl/include/pcl-1.8 -I$(THIRDPARTY)/opencv-hw/opencv/include/ \
+	-I$(THIRDPARTY)/opencv-hw/opencv/include/opencv   -I$(THIRDPARTY)/eigen/include  -I$(THIRDPARTY)/eigen/include/eigen3 \
+	-I$(THIRDPARTY)/boost/include -I$(THIRDPARTY)/vtk/include/vtk-6.3 -I$(THIRDPARTY)/libconfig/include -I$(ROOT)/include/ \
+	-I$(THIRDPARTY)/flann/include  -I$(THIRDPARTY)/proj4/include -I$(ROOT)/roifilter  -I$(DRV_VEL16_INC_DIR)  \
+	-I$(DRV_RS16_DIR) -I$(DRV_VEL32_DIR) -I$(DRV_LS16PRE_DIR) -I$(DRV_LS1_DIR)  -I$(THIRDPARTY)/comm/comm_2.6.2/include -I$(YAML_DIR)/include
+
+	
+#lib
+#aarch64-linux-gnu-g++ -fopenmp -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/opecv-hw/opencv/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/flann/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/pcl/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/libconfig/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/boost/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/vtk/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\3rdparty/proj4/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\rootfs-aarch64/usr/lib" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\rootfs-aarch64/usr/lib/aarch64-linux-gnu" -L"D:\echiev_develop_kit\echiev_develop_kit\sdk\windows\rootfs-aarch64/lib" -o "lidar_curb_no_leak"  ./src/rs16/rawdata.o ./src/rs16/rs16.o  ./src/CameraLaneMCserver.o ./src/config.o ./src/curbDetect.o ./src/funcCurbDetection.o ./src/funcGroundEstimation.o ./src/funcObjtracker.o ./src/funcObstacleDetection.o ./src/lidar_capture.o ./src/main.o ./src/que_node.o  ./common/pthread_drv.o ./common/utils.o   -lpthread -lgpg-error -lkrb5 -lk5crypto -lcom_err -lkrb5support -lkeyutils -licui18n -licuuc -licudata -lgcrypt -lpthread -lgssapi_krb5 -lmpg123 -lvorbisfile -lxml2 -lp11-kit -lidn -ltasn1 -lnettle -lhogweed -lgmp -lgraphite2 -lblkid -ludev -lsoxr -lnuma -logg -lshine -lopus -lopenjp2 -lmp3lame -lgsm -llzma -lssh-gcrypt -lopenmpt -lgme -lbluray -lgnutls -lchromaprint -lbz2 -lvdpau -lva-drm -lva-x11 -ljbig -lxcb-render -lharfbuzz -lselinux -lmount -lraw1394 -lusb-1.0 -lswresample -lva -lzvbi -lxvidcore -lx265 -lx264 -lwebpmux -lwavpack -lvpx -lvorbisenc -lvorbis -ltwolame -ltheoraenc -ltheoradec -lspeex -lsnappy -lxcb-shm -lpixman-1 -ldatrie -lglib -lffi -lgthread -lthai -lcairo -lfontconfig -lpangoft2-1.0 -lfreetype -lgdk_pixbuf-2.0 -lgio-2.0 -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -latk-1.0 -ldc1394 -lavcodec -lavformat -lavutil -lswscale -lz -ljpeg -lwebp -lpng16 -ltiff -lgmodule-2.0 -lgobject -lpango -lpangocairo -lgdk-x11 -lm -lrt -ldl -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_imgproc -lopencv_core -lflann_cpp -lflann -lpcl_2d -lpcl_common -lpcl_features -lpcl_filters -lpcl_io -lpcl_io_ply -lpcl_kdtree -lpcl_keypoints -lpcl_ml -lpcl_octree -lpcl_outofcore -lpcl_people -lpcl_recognition -lpcl_registration -lpcl_sample_consensus -lpcl_search -lpcl_segmentation -lpcl_stereo -lpcl_surface -lpcl_tracking -lpcl_visualization -lconfig -lconfig++ -lboost_atomic -lboost_chrono -lboost_container -lboost_context -lboost_coroutine -lboost_date_time -lboost_fiber -lboost_filesystem -lboost_graph -lboost_iostreams -lboost_locale -lboost_log -lboost_log_setup -lboost_math_c99 -lboost_math_c99f -lboost_math_c99l -lboost_math_tr1 -lboost_math_tr1f -lboost_math_tr1l -lboost_prg_exec_monitor -lboost_program_options -lboost_random -lboost_regex -lboost_serialization -lboost_signals -lboost_system -lboost_thread -lboost_timer -lboost_type_erasure -lboost_unit_test_framework -lboost_wave -lboost_wserialization -lvtkalglib-6.3 -lvtkChartsCore-6.3 -lvtkCommonColor-6.3 -lvtkCommonComputationalGeometry-6.3 -lvtkCommonCore-6.3 -lvtkCommonDataModel-6.3 -lvtkCommonExecutionModel-6.3 -lvtkCommonMath-6.3 -lvtkCommonMisc-6.3 -lvtkCommonSystem-6.3 -lvtkCommonTransforms-6.3 -lvtkDICOMParser-6.3 -lvtkDomainsChemistry-6.3 -lvtkexoIIc-6.3 -lvtkexpat-6.3 -lvtkFiltersAMR-6.3 -lvtkFiltersCore-6.3 -lvtkFiltersExtraction-6.3 -lvtkFiltersFlowPaths-6.3 -lvtkFiltersGeneral-6.3 -lvtkFiltersGeneric-6.3 -lvtkFiltersGeometry-6.3 -lvtkFiltersHybrid-6.3 -lvtkFiltersHyperTree-6.3 -lvtkFiltersImaging-6.3 -lvtkFiltersModeling-6.3 -lvtkFiltersParallel-6.3 -lvtkFiltersParallelImaging-6.3 -lvtkFiltersProgrammable-6.3 -lvtkFiltersSelection-6.3 -lvtkFiltersSMP-6.3 -lvtkFiltersSources-6.3 -lvtkFiltersStatistics-6.3 -lvtkFiltersTexture-6.3 -lvtkFiltersVerdict-6.3 -lvtkfreetype-6.3 -lvtkftgl-6.3 -lvtkGeovisCore-6.3 -lvtkgl2ps-6.3 -lvtkhdf5-6.3 -lvtkhdf5_hl-6.3 -lvtkImagingColor-6.3 -lvtkImagingCore-6.3 -lvtkImagingFourier-6.3 -lvtkImagingGeneral-6.3 -lvtkImagingHybrid-6.3 -lvtkImagingMath-6.3 -lvtkImagingMorphological-6.3 -lvtkImagingSources-6.3 -lvtkImagingStatistics-6.3 -lvtkImagingStencil-6.3 -lvtkInfovisCore-6.3 -lvtkInfovisLayout-6.3 -lvtkInteractionImage-6.3 -lvtkInteractionStyle-6.3 -lvtkInteractionWidgets-6.3 -lvtkIOAMR-6.3 -lvtkIOCore-6.3 -lvtkIOEnSight-6.3 -lvtkIOExodus-6.3 -lvtkIOExport-6.3 -lvtkIOGeometry-6.3 -lvtkIOImage-6.3 -lvtkIOImport-6.3 -lvtkIOInfovis-6.3 -lvtkIOLegacy-6.3 -lvtkIOLSDyna-6.3 -lvtkIOMINC-6.3 -lvtkIOMovie-6.3 -lvtkIONetCDF-6.3 -lvtkIOParallel-6.3 -lvtkIOParallelXML-6.3 -lvtkIOPLY-6.3 -lvtkIOSQL-6.3 -lvtkIOVideo-6.3 -lvtkIOXML-6.3 -lvtkIOXMLParser-6.3 -lvtkjpeg-6.3 -lvtkjsoncpp-6.3 -lvtklibxml2-6.3 -lvtkmetaio-6.3 -lvtkNetCDF-6.3 -lvtkNetCDF_cxx-6.3 -lvtkoggtheora-6.3 -lvtkParallelCore-6.3 -lvtkpng-6.3 -lvtkproj4-6.3 -lvtkRenderingAnnotation-6.3 -lvtkRenderingContext2D-6.3 -lvtkRenderingContextOpenGL-6.3 -lvtkRenderingCore-6.3 -lvtkRenderingFreeType-6.3 -lvtkRenderingGL2PS-6.3 -lvtkRenderingImage-6.3 -lvtkRenderingLabel-6.3 -lvtkRenderingLIC-6.3 -lvtkRenderingLOD-6.3 -lvtkRenderingOpenGL-6.3 -lvtkRenderingVolume-6.3 -lvtkRenderingVolumeOpenGL-6.3 -lvtksqlite-6.3 -lvtksys-6.3 -lvtktiff-6.3 -lvtkverdict-6.3 -lvtkViewsContext2D-6.3 -lvtkViewsCore-6.3 -lvtkViewsInfovis-6.3 -lvtkzlib-6.3 -lGL -ldrm -lexpat -lglapi -lICE -lSM -lX11 -lX11-xcb -lxcb-dri2 -lxcb-dri3 -lxcb-glx -lxcb-present -lxcb-sync -lXdamage -lXext -lXfixes -lxshmfence -lXt -lXxf86vm -lxcb -lbsd -luuid -lXau -lXdmcp -lcomm -lproj -lgtk-x11 -lpcre
+OPENCV_LIB_DIR = $(THIRDPARTY)/opencv-hw/opencv/lib	
+FLANN_LIB_DIR = $(THIRDPARTY)/flann/lib	
+PCL_LIB_DIR = $(THIRDPARTY)/pcl/lib	
+CONFIG_LIB_DIR = $(THIRDPARTY)/libconfig/lib
+BOOST_LIB_DIR = $(THIRDPARTY)/boost/lib	
+VTK_LIB_DIR = $(THIRDPARTY)/vtk/lib
+
+PRJ4_LIB_DIR = $(THIRDPARTY)/proj4/lib
+SYS_USR_LIB_DIR = $(ROOTFS_DIR)/usr/lib
+# aarch64-linux-gnu
+SYS_USR_LIB_GNU_DIR = $(ROOTFS_DIR)/usr/lib/aarch64-linux-gnu
+SYS_LIB_DIR = $(ROOTFS_DIR)/lib
+
+#./rootfs-aarch64-new/usr/lib/aarch64-linux-gnu/ instead
+#COMM_LIBDIR = $(ROOT)lib/commlib_2.6.3/aarch64/comm_2.6.3/lib/
+#COMM_LIBDIR = $(THIRDPARTY)/comm/comm_2.6.2/x86_64_lib
+COMM_LIBDIR = $(THIRDPARTY)/comm/comm_2.6.2/lib
+
+#COMM_LIB_FILE = $(COMM_LIBDIR)/libcomm.a
+
+LIB_DIR = -L$(OPENCV_LIB_DIR) -L$(FLANN_LIB_DIR) -L$(PCL_LIB_DIR) -L$(CONFIG_LIB_DIR) -L$(BOOST_LIB_DIR) -L$(VTK_LIB_DIR) -L$(PRJ4_LIB_DIR) -L$(SYS_USR_LIB_DIR) \
+ -L$(SYS_USR_LIB_GNU_DIR) -L$(SYS_LIB_DIR) -L$(COMM_LIBDIR) -L$(YAML_LIB_DIR) 
+
+#LIBRARY_FILES = -lpthread -lgpg-error -lkrb5 -lk5crypto -lcom_err -lkrb5support -lkeyutils -licui18n -licuuc -licudata -lgcrypt -lpthread -lgssapi_krb5 -lmpg123 -lvorbisfile -lxml2 -lp11-kit -lidn -ltasn1 -lnettle -lhogweed -lgmp -lgraphite2 -lblkid -ludev -lsoxr -lnuma -logg -lshine -lopus -lopenjp2 -lmp3lame -lgsm -llzma -lssh-gcrypt -lopenmpt -lgme -lbluray -lgnutls -lchromaprint -lbz2 -lvdpau -lva-drm -lva-x11 -ljbig -lxcb-render -lharfbuzz -lselinux -lmount -lraw1394 -lusb-1.0 -lswresample -lva -lzvbi -lxvidcore -lx265 -lx264 -lwebpmux -lwavpack -lvpx -lvorbisenc -lvorbis -ltwolame -ltheoraenc -ltheoradec -lspeex -lsnappy -lxcb-shm -lpixman-1 -ldatrie -lglib -lffi -lgthread -lthai -lcairo -lfontconfig -lpangoft2-1.0 -lfreetype -lgdk_pixbuf-2.0 -lgio-2.0 -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -latk-1.0 -ldc1394 -lavcodec -lavformat -lavutil -lswscale -lz -ljpeg -lwebp -lpng16 -ltiff -lgmodule-2.0 -lgobject -lpango -lpangocairo -lgdk-x11 -lm -lrt -ldl -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_imgproc -lopencv_core -lflann_cpp -lflann -lpcl_2d -lpcl_common -lpcl_features -lpcl_filters -lpcl_io -lpcl_io_ply -lpcl_kdtree -lpcl_keypoints -lpcl_ml -lpcl_octree -lpcl_outofcore -lpcl_people -lpcl_recognition -lpcl_registration -lpcl_sample_consensus -lpcl_search -lpcl_segmentation -lpcl_stereo -lpcl_surface -lpcl_tracking -lpcl_visualization -lconfig -lconfig++ -lboost_atomic -lboost_chrono -lboost_container -lboost_context -lboost_coroutine -lboost_date_time -lboost_fiber -lboost_filesystem -lboost_graph -lboost_iostreams -lboost_locale -lboost_log -lboost_log_setup -lboost_math_c99 -lboost_math_c99f -lboost_math_c99l -lboost_math_tr1 -lboost_math_tr1f -lboost_math_tr1l -lboost_prg_exec_monitor -lboost_program_options -lboost_random -lboost_regex -lboost_serialization -lboost_signals -lboost_system -lboost_thread -lboost_timer -lboost_type_erasure -lboost_unit_test_framework -lboost_wave -lboost_wserialization -lvtkalglib-6.3 -lvtkChartsCore-6.3 -lvtkCommonColor-6.3 -lvtkCommonComputationalGeometry-6.3 -lvtkCommonCore-6.3 -lvtkCommonDataModel-6.3 -lvtkCommonExecutionModel-6.3 -lvtkCommonMath-6.3 -lvtkCommonMisc-6.3 -lvtkCommonSystem-6.3 -lvtkCommonTransforms-6.3 -lvtkDICOMParser-6.3 -lvtkDomainsChemistry-6.3 -lvtkexoIIc-6.3 -lvtkexpat-6.3 -lvtkFiltersAMR-6.3 -lvtkFiltersCore-6.3 -lvtkFiltersExtraction-6.3 -lvtkFiltersFlowPaths-6.3 -lvtkFiltersGeneral-6.3 -lvtkFiltersGeneric-6.3 -lvtkFiltersGeometry-6.3 -lvtkFiltersHybrid-6.3 -lvtkFiltersHyperTree-6.3 -lvtkFiltersImaging-6.3 -lvtkFiltersModeling-6.3 -lvtkFiltersParallel-6.3 -lvtkFiltersParallelImaging-6.3 -lvtkFiltersProgrammable-6.3 -lvtkFiltersSelection-6.3 -lvtkFiltersSMP-6.3 -lvtkFiltersSources-6.3 -lvtkFiltersStatistics-6.3 -lvtkFiltersTexture-6.3 -lvtkFiltersVerdict-6.3 -lvtkfreetype-6.3 -lvtkftgl-6.3 -lvtkGeovisCore-6.3 -lvtkgl2ps-6.3 -lvtkhdf5-6.3 -lvtkhdf5_hl-6.3 -lvtkImagingColor-6.3 -lvtkImagingCore-6.3 -lvtkImagingFourier-6.3 -lvtkImagingGeneral-6.3 -lvtkImagingHybrid-6.3 -lvtkImagingMath-6.3 -lvtkImagingMorphological-6.3 -lvtkImagingSources-6.3 -lvtkImagingStatistics-6.3 -lvtkImagingStencil-6.3 -lvtkInfovisCore-6.3 -lvtkInfovisLayout-6.3 -lvtkInteractionImage-6.3 -lvtkInteractionStyle-6.3 -lvtkInteractionWidgets-6.3 -lvtkIOAMR-6.3 -lvtkIOCore-6.3 -lvtkIOEnSight-6.3 -lvtkIOExodus-6.3 -lvtkIOExport-6.3 -lvtkIOGeometry-6.3 -lvtkIOImage-6.3 -lvtkIOImport-6.3 -lvtkIOInfovis-6.3 -lvtkIOLegacy-6.3 -lvtkIOLSDyna-6.3 -lvtkIOMINC-6.3 -lvtkIOMovie-6.3 -lvtkIONetCDF-6.3 -lvtkIOParallel-6.3 -lvtkIOParallelXML-6.3 -lvtkIOPLY-6.3 -lvtkIOSQL-6.3 -lvtkIOVideo-6.3 -lvtkIOXML-6.3 -lvtkIOXMLParser-6.3 -lvtkjpeg-6.3 -lvtkjsoncpp-6.3 -lvtklibxml2-6.3 -lvtkmetaio-6.3 -lvtkNetCDF-6.3 -lvtkNetCDF_cxx-6.3 -lvtkoggtheora-6.3 -lvtkParallelCore-6.3 -lvtkpng-6.3 -lvtkproj4-6.3 -lvtkRenderingAnnotation-6.3 -lvtkRenderingContext2D-6.3 -lvtkRenderingContextOpenGL-6.3 -lvtkRenderingCore-6.3 -lvtkRenderingFreeType-6.3 -lvtkRenderingGL2PS-6.3 -lvtkRenderingImage-6.3 -lvtkRenderingLabel-6.3 -lvtkRenderingLIC-6.3 -lvtkRenderingLOD-6.3 -lvtkRenderingOpenGL-6.3 -lvtkRenderingVolume-6.3 -lvtkRenderingVolumeOpenGL-6.3 -lvtksqlite-6.3 -lvtksys-6.3 -lvtktiff-6.3 -lvtkverdict-6.3 -lvtkViewsContext2D-6.3 -lvtkViewsCore-6.3 -lvtkViewsInfovis-6.3 -lvtkzlib-6.3 -lGL -ldrm -lexpat -lglapi -lICE -lSM -lX11 -lX11-xcb -lxcb-dri2 -lxcb-dri3 -lxcb-glx -lxcb-present -lxcb-sync -lXdamage -lXext -lXfixes -lxshmfence -lXt -lXxf86vm -lxcb -lbsd -luuid -lXau -lXdmcp -lcomm -lproj -lgtk-x11 -lpcre	
+
+LIBRARY_FILES = -lyaml-cpp -lpthread -lgpg-error -lkrb5 -lk5crypto -lcom_err -lkrb5support -lkeyutils -licui18n -licuuc -licudata -lgcrypt -lpthread -lgssapi_krb5 -lmpg123 -lvorbisfile -lxml2 -lp11-kit -lidn -ltasn1 -lnettle -lhogweed -lgmp -lgraphite2 -lblkid -ludev -lsoxr -lnuma -logg -lshine -lopus -lopenjp2 -lmp3lame -lgsm -llzma -lssh-gcrypt -lopenmpt -lgme -lbluray -lgnutls -lchromaprint -lbz2 -lvdpau -lva-drm -lva-x11 -ljbig -lxcb-render -lharfbuzz -lselinux -lmount -lraw1394 -lusb-1.0 -lswresample -lva -lzvbi -lxvidcore -lx265 -lx264 -lwebpmux -lwavpack -lvpx -lvorbisenc -lvorbis -ltwolame -ltheoraenc -ltheoradec -lspeex -lsnappy -lxcb-shm -lpixman-1 -ldatrie -lglib -lffi -lgthread -lthai -lcairo -lfontconfig -lpangoft2-1.0 -lfreetype -lgdk_pixbuf-2.0 -lgio-2.0 -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXcomposite -latk-1.0 -ldc1394 -lavcodec -lavformat -lavutil -lswscale -lz -ljpeg -lwebp -lpng16 -ltiff -lgmodule-2.0 -lgobject -lpango -lpangocairo -lgdk-x11 -lm -lrt -ldl -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_imgproc -lopencv_core -lflann_cpp -lflann -lpcl_2d -lpcl_common -lpcl_features -lpcl_filters -lpcl_io -lpcl_io_ply -lpcl_kdtree -lpcl_keypoints -lpcl_ml -lpcl_octree -lpcl_outofcore -lpcl_people -lpcl_recognition -lpcl_registration -lpcl_sample_consensus -lpcl_search -lpcl_segmentation -lpcl_stereo -lpcl_surface -lpcl_tracking -lpcl_visualization -lconfig -lconfig++ -lboost_atomic -lboost_chrono -lboost_container -lboost_context -lboost_coroutine -lboost_date_time -lboost_fiber -lboost_filesystem -lboost_graph -lboost_iostreams -lboost_locale -lboost_log -lboost_log_setup -lboost_math_c99 -lboost_math_c99f -lboost_math_c99l -lboost_math_tr1 -lboost_math_tr1f -lboost_math_tr1l -lboost_prg_exec_monitor -lboost_program_options -lboost_random -lboost_regex -lboost_serialization -lboost_signals -lboost_system -lboost_thread -lboost_timer -lboost_type_erasure -lboost_unit_test_framework -lboost_wave -lboost_wserialization -lvtkalglib-6.3 -lvtkChartsCore-6.3 -lvtkCommonColor-6.3 -lvtkCommonComputationalGeometry-6.3 -lvtkCommonCore-6.3 -lvtkCommonDataModel-6.3 -lvtkCommonExecutionModel-6.3 -lvtkCommonMath-6.3 -lvtkCommonMisc-6.3 -lvtkCommonSystem-6.3 -lvtkCommonTransforms-6.3 -lvtkDICOMParser-6.3 -lvtkDomainsChemistry-6.3 -lvtkexoIIc-6.3 -lvtkexpat-6.3 -lvtkFiltersAMR-6.3 -lvtkFiltersCore-6.3 -lvtkFiltersExtraction-6.3 -lvtkFiltersFlowPaths-6.3 -lvtkFiltersGeneral-6.3 -lvtkFiltersGeneric-6.3 -lvtkFiltersGeometry-6.3 -lvtkFiltersHybrid-6.3 -lvtkFiltersHyperTree-6.3 -lvtkFiltersImaging-6.3 -lvtkFiltersModeling-6.3 -lvtkFiltersParallel-6.3 -lvtkFiltersParallelImaging-6.3 -lvtkFiltersProgrammable-6.3 -lvtkFiltersSelection-6.3 -lvtkFiltersSMP-6.3 -lvtkFiltersSources-6.3 -lvtkFiltersStatistics-6.3 -lvtkFiltersTexture-6.3 -lvtkFiltersVerdict-6.3 -lvtkfreetype-6.3 -lvtkftgl-6.3 -lvtkGeovisCore-6.3 -lvtkgl2ps-6.3 -lvtkhdf5-6.3 -lvtkhdf5_hl-6.3 -lvtkImagingColor-6.3 -lvtkImagingCore-6.3 -lvtkImagingFourier-6.3 -lvtkImagingGeneral-6.3 -lvtkImagingHybrid-6.3 -lvtkImagingMath-6.3 -lvtkImagingMorphological-6.3 -lvtkImagingSources-6.3 -lvtkImagingStatistics-6.3 -lvtkImagingStencil-6.3 -lvtkInfovisCore-6.3 -lvtkInfovisLayout-6.3 -lvtkInteractionImage-6.3 -lvtkInteractionStyle-6.3 -lvtkInteractionWidgets-6.3 -lvtkIOAMR-6.3 -lvtkIOCore-6.3 -lvtkIOEnSight-6.3 -lvtkIOExodus-6.3 -lvtkIOExport-6.3 -lvtkIOGeometry-6.3 -lvtkIOImage-6.3 -lvtkIOImport-6.3 -lvtkIOInfovis-6.3 -lvtkIOLegacy-6.3 -lvtkIOLSDyna-6.3 -lvtkIOMINC-6.3 -lvtkIOMovie-6.3 -lvtkIONetCDF-6.3 -lvtkIOParallel-6.3 -lvtkIOParallelXML-6.3 -lvtkIOPLY-6.3 -lvtkIOSQL-6.3 -lvtkIOVideo-6.3 -lvtkIOXML-6.3 -lvtkIOXMLParser-6.3 -lvtkjpeg-6.3 -lvtkjsoncpp-6.3 -lvtklibxml2-6.3 -lvtkmetaio-6.3 -lvtkNetCDF-6.3 -lvtkNetCDF_cxx-6.3 -lvtkoggtheora-6.3 -lvtkParallelCore-6.3 -lvtkpng-6.3 -lvtkproj4-6.3 -lvtkRenderingAnnotation-6.3 -lvtkRenderingContext2D-6.3 -lvtkRenderingContextOpenGL-6.3 -lvtkRenderingCore-6.3 -lvtkRenderingFreeType-6.3 -lvtkRenderingGL2PS-6.3 -lvtkRenderingImage-6.3 -lvtkRenderingLabel-6.3 -lvtkRenderingLIC-6.3 -lvtkRenderingLOD-6.3 -lvtkRenderingOpenGL-6.3 -lvtkRenderingVolume-6.3 -lvtkRenderingVolumeOpenGL-6.3 -lvtksqlite-6.3 -lvtksys-6.3 -lvtktiff-6.3 -lvtkverdict-6.3 -lvtkViewsContext2D-6.3 -lvtkViewsCore-6.3 -lvtkViewsInfovis-6.3 -lvtkzlib-6.3 -lGL -ldrm -lexpat -lglapi -lICE -lSM -lX11 -lX11-xcb -lxcb-dri2 -lxcb-dri3 -lxcb-glx -lxcb-present -lxcb-sync -lXdamage -lXext -lXfixes -lxshmfence -lXt -lXxf86vm -lxcb -lbsd -luuid -lXau -lXdmcp  -lcomm -lproj -lgtk-x11 -lpcre	
+
+#main dir
+MAIN_SRC_DIR = $(ROOT)/src
+
+MAIN_SRC_C = $(wildcard $(MAIN_SRC_DIR)/*.c)
+MAIN_SRC_CPP = $(wildcard $(MAIN_SRC_DIR)/*.cpp)
+MAIN_SRC_CC = $(wildcard $(MAIN_SRC_DIR)/*.cc)
+
+MAIN_SRC_C_OBJ = ${patsubst %.c, %.o, $(MAIN_SRC_C)} 
+MAIN_SRC_CPP_OBJ = ${patsubst %.cpp, %.o, $(MAIN_SRC_CPP)}
+MAIN_SRC_CC_OBJ = ${patsubst %.cc, %.o, $(MAIN_SRC_CC)}
+
+#main/roifilter dir
+RS16_SRC_DIR = $(ROOT)/roifilter
+
+RS16_SRC_C = $(wildcard $(RS16_SRC_DIR)/*.c)
+RS16_SRC_CPP = $(wildcard $(RS16_SRC_DIR)/*.cpp)
+
+RS16_SRC_C_OBJ = ${patsubst %.c, %.o, $(RS16_SRC_C)} 
+RS16_SRC_CPP_OBJ = ${patsubst %.cpp, %.o, $(RS16_SRC_CPP)}
+
+#main/spe_src dir
+SPE_SRC_DIR = $(ROOT)/spe_src
+
+SPE_SRC_C = $(wildcard $(SPE_SRC_DIR)/*.c)
+SPE_SRC_CPP = $(wildcard $(SPE_SRC_DIR)/*.cpp)
+
+SPE_SRC_C_OBJ = ${patsubst %.c, %.o, $(SPE_SRC_C)} 
+SPE_SRC_CPP_OBJ = ${patsubst %.cpp, %.o, $(SPE_SRC_CPP)}
+
+
+#common dir
+COMMON_SRC_DIR = $(ROOT)/common
+
+COMMON_SRC_C = $(wildcard $(COMMON_SRC_DIR)/*.c)
+COMMON_SRC_CPP = $(wildcard $(COMMON_SRC_DIR)/*.cpp)
+
+COMMON_SRC_C_OBJ = ${patsubst %.c, %.o, $(COMMON_SRC_C)} 
+COMMON_SRC_CPP_OBJ = ${patsubst %.cpp, %.o, $(COMMON_SRC_CPP)}
+
+
+#DRV_RS16_DIR = $(ROOT)/driver/rs16 
+#DRV_VEL32_DIR = $(ROOT)/driver/vel32
+#DRV_LS16PRE_DIR = $(ROOT)/driver/ls16pre
+#DRV_LS1_DIR = $(ROOT)/driver/ls1
+
+
+DRV_RS16_CPP = $(wildcard $(DRV_RS16_DIR)/*.cpp)
+DRV_RS16_CPP_OBJ = ${patsubst %.cpp, %.o, $(DRV_RS16_CPP)}
+
+
+
+DRV_VEL32_CPP = $(wildcard $(DRV_VEL32_DIR)/*.cpp)
+DRV_VEL32_CPP_OBJ = ${patsubst %.cpp, %.o, $(DRV_VEL32_CPP)}
+
+
+DRV_LS16PRE_CPP = $(wildcard $(DRV_LS16PRE_DIR)/*.cpp)
+DRV_LS16PRE_CPP_OBJ = ${patsubst %.cpp, %.o, $(DRV_LS16PRE_CPP)}
+
+
+DRV_LS1_CPP = $(wildcard $(DRV_LS1_DIR)/*.cpp)
+DRV_LS1_CPP_OBJ = ${patsubst %.cpp, %.o, $(DRV_LS1_CPP)}
+
+
+
+
+DRV_VEL16_SRC_C = $(wildcard $(DRV_VEL16_DIR)/*.c)
+DRV_VEL16_SRC_CPP = $(wildcard $(DRV_VEL16_DIR)/*.cpp)
+DRV_VEL16_SRC_CC = $(wildcard $(DRV_VEL16_DIR)/*.cc)
+
+DRV_VEL16_SRC_C_OBJ = ${patsubst %.c, %.o, $(DRV_VEL16_SRC_C)} 
+DRV_VEL16_SRC_CPP_OBJ = ${patsubst %.cpp, %.o, $(DRV_VEL16_SRC_CPP)}
+DRV_VEL16_SRC_CC_OBJ = ${patsubst %.cc, %.o, $(DRV_VEL16_SRC_CC)}
+
+
+ALL_SRCS =  $(MAIN_SRC_C) $(MAIN_SRC_CPP) $(MAIN_SRC_CC)     $(RS16_SRC_C) $(RS16_SRC_CPP)   $(SPE_SRC_C) $(SPE_SRC_CPP)    $(COMMON_SRC_C) $(COMMON_SRC_CPP) \
+$(DRV_RS16_CPP) $(DRV_VEL32_CPP) $(DRV_LS16PRE_CPP) $(DRV_LS1_CPP) $(DRV_VEL16_SRC_C)  $(DRV_VEL16_SRC_CPP)  $(DRV_VEL16_SRC_CC)
+ 
+
+
+
+# MAIN_SRC_CC_OBJ
+ALL_OBJ = $(MAIN_SRC_C_OBJ) $(MAIN_SRC_CPP_OBJ) $(MAIN_SRC_CC_OBJ)  $(RS16_SRC_C_OBJ) $(RS16_SRC_CPP_OBJ) $(SPE_SRC_C_OBJ) $(SPE_SRC_CPP_OBJ)  $(COMMON_SRC_C_OBJ) $(COMMON_SRC_CPP_OBJ) \
+$(DRV_RS16_CPP_OBJ) $(DRV_VEL32_CPP_OBJ) $(DRV_LS16PRE_CPP_OBJ) $(DRV_LS1_CPP_OBJ)  $(DRV_VEL16_SRC_CC_OBJ) $(DRV_VEL16_SRC_CPP_OBJ) $(DRV_VEL16_SRC_C_OBJ)
+
+CAR_TGT = perception_lidar
+
+HAS_DEP_FILE = 1
+file =  /home/mamengmeng/vel16/hdr_deps
+DEPS = hdr_deps
+
+DEPS_DEMO = hdr_deps 
+
+define fun1
+
+	@echo "My name is $(0)"
+
+endef
+
+
+all:$(CAR_TGT)
+	@echo "all objs: " $(ALL_OBJ)
+
+	#@echo $(CAR_SRC_C_OBJ) $(GTK_SRC_C_OBJ) $(CAR_SRC_CPP_OBJ) $(TGT_MAIN_OBJ) $(LOG_OBJ) 
+	
+# #$(COMM_LIB_FILE)	
+#$(ALL_OBJ) 
+
+	
+
+$(CAR_TGT):$(ALL_OBJ) 
+	#echo "" > $(DEPS)
+	#ifeq ($(HAS_DEP_FILE) 1)
+
+	$(CPP) $(CPPFLAGS) $^ -o $@ $(LIB_DIR) $(LIBRARY_FILES)
+
+	
+	
+%.o:%.c  
+	@echo "com c files"
+	#$(CC) $(CFLAGS) -MM -MT $@ $< >> $(DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
+%.o:%.cpp
+ifeq ($(DEPS), $(wildcard $(DEPS)))
+	echo  exist $(file)
+else
+	$(error hdr_dep file not exist , make dep pls, $(DEPS))
+endif
+	#$(CPP) $(CPPFLAGS) -MM -MT $@ $< >> $(DEPS)
+	$(CPP) $(CPPFLAGS) -c $< -o $@
+
+%.o:%.cc
+	#$(CPP) $(CPPFLAGS) -MM -MT $@ $< >> $(DEPS)
+	$(CPP) $(CPPFLAGS) -c $< -o $@
+	
+
+	
+	
+
+#include $(ALL_OBJ:.o=.d)
+
+
+
+
+
+
+	
+dep: 
+	echo "" > $(DEPS_DEMO)
+	$(foreach SRC,$(filter %.c, $(ALL_SRCS)),  $(CC) $(CFLAGS) -MM -MT $(SRC:.c=.o) $(SRC) >> $(DEPS_DEMO); )
+	$(foreach SRC,$(filter %.cc, $(ALL_SRCS)),  $(CPP) $(CPPFLAGS) -MM -MT $(SRC:.cc=.o) $(SRC) >> $(DEPS_DEMO);)
+	$(foreach SRC,$(filter %.cpp, $(ALL_SRCS)), $(CPP) $(CPPFLAGS) -MM -MT $(SRC:.cpp=.o) $(SRC) >> $(DEPS_DEMO);)
+	#$(foreach SRC,$(ALL_SRCS),$(CPP) $(CPPFLAGS) -MM -MT $(SRC:.c=.o,.cpp=.o,.cc=.o) $(SRC);)
+
+ifeq ($(DEPS), $(wildcard $(DEPS)))
+	echo "have dep file" $(DEPS)
+include $(DEPS)
+else
+	echo "no dep file" $(DEPS)
+endif
+
+
+
+fff:
+	@echo $(MAIN_SRC_C:.c=.d)   $(RS16_SRC_CPP:.cpp=.d) $(COMMON_SRC_C) 
+
+
+ttt:
+	@echo "all objs: " $(ALL_OBJ)
+	@echo "DRV_RS16_CPP_OBJ: " $(DRV_RS16_CPP_OBJ) " DRV_RS16_CPP: " $(DRV_RS16_CPP) " DRV_RS16_DIR: " $(DRV_RS16_DIR)
+	@echo "$(wildcard $(DRV_VEL32_DIR)/*.cpp)" $(wildcard $(DRV_VEL32_DIR)/*.cpp)
+	@echo " (wildcard $(DRV_RS16_DIR)/*.cpp) " $(wildcard $(DRV_RS16_DIR)/*.cpp)
+
+
+
+	
+clean:
+	rm -f $(CAR_TGT) $(ALL_OBJ)
+
